@@ -1,0 +1,29 @@
+﻿
+namespace AGooday.AgPay.Domain.Commands.AgentInfos
+{
+    public class CreateAgentInfoCommand : AgentInfoCommand
+    {
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string LoginUsername { get; set; }
+
+        /// <summary>
+        /// 密码类型
+        /// </summary>
+        public string PasswordType { get; set; }
+
+        /// <summary>
+        /// 登录密码
+        /// </summary>
+        public string LoginPassword { get; set; }
+
+        /// <summary>
+        /// 是否发送开通提醒
+        /// </summary>
+        public byte IsNotify { get; set; }
+
+      
+       
+    }
+}

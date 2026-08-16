@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Agent.Api/Zentin.Agent.Api.csproj" Id="7cb42173-2a9e-4c6d-be67-5efac866605f" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Manager.Api/Zentin.Manager.Api.csproj" Id="a93861bf-2a89-4521-90ba-5df0a93f93c2" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Merchant.Api/Zentin.Merchant.Api.csproj" Id="6b6000cb-1c9d-422b-a8f6-f272663a38c2" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Api/Zentin.Payment.Api.csproj" Id="ebd56f6c-67f9-4034-8e20-02c9a0dc0781" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Application.Contracts/Zentin.Payment.Application.Contracts.csproj" Id="24bcbbf0-c671-4e12-aec0-bc0c3f3b42d7" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Application/Zentin.Payment.Application.csproj" Id="f8bdb1cb-f597-49cf-8846-8f4644c1bc6d" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Common/Zentin.Payment.Common.csproj" Id="0dbd9c86-af0c-4edc-91a9-528a2abbd292" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Domain/Zentin.Payment.Domain.csproj" Id="bdb2daae-8740-4373-bf4d-976388de4949" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Infrastructure/Zentin.Payment.Infrastructure.csproj" Id="4ea4f53e-c341-4ce7-8137-2d69fc0ad6eb" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Common.Tests/Zentin.Payment.Common.Tests.csproj" Id="9bb83da1-3f18-4196-ac52-62a26ece888a" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Domain.Tests/Zentin.Payment.Infrastructure.Tests.csproj" Id="4f23c3a4-6ce1-45ce-b378-8500063fc851" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Notice.Tests/Zentin.Payment.Notice.Tests.csproj" Id="aa4f29ac-4506-4dde-88ba-6c10a22b5fba" />
+    <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Sdk.Tests/Zentin.Payment.Sdk.Tests.csproj" Id="7b826d88-5a38-4f4f-8227-92f7f323190b" />
+  </Folder>
+</Solution>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+    <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zentin.Payment.Application.Contracts\Zentin.Payment.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Zentin.Payment.Common\Zentin.Payment.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+  </ItemGroup>
+
+</Project>
