@@ -1,6 +1,5 @@
 ﻿using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
-using Zentin.Payment.Domain.Entities.Order;
 
 namespace Zentin.Payment.Domain.Entities.Pay
 {
@@ -32,7 +31,7 @@ namespace Zentin.Payment.Domain.Entities.Pay
         /// create profit record (called within the aggregate)
         /// </summary>
         internal static PayOrderProfit Create(string infoId, string infoName, string infoType, string payOrderId, decimal feeRate,
-            long feeAmount,long orderFeeAmount,decimal profitRate, long profitAmount, long orderProfitAmount,string? feeRateDesc = null)
+            long feeAmount, long orderFeeAmount, decimal profitRate, long profitAmount, long orderProfitAmount, string? feeRateDesc = null)
         {
             if (string.IsNullOrWhiteSpace(infoId))
                 throw new ArgumentException("Profit Account ID is required", nameof(infoId));

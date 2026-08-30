@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Zentin.Payment.Common;
+﻿using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Enums;
 
@@ -32,7 +29,7 @@ namespace Zentin.Payment.Domain.Entities.Pay
         /// 创建阶梯费率配置
         /// </summary>
         public static PayRateLevelConfig Create(long rateConfigId, decimal feeRate, int minAmount = 0, int maxAmount = 0,
-            int minFee = 0,int maxFee = 0,BankCardType? bankCardType = null,bool state = true)
+            int minFee = 0, int maxFee = 0, BankCardType? bankCardType = null, bool state = true)
         {
             if (feeRate < 0)
                 throw new ArgumentException("费率不能为负数", nameof(feeRate));

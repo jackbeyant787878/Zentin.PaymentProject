@@ -28,7 +28,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Agent
             builder.Property(e => e.Remark).HasMaxLength(128);
             builder.Property(e => e.InitUserId).HasColumnType("bigint");
 
-           
+
             builder.Property(e => e.SettAccountType).HasConversion<int>();
             builder.Property(e => e.SettAccountTelphone).HasMaxLength(32);
             builder.Property(e => e.SettAccountName).HasMaxLength(32);
@@ -36,11 +36,11 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Agent
             builder.Property(e => e.SettAccountBank).HasMaxLength(32);
             builder.Property(e => e.SettAccountSubBank).HasMaxLength(32);
 
-         
+
             builder.Property(e => e.CashoutFeeRuleType).HasConversion<int>().HasDefaultValue(CashoutFeeRuleType.SystemDefault);
             builder.Property(e => e.CashoutFeeRule).HasMaxLength(255);
 
-           
+
             builder.Property(e => e.LicenseImg).HasMaxLength(128);
             builder.Property(e => e.PermitImg).HasMaxLength(128);
             builder.Property(e => e.Idcard1Img).HasMaxLength(128);
@@ -48,7 +48,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Agent
             builder.Property(e => e.IdcardInHandImg).HasMaxLength(128);
             builder.Property(e => e.BankCardImg).HasMaxLength(128);
 
-           
+
             builder.Property(e => e.UnAmount).HasColumnType("bigint").HasDefaultValue(0);
             builder.Property(e => e.BalanceAmount).HasColumnType("bigint").HasDefaultValue(0);
             builder.Property(e => e.AuditProfitAmount).HasColumnType("bigint").HasDefaultValue(0);
@@ -56,7 +56,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Agent
 
             builder.Property(e => e.CreatedUid).HasColumnType("bigint");
             builder.Property(e => e.CreatedBy).HasMaxLength(64);
-         
+
             builder.HasOne(e => e.Parent)
                 .WithMany(e => e.Children)
                 .HasForeignKey(e => e.Pid)

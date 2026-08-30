@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 系统角色表
     /// </summary>
-    public class SysRoleQueryDto : PageQuery
+    public class SysRoleQueryDto : PagedQuery
     {
         /// <summary>
         /// 角色ID, ROLE_开头

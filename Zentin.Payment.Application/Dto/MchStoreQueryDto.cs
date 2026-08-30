@@ -1,12 +1,12 @@
-﻿
-using AGooday.AgPay.Domain.Models;
+﻿using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+using Zentin.Payment.Domain.Entities.Merchant;
 
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 商户门店表
     /// </summary>
-    public class MchStoreQueryDto : PageQuery
+    public class MchStoreQueryDto : PagedQuery
     {
         /// <summary>
         /// 门店ID

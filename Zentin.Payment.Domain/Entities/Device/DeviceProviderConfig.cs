@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Zentin.Payment.Common;
+﻿using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 using static Zentin.Payment.Domain.Enums.Enums;
 
@@ -24,7 +21,7 @@ namespace Zentin.Payment.Domain.Entities.Device
             DeviceProviderConfigId = SnowflakeIdGenerator.GetSnowflakeId();
         }
 
-        public static DeviceProviderConfig Create(DeviceType deviceType,string providerCode,string providerParams,string? remark = null,bool state = true)
+        public static DeviceProviderConfig Create(DeviceType deviceType, string providerCode, string providerParams, string? remark = null, bool state = true)
         {
             if (string.IsNullOrWhiteSpace(providerCode))
                 throw new ArgumentException("Provider code cannot be empty", nameof(providerCode));

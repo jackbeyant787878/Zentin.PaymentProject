@@ -24,12 +24,6 @@ namespace AGooday.AgPay.Domain.Commands.AgentInfos
         /// </summary>
         public long CurrentSysUserId { get; set; }
 
-        // 重写基类中的 是否有效 方法
-        // 主要是为了引入命令验证 CreateAgentInfoCommandValidation。
-        public override bool IsValid()
-        {
-            ValidationResult = new ModifyAgentInfoCommandValidation().Validate(this);
-            return ValidationResult.IsValid;
-        }
+
     }
 }

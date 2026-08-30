@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Member;
 using Zentin.Payment.Domain.Enums;
 
@@ -29,8 +26,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Member
             builder.Property(e => e.BizType).HasConversion<int>().HasDefaultValue(MbrBillBizType.PayRecharge);
             builder.Property(e => e.Remark).HasMaxLength(128);
 
-           
-            
+
+
 
             builder.HasIndex(e => e.MbrNo).HasDatabaseName("IdxMbrNo");
             builder.HasIndex(e => e.CreatedOnUtc).HasDatabaseName("IdxCreatedOnUtc");

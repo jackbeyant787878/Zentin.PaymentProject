@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 文章信息表
     /// </summary>
-    public class SysArticleQueryDto : DatePageQuery
+    public class SysArticleQueryDto : DatePagedQuery
     {
         /// <summary>
         /// 文章ID

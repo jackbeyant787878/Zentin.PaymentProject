@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Zentin.Payment.Common;
+﻿using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 
 namespace Zentin.Payment.Domain.Entities.Pay
@@ -26,7 +23,7 @@ namespace Zentin.Payment.Domain.Entities.Pay
         /// <summary>
         /// create merchant payment passage
         /// </summary>
-        public static MchPayPassage Create(string mchNo,string appId,string ifCode, string wayCode,decimal rate, string? riskConfig = null,bool state = true    )
+        public static MchPayPassage Create(string mchNo, string appId, string ifCode, string wayCode, decimal rate, string? riskConfig = null, bool state = true)
         {
             if (string.IsNullOrWhiteSpace(mchNo))
                 throw new ArgumentException("Merchant No is required", nameof(mchNo));

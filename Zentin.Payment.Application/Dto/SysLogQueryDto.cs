@@ -1,12 +1,13 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
 
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 系统操作日志表
     /// </summary>
-    public class SysLogQueryDto : DatePageQuery
+    public class SysLogQueryDto : DatePagedQuery
     {
         /// <summary>
         /// 系统用户ID

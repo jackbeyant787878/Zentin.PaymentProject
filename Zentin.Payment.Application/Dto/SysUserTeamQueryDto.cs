@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 用户团队信息表
     /// </summary>
-    public class SysUserTeamQueryDto : PageQuery
+    public class SysUserTeamQueryDto : PagedQuery
     {
         /// <summary>
         /// 团队ID

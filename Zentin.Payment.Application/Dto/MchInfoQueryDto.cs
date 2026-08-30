@@ -1,12 +1,13 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
 
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 商户信息表
     /// </summary>
-    public class MchInfoQueryDto : PageQuery
+    public class MchInfoQueryDto : PagedQuery
     {
         /// <summary>
         /// 商户号

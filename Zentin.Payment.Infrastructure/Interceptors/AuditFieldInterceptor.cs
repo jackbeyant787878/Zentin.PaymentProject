@@ -1,9 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Abstractions;
 
 namespace Zentin.Payment.Infrastructure.Interceptors

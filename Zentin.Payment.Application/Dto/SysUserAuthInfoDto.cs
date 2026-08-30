@@ -1,5 +1,4 @@
-﻿
-
+﻿using Zentin.Payment.Application.Contracts;
 namespace Zentin.Payment.Application.Dto
 {
     public class SysUserAuthInfoDto : ExtensibleDto

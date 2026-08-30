@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Dto\" />
+    <Folder Include="Params\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zentin.Payment.Application.Contracts\Zentin.Payment.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Zentin.Payment.Domain\Zentin.Payment.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 统计查询
     /// </summary>
-    public class StatisticQueryDto : DatePageQuery
+    public class StatisticQueryDto : DatePagedQuery
     {
         /// <summary>
         /// 商户号
@@ -84,17 +86,17 @@ namespace Zentin.Payment.Application.Dto
 
             switch (QueryDateType)
             {
-                case StatisticCS.QueryDateType.DAY:
+                case StatisticConstants.QueryDateType.DAY:
                     Format = "yyyy-MM-dd";
                     CreatedStart ??= DateTime.Today.AddMonths(-1);
                     CreatedEnd ??= DateTime.Today.AddSeconds(-1);
                     break;
-                case StatisticCS.QueryDateType.MONTH:
+                case StatisticConstants.QueryDateType.MONTH:
                     Format = "yyyy-MM";
                     CreatedStart ??= DateTime.Today.AddYears(-1);
                     CreatedEnd ??= DateTime.Today.AddSeconds(-1);
                     break;
-                case StatisticCS.QueryDateType.YEAR:
+                case StatisticConstants.QueryDateType.YEAR:
                     Format = "yyyy";
                     CreatedStart ??= DateTime.Today.AddYears(-1);
                     CreatedEnd ??= DateTime.Today.AddSeconds(-1);
@@ -105,7 +107,7 @@ namespace Zentin.Payment.Application.Dto
         }
     }
 
-    public class StatisticCS
+    public class StatisticConstants
     {
         public interface Method
         {

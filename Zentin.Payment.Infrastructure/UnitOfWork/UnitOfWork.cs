@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Infrastructure.Data;
 
@@ -61,7 +58,7 @@ namespace Zentin.Payment.Infrastructure.UnitOfWork
         /// </summary>
         private async Task PublishDomainEventsAsync(CancellationToken cancellationToken)
         {
-            var domainEntities = _dbContext.ChangeTracker.Entries<AggregateRoot>() .Where(e => e.Entity.DomainEvents.Any()) .ToList();
+            var domainEntities = _dbContext.ChangeTracker.Entries<AggregateRoot>().Where(e => e.Entity.DomainEvents.Any()).ToList();
 
             var domainEvents = domainEntities
                 .SelectMany(e => e.Entity.DomainEvents)
@@ -86,6 +83,11 @@ namespace Zentin.Payment.Infrastructure.UnitOfWork
         {
             if (_transaction != null) await _transaction.DisposeAsync();
             await _dbContext.DisposeAsync();
+        }
+
+        public async Task<bool> CommitAsync()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

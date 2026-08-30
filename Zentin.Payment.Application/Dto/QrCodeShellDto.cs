@@ -1,5 +1,7 @@
 ﻿
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Contracts;
+using Zentin.Payment.Common.Response;
 
 namespace Zentin.Payment.Application.Dto
 {

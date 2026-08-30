@@ -12,7 +12,7 @@ namespace Zentin.Payment.Domain.Entities.QrCode
     public sealed class QrCode : BaseEntity
     {
         public string QrCodeId { get; private set; } = string.Empty;
-        public int? QrcShellId { get; private set; }
+        public int? QrConstantshellId { get; private set; }
         public string? BatchId { get; private set; }
         public bool FixedFlag { get; private set; }
         public int FixedPayAmount { get; private set; }
@@ -37,7 +37,7 @@ namespace Zentin.Payment.Domain.Entities.QrCode
             string alipayWayCode,
             string sysType,
             string belongInfoId,
-            int? qrcShellId = null,
+            int? qrConstantshellId = null,
             string? batchId = null,
             bool fixedFlag = false,
             int fixedPayAmount = 0,
@@ -49,7 +49,7 @@ namespace Zentin.Payment.Domain.Entities.QrCode
             return new QrCode
             {
                 QrCodeId = qrcId,
-                QrcShellId = qrcShellId,
+                QrConstantshellId = qrConstantshellId,
                 BatchId = batchId,
                 FixedFlag = fixedFlag,
                 FixedPayAmount = fixedPayAmount,

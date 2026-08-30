@@ -11,7 +11,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.QrCode
             builder.HasKey(e => e.QrCodeId);
 
             builder.Property(e => e.QrCodeId).HasMaxLength(64).ValueGeneratedNever();
-            builder.Property(e => e.QrcShellId).HasColumnType("int");
+            builder.Property(e => e.QrConstantshellId).HasColumnType("int");
             builder.Property(e => e.BatchId).HasMaxLength(64);
             builder.Property(e => e.FixedFlag).HasColumnType("bit").IsRequired();
             builder.Property(e => e.FixedPayAmount).HasColumnType("int").HasDefaultValue(0);

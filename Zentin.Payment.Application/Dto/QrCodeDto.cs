@@ -1,5 +1,7 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
@@ -15,7 +17,7 @@ namespace Zentin.Payment.Application.Dto
         /// <summary>
         /// 码牌模板ID
         /// </summary>
-        public long? QrcShellId { get; set; }
+        public long? QrConstantshellId { get; set; }
 
         /// <summary>
         /// 批次号

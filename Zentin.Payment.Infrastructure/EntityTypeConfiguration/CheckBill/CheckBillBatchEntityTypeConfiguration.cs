@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.CheckBill;
 using static Zentin.Payment.Domain.Enums.Enums;
 
@@ -36,8 +33,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.CheckBill
             builder.Property(e => e.ChannelTotalRefundAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.ChannelTotalRefundCount).HasColumnType("int").HasDefaultValue(0);
 
-           
-            
+
+
         }
     }
 }

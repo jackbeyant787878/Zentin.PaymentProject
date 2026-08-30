@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Zentin.Payment.Common;
+﻿using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 
 namespace Zentin.Payment.Domain.Entities.Pay
@@ -33,8 +30,8 @@ namespace Zentin.Payment.Domain.Entities.Pay
         }
 
 
-        public static PayInterfaceConfig Create( string infoType, string infoId, string ifCode,
-        string ifParams,int settHoldDay = 0,  decimal? ifRate = null, long? createdUid = null, string? createdBy = null,
+        public static PayInterfaceConfig Create(string infoType, string infoId, string ifCode,
+        string ifParams, int settHoldDay = 0, decimal? ifRate = null, long? createdUid = null, string? createdBy = null,
         string? remark = null, bool state = true)
         {
             if (string.IsNullOrWhiteSpace(infoType))

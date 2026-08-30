@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Device;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Device
@@ -23,8 +20,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Device
             builder.Property(e => e.State).HasColumnType("bit").HasDefaultValue(true);
             builder.Property(e => e.Remark).HasMaxLength(128);
 
-           
-            
+
+
 
             builder.HasIndex(e => new { e.DeviceType, e.ProviderCode }).HasDatabaseName("Uni_DeviceType_Provider").IsUnique();
         }

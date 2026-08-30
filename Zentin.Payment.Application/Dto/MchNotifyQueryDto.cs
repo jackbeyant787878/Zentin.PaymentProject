@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 商户通知记录表
     /// </summary>
-    public class MchNotifyQueryDto : DatePageQuery
+    public class MchNotifyQueryDto : DatePagedQuery
     {
         /// <summary>
         /// 订单ID

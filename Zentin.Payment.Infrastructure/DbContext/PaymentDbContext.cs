@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.CheckBill;
 using Zentin.Payment.Domain.Entities.Device;
 using Zentin.Payment.Domain.Entities.Division;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
+﻿using System.Data;
 
 namespace Zentin.Payment.Domain.Abstractions
 {
@@ -17,5 +14,6 @@ namespace Zentin.Payment.Domain.Abstractions
         Task CommitTransactionAsync(CancellationToken cancellationToken = default);
 
         Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
+        Task<bool> CommitAsync();
     }
 }

@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 支付方式表
     /// </summary>
-    public class PayWayQueryDto : PageQuery
+    public class PayWayQueryDto : PagedQuery
     {
         /// <summary>
         /// 支付方式代码  例如： wxpay_jsapi

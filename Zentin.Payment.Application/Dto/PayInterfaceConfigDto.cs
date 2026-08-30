@@ -1,5 +1,7 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>

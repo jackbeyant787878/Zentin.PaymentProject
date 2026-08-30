@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Notify;
 using Zentin.Payment.Domain.IRepositories;
 using Zentin.Payment.Infrastructure.Data;

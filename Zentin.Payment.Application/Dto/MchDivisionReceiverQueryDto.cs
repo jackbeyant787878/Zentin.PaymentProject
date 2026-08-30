@@ -1,12 +1,13 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
 
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 商户分账接收者账号绑定关系表
     /// </summary>
-    public class MchDivisionReceiverQueryDto : PageQuery
+    public class MchDivisionReceiverQueryDto : PagedQuery
     {
         /// <summary>
         /// 分账接收者ID

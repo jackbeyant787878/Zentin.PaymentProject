@@ -1,0 +1,51 @@
+﻿using AGooday.AgPay.Components.Third.Models;
+using AGooday.AgPay.Components.Third.RQRS;
+using AGooday.AgPay.Components.Third.RQRS.PayOrder;
+using AGooday.AgPay.Components.Third.Services;
+using AGooday.AgPay.Components.Third.Utils;
+using Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+
+namespace AGooday.AgPay.Components.Third.Channel.AliPay
+{
+    /// <summary>
+    /// 支付接口： 支付宝官方
+    /// 支付方式： 自适应
+    /// </summary>
+    public class AliPayPaymentService : AbstractPaymentService
+    {
+        public AliPayPaymentService(ILogger<AliPayPaymentService> logger,
+            IServiceProvider serviceProvider,
+            ISysConfigService sysConfigService,
+            ConfigContextQueryService configContextQueryService)
+            : base(logger, serviceProvider, sysConfigService, configContextQueryService)
+        {
+        }
+
+        public AliPayPaymentService()
+            : base()
+        {
+        }
+
+        public override string GetIfCode()
+        {
+            return Constants.IF_CODE.ALIPAY;
+        }
+
+        public override bool IsSupport(string wayCode)
+        {
+            return true;
+        }
+
+        public override Task<AbstractRS> PayAsync(UnifiedOrderRQ bizRQ, PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
+        {
+            return PayWayUtil.GetRealPayWayService(this, payOrder.WayCode).PayAsync(bizRQ, payOrder, mchAppConfigContext);
+        }
+
+        public override Task<string> PreCheckAsync(UnifiedOrderRQ bizRQ, PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
+        {
+            return PayWayUtil.GetRealPayWayService(this, payOrder.WayCode).PreCheckAsync(bizRQ, payOrder, mchAppConfigContext);
+        }
+    }
+}

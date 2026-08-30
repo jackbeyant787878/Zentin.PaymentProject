@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Device;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Device
@@ -33,8 +30,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Device
             builder.Property(e => e.SysType).HasMaxLength(8).IsRequired();
             builder.Property(e => e.BelongInfoId).HasMaxLength(64).IsRequired();
 
-            builder.Property(e => e.CreatedOnUtc).HasColumnType("datetime2(6)") .HasDefaultValueSql("GETUTCDATE()");
-            
+            builder.Property(e => e.CreatedOnUtc).HasColumnType("datetime2(6)").HasDefaultValueSql("GETUTCDATE()");
+
 
             builder.HasIndex(e => new { e.ProviderCode, e.DeviceType, e.DeviceNo }).HasDatabaseName("Uni_ProviderCode_DeviceType_DeviceNo").IsUnique();
 

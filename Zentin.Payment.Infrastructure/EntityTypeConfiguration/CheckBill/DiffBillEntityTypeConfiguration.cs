@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.CheckBill;
 using static Zentin.Payment.Domain.Enums.Enums;
 
@@ -15,7 +12,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.CheckBill
             builder.ToTable("DiffBill");
             builder.HasKey(e => e.DiffBillId);
 
-            builder.Property(e => e.DiffBillId).HasColumnType("bigint") .ValueGeneratedNever();
+            builder.Property(e => e.DiffBillId).HasColumnType("bigint").ValueGeneratedNever();
 
             builder.Property(e => e.DiffType).HasMaxLength(8).IsRequired();
             builder.Property(e => e.IfCode).HasMaxLength(20).IsRequired();
@@ -39,8 +36,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.CheckBill
             builder.Property(e => e.HandleUid).HasColumnType("bigint");
             builder.Property(e => e.HandleBy).HasMaxLength(64);
 
-           
-            
+
+
 
             builder.HasIndex(e => e.BatchNo).HasDatabaseName("Idx_BatchNo");
             builder.HasIndex(e => e.HandleState).HasDatabaseName("Idx_HandleState");

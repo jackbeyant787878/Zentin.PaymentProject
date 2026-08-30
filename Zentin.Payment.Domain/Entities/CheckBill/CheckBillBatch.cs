@@ -67,7 +67,7 @@ namespace Zentin.Payment.Domain.Entities.CheckBill
             ParseErrMsg = errMsg;
         }
 
-        public void SetStatistics(
+        public void SetStatistiConstants(
             long totalAmount,
             int totalCount,
             long totalFeeAmount,

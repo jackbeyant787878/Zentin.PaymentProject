@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Zentin.Payment.ThirdPartyAdapters.csproj.Backup.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AlipaySDKNet.Standard" Version="4.9.1234" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.12" />
+    <PackageReference Include="PayPalServerSDK" Version="2.4.0" />
+    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.Api" Version="3.15.0" />
+    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.TenpayV2" Version="3.4.0" />
+    <PackageReference Include="SKIT.FlurlHttpClient.Wechat.TenpayV3" Version="3.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zentin.Payment.Application\Zentin.Payment.Application.csproj" />
+  </ItemGroup>
+
+</Project>

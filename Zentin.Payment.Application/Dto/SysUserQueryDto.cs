@@ -1,8 +1,10 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
-    public class SysUserQueryDto : PageQuery
+    public class SysUserQueryDto : PagedQuery
     {
         /// <summary>
         /// 系统用户ID

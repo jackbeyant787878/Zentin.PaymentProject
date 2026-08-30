@@ -1,11 +1,13 @@
 ﻿
 
+using Zentin.Payment.Application.Contracts.Queries.Abstractions;
+
 namespace Zentin.Payment.Application.Dto
 {
     /// <summary>
     /// 码牌信息表
     /// </summary>
-    public class QrCodeQueryDto : DatePageQuery
+    public class QrCodeQueryDto : DatePagedQuery
     {
         /// <summary>
         /// 码牌ID

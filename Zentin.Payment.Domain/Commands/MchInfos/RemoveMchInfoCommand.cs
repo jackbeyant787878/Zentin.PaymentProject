@@ -10,6 +10,6 @@ namespace AGooday.AgPay.Domain.Commands.MchInfos
         /// </summary>
         public string MchNo { get; set; }
 
-     
+
     }
 }

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.CheckBill;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.CheckBill
@@ -30,8 +27,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.CheckBill
             builder.Property(e => e.ChannelUser).HasMaxLength(64);
             builder.Property(e => e.Currency).HasMaxLength(3).HasDefaultValue("CNY");
 
-           
-            
+
+
 
             builder.HasIndex(e => e.BatchNo).HasDatabaseName("Idx_BatchNo");
             builder.HasIndex(e => e.OrderId).HasDatabaseName("Idx_OrderId");

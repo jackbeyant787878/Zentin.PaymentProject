@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Division;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Division
@@ -14,7 +11,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Division
             builder.ToTable("MchDivisionReceiver");
             builder.HasKey(e => e.ReceiverId);
 
-            builder.Property(e => e.ReceiverId) .HasColumnType("bigint").ValueGeneratedNever();
+            builder.Property(e => e.ReceiverId).HasColumnType("bigint").ValueGeneratedNever();
 
             builder.Property(e => e.ReceiverAlias).HasMaxLength(64).IsRequired();
             builder.Property(e => e.ReceiverGroupId).HasColumnType("bigint");
@@ -35,7 +32,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Division
             builder.Property(e => e.ChannelExtInfo).HasColumnType("nvarchar(max)");
             builder.Property(e => e.BindSuccessTime).HasColumnType("datetime2(6)");
 
-          
+
             builder.HasIndex(e => e.MchNo).HasDatabaseName("Idx_MchNo");
             builder.HasIndex(e => e.ReceiverGroupId).HasDatabaseName("Idx_GroupId");
         }
