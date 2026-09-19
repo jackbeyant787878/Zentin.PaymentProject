@@ -1,17 +1,17 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Application.WxPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2.Models;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 支付接口： 微信官方
@@ -34,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public override bool IsSupport(string wayCode)
@@ -47,11 +47,11 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             // 微信API版本
             WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
             string apiVersion = wxServiceWrapper.Config.ApiVersion;
-            if (CS.PAY_IF_VERSION.WX_V2.Equals(apiVersion))
+            if (Constants.PAY_IF_VERSION.WX_V2.Equals(apiVersion))
             {
                 return await PayWayUtil.GetRealPayWayService(this, payOrder.WayCode).PayAsync(bizRQ, payOrder, mchAppConfigContext);
             }
-            else if (CS.PAY_IF_VERSION.WX_V3.Equals(apiVersion))
+            else if (Constants.PAY_IF_VERSION.WX_V3.Equals(apiVersion))
             {
                 return await PayWayUtil.GetRealPayWayV3Service(this, payOrder.WayCode).PayAsync(bizRQ, payOrder, mchAppConfigContext);
             }
@@ -66,11 +66,11 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             // 微信API版本
             WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
             string apiVersion = wxServiceWrapper.Config.ApiVersion;
-            if (CS.PAY_IF_VERSION.WX_V2.Equals(apiVersion))
+            if (Constants.PAY_IF_VERSION.WX_V2.Equals(apiVersion))
             {
                 return await PayWayUtil.GetRealPayWayService(this, payOrder.WayCode).PreCheckAsync(bizRQ, payOrder, mchAppConfigContext);
             }
-            else if (CS.PAY_IF_VERSION.WX_V3.Equals(apiVersion))
+            else if (Constants.PAY_IF_VERSION.WX_V3.Equals(apiVersion))
             {
                 return await PayWayUtil.GetRealPayWayV3Service(this, payOrder.WayCode).PreCheckAsync(bizRQ, payOrder, mchAppConfigContext);
             }

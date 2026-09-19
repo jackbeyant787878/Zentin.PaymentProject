@@ -1,17 +1,19 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Application.SxfPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.SxfPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json.Linq;
-using static AGooday.AgPay.Components.Third.Channel.IChannelRefundNoticeService;
+using Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelRefundNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.SxfPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay
 {
     /// <summary>
     /// 随行付 退款回调接口实现类
@@ -32,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.SXFPAY;
+            return Constants.IF_CODE.SXFPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

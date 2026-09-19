@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using  Microsoft.Extensions.Logging;
 using AutoMapper;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Division
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Division
 {
     /// <summary>
     /// 绑定账户 响应参数

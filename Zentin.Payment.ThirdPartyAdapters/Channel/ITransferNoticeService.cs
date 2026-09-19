@@ -1,9 +1,10 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     /// <summary>
     /// 转账订单通知解析实现 异步回调

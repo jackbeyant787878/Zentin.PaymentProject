@@ -1,8 +1,10 @@
-﻿using System.Reflection;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Reflection;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     public class ChannelNativeInjectorBootStrapper
     {

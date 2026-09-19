@@ -1,11 +1,11 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using AGooday.AgPay.Components.Third.Channel;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.ThirdPartyAdapters.Channel;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Newtonsoft.Json;
 
-namespace AGooday.AgPay.Components.Third.Services
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     public class TransferOrderReissueService
     {

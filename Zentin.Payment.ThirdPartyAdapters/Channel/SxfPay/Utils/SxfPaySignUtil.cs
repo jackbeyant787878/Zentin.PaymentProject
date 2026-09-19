@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.SxfPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay.Utils
 {
     public class SxfPaySignUtil
     {

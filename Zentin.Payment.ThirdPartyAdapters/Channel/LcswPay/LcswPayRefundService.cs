@@ -1,41 +1,41 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay
 {
     /// <summary>
     /// 利楚扫呗退款接口
     /// </summary>
-    public class LcswPayRefundService : AbstractRefundService
+    public class LConstantswPayRefundService : AbstractRefundService
     {
-        private readonly LcswPayPaymentService _paymentService;
+        private readonly LConstantswPayPaymentService _paymentService;
 
-        public LcswPayRefundService(ILogger<LcswPayRefundService> logger,
+        public LConstantswPayRefundService(ILogger<LConstantswPayRefundService> logger,
             IServiceProvider serviceProvider,
             ISysConfigService sysConfigService,
             ConfigContextQueryService configContextQueryService)
             : base(logger, serviceProvider, sysConfigService, configContextQueryService)
         {
-            _paymentService = ActivatorUtilities.CreateInstance<LcswPayPaymentService>(serviceProvider);
+            _paymentService = ActivatorUtilities.CreateInstance<LConstantswPayPaymentService>(serviceProvider);
         }
 
-        public LcswPayRefundService()
+        public LConstantswPayRefundService()
             : base()
         {
         }
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.LCSWPAY;
+            return Constants.IF_CODE.LConstantsWPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)
@@ -47,7 +47,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         {
             ChannelRetMsg channelRetMsg = new ChannelRetMsg();
             JObject reqParams = new JObject();
-            string payType = LcswPayEnum.GetPayType(refundOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(refundOrder.WayCode);
             string logPrefix = $"【利楚扫呗({payType})退款查询】";
             try
             {
@@ -89,10 +89,10 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                         resJSON.TryGetString("channel_order_no", out string channelOrderNo);// 银行渠道订单号，微信支付时显示在支付成功页面的条码，可用作扫码查询和扫码退款时匹配
                         resJSON.TryGetString("user_id", out string userId);// 付款方用户id，服务商appid下的“微信openid”、“支付宝账户”
                         resJSON.TryGetString("trade_state", out string tradeState);
-                        var _tradeState = LcswPayEnum.ConvertTradeState(tradeState);
+                        var _tradeState = LConstantswPayEnum.ConvertTradeState(tradeState);
                         switch (_tradeState)
                         {
-                            case LcswPayEnum.TradeState.SUCCESS:
+                            case LConstantswPayEnum.TradeState.SUCCESS:
                                 channelRetMsg.ChannelOrderId = outRefundNo;
                                 channelRetMsg.ChannelUserId = userId;
                                 channelRetMsg.PlatformOrderId = channelTradeNo;
@@ -101,8 +101,8 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                                 _logger.LogInformation("{logPrefix} >>> 退款成功", logPrefix);
                                 //_logger.LogInformation($"{logPrefix} >>> 退款成功");
                                 break;
-                            case LcswPayEnum.TradeState.FAIL:
-                            case LcswPayEnum.TradeState.NOREFUND:
+                            case LConstantswPayEnum.TradeState.FAIL:
+                            case LConstantswPayEnum.TradeState.NOREFUND:
                                 //明确退款失败
                                 channelRetMsg.ChannelState = ChannelState.CONFIRM_FAIL;
                                 channelRetMsg.ChannelErrCode = resultCode;
@@ -110,7 +110,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                                 _logger.LogInformation("{logPrefix} >>> 退款失败, {returnMsg}", logPrefix, returnMsg);
                                 //_logger.LogInformation($"{logPrefix} >>> 退款失败, {returnMsg}");
                                 break;
-                            case LcswPayEnum.TradeState.REFUNDING:
+                            case LConstantswPayEnum.TradeState.REFUNDING:
                                 //退款中
                                 channelRetMsg.ChannelState = ChannelState.WAITING;
                                 _logger.LogInformation("{logPrefix} >>> 退款中", logPrefix);
@@ -143,7 +143,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         {
             ChannelRetMsg channelRetMsg = new ChannelRetMsg();
             JObject reqParams = new JObject();
-            string payType = LcswPayEnum.GetPayType(refundOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(refundOrder.WayCode);
             string logPrefix = $"【利楚扫呗({payType})订单退款】";
             try
             {

@@ -1,4 +1,4 @@
-﻿using AGooday.AgPay.Application.Params;
+﻿using Zentin.Payment.Application.Params;
 
 namespace Zentin.Payment.Application.AliPay
 {

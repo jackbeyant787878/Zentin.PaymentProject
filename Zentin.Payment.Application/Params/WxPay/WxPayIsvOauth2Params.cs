@@ -1,5 +1,5 @@
-﻿using AGooday.AgPay.Common.Extensions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Zentin.Payment.Common.Extensions;
 
 namespace Zentin.Payment.Application.WxPay
 {

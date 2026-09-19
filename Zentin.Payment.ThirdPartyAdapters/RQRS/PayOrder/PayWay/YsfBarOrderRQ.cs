@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： YSF_BAR
@@ -19,7 +19,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public YsfBarOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.YSF_BAR;
+            this.WayCode = Constants.PAY_WAY_CODE.YSF_BAR;
         }
     }
 }

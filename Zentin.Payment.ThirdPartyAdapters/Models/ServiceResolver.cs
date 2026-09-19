@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.Models
+﻿namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     public static class ServiceResolver
     {

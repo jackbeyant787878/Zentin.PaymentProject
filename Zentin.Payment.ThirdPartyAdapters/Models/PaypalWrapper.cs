@@ -1,4 +1,4 @@
-﻿using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ using System.Net.Mime;
 using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Application.PpPay;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     /// <summary>
     /// https://github.com/paypal/PayPal-Dotnet-Server-SDK

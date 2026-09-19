@@ -1,16 +1,16 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.JlPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Channel.JlPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.JlPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.JlPay
 {
     /// <summary>
     /// 嘉联退款接口
@@ -35,7 +35,7 @@ namespace AGooday.AgPay.Components.Third.Channel.JlPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.JLPAY;
+            return Constants.IF_CODE.JLPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)

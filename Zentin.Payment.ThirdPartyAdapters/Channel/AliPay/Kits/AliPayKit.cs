@@ -1,5 +1,5 @@
-﻿using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Aop.Api;
 using Aop.Api.Domain;
 using Aop.Api.Request;
@@ -7,7 +7,7 @@ using Zentin.Payment.Application.AliPay;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay.Kits
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.Kits
 {
     /// <summary>
     /// 【支付宝】支付通道工具包

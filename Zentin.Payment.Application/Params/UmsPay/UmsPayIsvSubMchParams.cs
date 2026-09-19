@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.UmsPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.UmsPay
 {
     public class UmsPayIsvSubMchParams : IsvSubMchParams
     {

@@ -1,17 +1,17 @@
-﻿using AGooday.AgPay.Components.Third.Channel.AliPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
-using Aop.Api.Domain;
+﻿using Aop.Api.Domain;
 using Aop.Api.Request;
 using Aop.Api.Response;
 using Microsoft.Extensions.Logging;
 using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay
 {
     /// <summary>
     /// 退款接口： 支付宝官方

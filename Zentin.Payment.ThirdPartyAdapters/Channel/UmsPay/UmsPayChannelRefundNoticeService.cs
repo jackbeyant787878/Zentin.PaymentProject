@@ -1,12 +1,12 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using static AGooday.AgPay.Components.Third.Channel.IChannelRefundNoticeService;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelRefundNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay
 {
     /// <summary>
     /// 银联商务 退款回调接口实现类
@@ -27,7 +27,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.UMSPAY;
+            return Constants.IF_CODE.UMSPAY;
         }
 
         public override Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.Channel.YsePay.Enumerator
+﻿namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsePay.Enumerator
 {
     public class YsePayEnum
     {

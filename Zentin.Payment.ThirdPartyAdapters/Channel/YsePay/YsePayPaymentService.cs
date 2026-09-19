@@ -1,23 +1,21 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Web;
-using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
 using Zentin.Payment.Application.YsePay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.YsePay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.YsePay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Zentin.Payment.ThirdPartyAdapters.Channel.YsePay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.YsePay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsePay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsePay
 {
     public class YsePayPaymentService : AbstractPaymentService
     {
@@ -36,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.YsePay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.YSEPAY;
+            return Constants.IF_CODE.YSEPAY;
         }
 
         public override bool IsSupport(string wayCode)

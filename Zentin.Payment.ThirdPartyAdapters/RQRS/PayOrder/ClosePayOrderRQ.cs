@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+﻿namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     /// <summary>
     /// 关闭订单 请求参数对象

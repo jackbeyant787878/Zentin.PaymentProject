@@ -1,38 +1,36 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Application.LcswPay;
-using Zentin.Payment.Common.Constants;
+﻿using Newtonsoft.Json.Linq;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json.Linq;
-using static AGooday.AgPay.Components.Third.Channel.IChannelNoticeService;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay
 {
     /// <summary>
     /// 利楚扫呗回调
     /// </summary>
-    public class LcswPayChannelNoticeService : AbstractChannelNoticeService
+    public class LConstantswPayChannelNoticeService : AbstractChannelNoticeService
     {
-        public LcswPayChannelNoticeService(ILogger<LcswPayChannelNoticeService> logger,
+        public LConstantswPayChannelNoticeService(ILogger<LConstantswPayChannelNoticeService> logger,
             RequestKit requestKit,
             ConfigContextQueryService configContextQueryService)
             : base(logger, requestKit, configContextQueryService)
         {
         }
 
-        public LcswPayChannelNoticeService()
+        public LConstantswPayChannelNoticeService()
             : base()
         {
         }
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.LCSWPAY;
+            return Constants.IF_CODE.LConstantsWPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)
@@ -137,13 +135,13 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                 return false;
             }
 
-            LcswPayNormalMchParams lcswParams = (LcswPayNormalMchParams)await _configContextQueryService.QueryNormalMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
+            LConstantswPayNormalMchParams lConstantswParams = (LConstantswPayNormalMchParams)await _configContextQueryService.QueryNormalMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
 
             //验签
-            string key = lcswParams.AccessToken;
+            string key = lConstantswParams.AccessToken;
 
             //验签失败
-            if (!LcswPaySignUtil.Verify(jsonParams, key))
+            if (!LConstantswPaySignUtil.Verify(jsonParams, key))
             {
                 _logger.LogInformation("【利楚扫呗回调】 验签失败！ 回调参数: parameter={jsonParams}, publicKey={key} ", jsonParams, key);
                 //_logger.LogInformation($"【利楚扫呗回调】 验签失败！ 回调参数: parameter={jsonParams}, publicKey={key} ");

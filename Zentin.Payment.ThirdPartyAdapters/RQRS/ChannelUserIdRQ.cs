@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AGooday.AgPay.Components.Third.RQRS
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS
 {
     public class ChannelUserIdRQ : AbstractMchAppRQ
     {

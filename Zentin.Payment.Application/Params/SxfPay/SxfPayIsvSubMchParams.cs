@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.SxfPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.SxfPay
 {
     public class SxfPayIsvSubMchParams : IsvSubMchParams
     {

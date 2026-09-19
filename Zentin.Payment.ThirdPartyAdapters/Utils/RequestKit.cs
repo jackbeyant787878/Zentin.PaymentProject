@@ -4,7 +4,7 @@ using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Models;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     public class RequestKit
     {

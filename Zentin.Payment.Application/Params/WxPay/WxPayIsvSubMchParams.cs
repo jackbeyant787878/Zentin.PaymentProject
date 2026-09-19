@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.WxPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.WxPay
 {
     /// <summary>
     /// 微信官方支付 配置参数

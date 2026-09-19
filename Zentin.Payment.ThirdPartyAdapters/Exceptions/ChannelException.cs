@@ -1,6 +1,6 @@
-﻿using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Exceptions
+namespace Zentin.Payment.ThirdPartyAdapters.Exceptions
 {
     /// <summary>
     /// 请求渠道侧异常 exception

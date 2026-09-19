@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Newtonsoft.Json;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     public class ClosePayOrderRS : AbstractRS
     {

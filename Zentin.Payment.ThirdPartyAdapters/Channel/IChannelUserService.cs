@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Components.Third.Models;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     /// <summary>
     /// 301方式获取渠道侧用户ID， 如微信openId 支付宝的userId等

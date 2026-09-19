@@ -1,17 +1,17 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using  Microsoft.Extensions.Logging;
 using Zentin.Payment.Application.YsfPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Channel.YsfPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.YsfPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using static AGooday.AgPay.Components.Third.Channel.IChannelNoticeService;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsfPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsfPay
 {
     /// <summary>
     /// 云闪付回调
@@ -32,7 +32,7 @@ namespace AGooday.AgPay.Components.Third.Channel.YsfPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.YSFPAY;
+            return Constants.IF_CODE.YSFPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

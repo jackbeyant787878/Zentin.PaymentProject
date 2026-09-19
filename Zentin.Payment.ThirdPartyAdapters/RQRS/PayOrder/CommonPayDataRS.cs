@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     /// <summary>
     /// 通用支付数据RS
@@ -33,25 +33,25 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
 
             if (!string.IsNullOrWhiteSpace(PayUrl))
             {
-                return CS.PAY_DATA_TYPE.PAY_URL;
+                return Constants.PAY_DATA_TYPE.PAY_URL;
             }
 
             if (!string.IsNullOrWhiteSpace(CodeUrl))
             {
-                return CS.PAY_DATA_TYPE.CODE_URL;
+                return Constants.PAY_DATA_TYPE.CODE_URL;
             }
 
             if (!string.IsNullOrWhiteSpace(CodeImgUrl))
             {
-                return CS.PAY_DATA_TYPE.CODE_IMG_URL;
+                return Constants.PAY_DATA_TYPE.CODE_IMG_URL;
             }
 
             if (!string.IsNullOrWhiteSpace(FormContent))
             {
-                return CS.PAY_DATA_TYPE.FORM;
+                return Constants.PAY_DATA_TYPE.FORM;
             }
 
-            return CS.PAY_DATA_TYPE.PAY_URL;
+            return Constants.PAY_DATA_TYPE.PAY_URL;
         }
 
         public override string BuildPayData()

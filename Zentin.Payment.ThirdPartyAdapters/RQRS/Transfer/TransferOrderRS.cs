@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AutoMapper;
+﻿using AutoMapper;
+using Zentin.Payment.Application.Dto;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Transfer
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Transfer
 {
     /// <summary>
     /// 创建订单(统一订单) 响应参数

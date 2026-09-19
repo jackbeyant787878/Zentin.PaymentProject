@@ -1,12 +1,4 @@
-﻿using AGooday.AgPay.Components.Third.Channel.AllinPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.AllinPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
@@ -15,8 +7,16 @@ using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.AllinPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay
 {
     public class AllinPayPaymentService : AbstractPaymentService
     {

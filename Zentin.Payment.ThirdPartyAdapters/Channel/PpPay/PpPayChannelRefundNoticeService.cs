@@ -1,16 +1,16 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PaypalServerSdk.Standard.Models;
-using static AGooday.AgPay.Components.Third.Channel.IChannelRefundNoticeService;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelRefundNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.PpPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.PpPay
 {
     public class PpPayChannelRefundNoticeService : AbstractChannelRefundNoticeService
     {
@@ -28,7 +28,7 @@ namespace AGooday.AgPay.Components.Third.Channel.PpPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.PPPAY;
+            return Constants.IF_CODE.PPPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

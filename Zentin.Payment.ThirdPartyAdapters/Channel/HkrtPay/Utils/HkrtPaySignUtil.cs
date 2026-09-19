@@ -1,7 +1,7 @@
 ﻿using Zentin.Payment.Common.Utils;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.HkrtPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.HkrtPay.Utils
 {
     public class HkrtPaySignUtil
     {

@@ -1,8 +1,8 @@
-﻿using AGooday.AgPay.Components.Third.Channel.AliPay.Kits;
-using AGooday.AgPay.Components.Third.Exceptions;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Aop.Api.Domain;
 using Aop.Api.Request;
 using Aop.Api.Response;
@@ -13,7 +13,7 @@ using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay
 {
     /// <summary>
     /// 分账接口： 支付宝官方
@@ -118,7 +118,7 @@ namespace AGooday.AgPay.Components.Third.Channel.AliPay
                 // royalty_mode 参数说明:  同步执行 sync  ; 分账异步执行 async ( 使用异步：  需要 1、请配置 支付宝应用的网关地址 （ xxx.com/api/channelbiz/alipay/appGatewayMsgReceive ）， 2、 订阅消息。   )
                 // 2023-03-30 咨询支付宝客服：  如果没有传royalty_mode分账模式,这个默认会是同步分账,同步分账不需要关注异步通知,接口调用成功就分账成功了  2,同步分账默认不会给您发送异步通知。
                 // 3. 服务商代商户调用商家分账，当异步分账时服务商必须调用alipay.open.app.message.topic.subscribe(订阅消息主题)对消息api做关联绑定，服务商才会收到alipay.trade.order.settle.notify通知，否则服务商无法收到通知。
-                // https://opendocs.alipay.com/open/20190308105425129272/quickstart#%E8%9A%82%E8%9A%81%E6%B6%88%E6%81%AF%EF%BC%9A%E4%BA%A4%E6%98%93%E5%88%86%E8%B4%A6%E7%BB%93%E6%9E%9C%E9%80%9A%E7%9F%A5
+                // https://opendoConstants.alipay.com/open/20190308105425129272/quickstart#%E8%9A%82%E8%9A%81%E6%B6%88%E6%81%AF%EF%BC%9A%E4%BA%A4%E6%98%93%E5%88%86%E8%B4%A6%E7%BB%93%E6%9E%9C%E9%80%9A%E7%9F%A5
 
                 model.RoyaltyMode = "sync"; // 综上所述， 目前使用同步调用。
 

@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Application.Params.LcswPay
+﻿namespace Zentin.Payment.Application.Params.LcswPay
 {
     public class LcswPayConfig
     {
@@ -9,3 +9,4 @@
         public const string SANDBOX_SERVER_URL = "http://test.lcsw.cn:8045/lcsw";
     }
 }
+

@@ -1,12 +1,12 @@
-﻿using AGooday.AgPay.Application.Params;
-using AGooday.AgPay.Components.Third.Models;
-using Zentin.Payment.Application;
+﻿using Zentin.Payment.Application;
 using Zentin.Payment.Application.AliPay;
 using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.Params;
 using Zentin.Payment.Application.PpPay;
 using Zentin.Payment.Application.WxPay;
 using Zentin.Payment.Common.Constant;
-namespace AGooday.AgPay.Components.Third.Services
+using Zentin.Payment.ThirdPartyAdapters.Models;
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     public class ConfigContextQueryService
     {

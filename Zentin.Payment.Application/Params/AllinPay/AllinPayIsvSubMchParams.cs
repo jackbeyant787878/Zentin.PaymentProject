@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.AllinPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.AllinPay
 {
     public class AllinPayIsvSubMchParams : IsvSubMchParams
     {

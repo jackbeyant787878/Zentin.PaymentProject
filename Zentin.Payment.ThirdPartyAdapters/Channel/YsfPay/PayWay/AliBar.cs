@@ -1,17 +1,15 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsfPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsfPay.PayWay
 {
     public class AliBar : YsfPayPaymentService
     {

@@ -1,6 +1,6 @@
-﻿using AGooday.AgPay.Components.Third.RQRS;
+﻿using Zentin.Payment.ThirdPartyAdapters.RQRS;
 
-namespace AGooday.AgPay.Components.Third.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     /// <summary>
     /// api响应结果构造器

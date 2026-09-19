@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsfPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsfPay.Enumerator
 {
     public class YsfPayEnum
     {
@@ -26,15 +26,15 @@ namespace AGooday.AgPay.Components.Third.Channel.YsfPay.Enumerator
         /// <returns></returns>
         public static string GetOrderTypeByBar(string wayCode)
         {
-            if (CS.PAY_WAY_CODE.ALI_BAR.Equals(wayCode))
+            if (Constants.PAY_WAY_CODE.ALI_BAR.Equals(wayCode))
             {
                 return OrderType.ALIPAY;
             }
-            else if (CS.PAY_WAY_CODE.WX_BAR.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.WX_BAR.Equals(wayCode))
             {
                 return OrderType.WECHAT;
             }
-            else if (CS.PAY_WAY_CODE.YSF_BAR.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.YSF_BAR.Equals(wayCode))
             {
                 return OrderType.UNIONPAY;
             }
@@ -49,15 +49,15 @@ namespace AGooday.AgPay.Components.Third.Channel.YsfPay.Enumerator
         /// <returns></returns>
         public static string GetOrderTypeByJSapi(string wayCode)
         {
-            if (CS.PAY_WAY_CODE.ALI_JSAPI.Equals(wayCode))
+            if (Constants.PAY_WAY_CODE.ALI_JSAPI.Equals(wayCode))
             {
                 return OrderType.ALIPAY_JS;
             }
-            else if (CS.PAY_WAY_CODE.WX_JSAPI.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.WX_JSAPI.Equals(wayCode))
             {
                 return OrderType.WECHAT_JS;
             }
-            else if (CS.PAY_WAY_CODE.YSF_JSAPI.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.YSF_JSAPI.Equals(wayCode))
             {
                 return OrderType.UP_JS;
             }
@@ -72,15 +72,15 @@ namespace AGooday.AgPay.Components.Third.Channel.YsfPay.Enumerator
         /// <returns></returns>
         public static string GetOrderTypeByCommon(string wayCode)
         {
-            if (CS.PAY_WAY_CODE.ALI_JSAPI.Equals(wayCode) || CS.PAY_WAY_CODE.ALI_BAR.Equals(wayCode))
+            if (Constants.PAY_WAY_CODE.ALI_JSAPI.Equals(wayCode) || Constants.PAY_WAY_CODE.ALI_BAR.Equals(wayCode))
             {
                 return OrderType.ALIPAY;
             }
-            else if (CS.PAY_WAY_CODE.WX_JSAPI.Equals(wayCode) || CS.PAY_WAY_CODE.WX_BAR.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.WX_JSAPI.Equals(wayCode) || Constants.PAY_WAY_CODE.WX_BAR.Equals(wayCode))
             {
                 return OrderType.WECHAT;
             }
-            else if (CS.PAY_WAY_CODE.YSF_JSAPI.Equals(wayCode) || CS.PAY_WAY_CODE.YSF_BAR.Equals(wayCode))
+            else if (Constants.PAY_WAY_CODE.YSF_JSAPI.Equals(wayCode) || Constants.PAY_WAY_CODE.YSF_BAR.Equals(wayCode))
             {
                 return OrderType.UNIONPAY;
             }

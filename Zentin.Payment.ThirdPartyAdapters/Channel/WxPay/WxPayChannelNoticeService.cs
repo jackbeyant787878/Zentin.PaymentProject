@@ -1,24 +1,24 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.WxPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2.Events;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Events;
-using static AGooday.AgPay.Components.Third.Channel.IChannelNoticeService;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelNoticeService;
 using WechatTenpayClientV2 = SKIT.FlurlHttpClient.Wechat.TenpayV2.WechatTenpayClient;
 using WechatTenpayClientV3 = SKIT.FlurlHttpClient.Wechat.TenpayV3.WechatTenpayClient;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 微信回调
@@ -43,7 +43,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)
@@ -142,7 +142,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 var wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
 
                 // V2
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     // 获取回调参数
                     //var result = (OrderEvent)@params;
@@ -169,7 +169,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     channelResult.ChannelState = ChannelState.CONFIRM_SUCCESS;
                     channelResult.ResponseEntity = TextResp(WxPayKit.SuccessResp("OK"));
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     // 获取回调参数
                     string channelState = string.Empty;

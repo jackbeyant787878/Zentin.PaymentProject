@@ -1,11 +1,11 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay.PayWayV3
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.PayWayV3
 {
     /// <summary>
     /// 微信 条码支付

@@ -1,12 +1,4 @@
-﻿using AGooday.AgPay.Components.Third.Channel.DgPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.DgPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
@@ -15,8 +7,16 @@ using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.DgPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.DgPay
 {
     public class DgPayPaymentService : AbstractPaymentService
     {
@@ -195,7 +195,7 @@ namespace AGooday.AgPay.Components.Third.Channel.DgPay
              *  示例值：6666000123120000
              **/
             reqParams.Add("sys_id", sysId);
-            reqParams.Add("product_id", productId); //汇付分配的产品号，示例值：MCS
+            reqParams.Add("product_id", productId); //汇付分配的产品号，示例值：MConstants
             reqParams.Add("sign", sign); //加签结果
             reqParams.Add("data", reqData.ToString(Formatting.None)); //业务请求参数，具体值参考API文档
 

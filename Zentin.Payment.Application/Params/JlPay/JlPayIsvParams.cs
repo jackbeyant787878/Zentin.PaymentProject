@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Common.Extensions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Zentin.Payment.Common.Extensions;
 
-namespace AGooday.AgPay.Application.Params.JlPay
+namespace Zentin.Payment.Application.Params.JlPay
 {
     /// <summary>
     /// 嘉联 配置信息

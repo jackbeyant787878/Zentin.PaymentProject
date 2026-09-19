@@ -1,10 +1,10 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.PpPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.PpPay
 {
     public class PpPayPayOrderQueryService : IPayOrderQueryService
     {
@@ -21,7 +21,7 @@ namespace AGooday.AgPay.Components.Third.Channel.PpPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.PPPAY;
+            return Constants.IF_CODE.PPPAY;
         }
 
         public async Task<ChannelRetMsg> QueryAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)

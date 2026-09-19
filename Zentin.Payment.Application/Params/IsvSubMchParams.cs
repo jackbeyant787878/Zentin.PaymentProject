@@ -1,6 +1,4 @@
-﻿using Zentin.Payment.Application;
-
-namespace AGooday.AgPay.Application.Params
+﻿namespace Zentin.Payment.Application.Params
 {
     /// <summary>
     /// 抽象类 特约商户参数定义

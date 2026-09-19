@@ -1,7 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 namespace Zentin.Payment.Common.Utils

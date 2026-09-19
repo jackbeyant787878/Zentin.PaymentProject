@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.SxfPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay.Enumerator
 {
     public class SxfPayEnum
     {
@@ -132,24 +132,24 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay.Enumerator
             string payType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_BAR:
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
-                case CS.PAY_WAY_CODE.ALI_APP:
-                case CS.PAY_WAY_CODE.ALI_PC:
-                case CS.PAY_WAY_CODE.ALI_WAP:
-                case CS.PAY_WAY_CODE.ALI_QR:
-                case CS.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.ALI_BAR:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_APP:
+                case Constants.PAY_WAY_CODE.ALI_PC:
+                case Constants.PAY_WAY_CODE.ALI_WAP:
+                case Constants.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
                     payType = PayType.ALIPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_JSAPI:
-                case CS.PAY_WAY_CODE.WX_LITE:
-                case CS.PAY_WAY_CODE.WX_BAR:
-                case CS.PAY_WAY_CODE.WX_H5:
-                case CS.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_BAR:
+                case Constants.PAY_WAY_CODE.WX_H5:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
                     payType = PayType.WECHAT.ToString();
                     break;
-                case CS.PAY_WAY_CODE.YSF_BAR:
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.YSF_BAR:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     payType = PayType.UNIONPAY.ToString();
                     break;
                 default:
@@ -171,16 +171,16 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay.Enumerator
             string payWay = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.WX_JSAPI:
-                case CS.PAY_WAY_CODE.WX_H5:
-                case CS.PAY_WAY_CODE.WX_NATIVE:
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
-                case CS.PAY_WAY_CODE.ALI_WAP:
-                case CS.PAY_WAY_CODE.ALI_LITE:
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_H5:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_WAP:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     payWay = PayWay.JSAPI;
                     break;
-                case CS.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_LITE:
                     payWay = PayWay.LITE;
                     break;
                 default:

@@ -1,10 +1,10 @@
-﻿using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Zentin.Payment.Application.Dto;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     /// <summary>
     /// 渠道侧的退款订单通知解析实现 【分为同步跳转（doReturn）和异步回调(doNotify) 】

@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Microsoft.Extensions.Logging;
 using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Enumerator;
 using Zentin.Payment.Common.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     /// <summary>
     /// 支付接口抽象类

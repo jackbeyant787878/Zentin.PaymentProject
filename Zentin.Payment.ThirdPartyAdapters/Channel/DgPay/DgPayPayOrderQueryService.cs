@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.DgPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.DgPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.DgPay
 {
     /// <summary>
     /// 斗拱查单
@@ -30,7 +30,7 @@ namespace AGooday.AgPay.Components.Third.Channel.DgPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.DGPAY;
+            return Constants.IF_CODE.DGPAY;
         }
 
         public async Task<ChannelRetMsg> QueryAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)

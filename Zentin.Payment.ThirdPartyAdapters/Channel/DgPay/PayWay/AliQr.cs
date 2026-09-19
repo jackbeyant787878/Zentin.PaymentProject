@@ -1,18 +1,18 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.DgPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.DgPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.PayWay
 {
     /// <summary>
     /// 斗拱 支付宝 二维码支付
@@ -67,7 +67,7 @@ namespace AGooday.AgPay.Components.Third.Channel.DgPay.PayWay
                         case DgPayEnum.TransStat.P:
                             string qrCode = data.GetValue("qr_code").ToString();
                             //二维码地址
-                            if (CS.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
+                            if (Constants.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
                             {
                                 res.CodeImgUrl = _sysConfigService.GetDBApplicationConfig().GenScanImgUrl(qrCode);
                             }

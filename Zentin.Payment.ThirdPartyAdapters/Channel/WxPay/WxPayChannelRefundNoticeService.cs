@@ -1,25 +1,25 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Application.WxPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.WxPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2.Events;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Events;
-using static AGooday.AgPay.Components.Third.Channel.IChannelRefundNoticeService;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelRefundNoticeService;
 using WechatTenpayClientV2 = SKIT.FlurlHttpClient.Wechat.TenpayV2.WechatTenpayClient;
 using WechatTenpayClientV3 = SKIT.FlurlHttpClient.Wechat.TenpayV3.WechatTenpayClient;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 微信支付 退款回调接口实现类
@@ -44,7 +44,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)
@@ -67,17 +67,17 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 string apiVersion = ""; // 接口类型
                 string wxKey = "";  // 微信私钥
                 byte mchType = mchAppConfigContext.MchType;
-                if (CS.MCH_TYPE_NORMAL == mchType)
+                if (Constants.MCH_TYPE_NORMAL == mchType)
                 {
                     WxPayNormalMchParams normalMchParams = (WxPayNormalMchParams)await _configContextQueryService.QueryNormalMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
                     apiVersion = normalMchParams.ApiVersion;
-                    wxKey = CS.PAY_IF_VERSION.WX_V2.Equals(apiVersion) ? normalMchParams.Key : normalMchParams.ApiV3Key;
+                    wxKey = Constants.PAY_IF_VERSION.WX_V2.Equals(apiVersion) ? normalMchParams.Key : normalMchParams.ApiV3Key;
                 }
-                else if (CS.MCH_TYPE_ISVSUB == mchType)
+                else if (Constants.MCH_TYPE_ISVSUB == mchType)
                 {
                     WxPayIsvParams wxpayIsvParams = (WxPayIsvParams)await _configContextQueryService.QueryIsvParamsAsync(mchAppConfigContext.MchInfo.IsvNo, GetIfCode());
                     apiVersion = wxpayIsvParams.ApiVersion;
-                    wxKey = CS.PAY_IF_VERSION.WX_V2.Equals(apiVersion) ? wxpayIsvParams.Key : wxpayIsvParams.ApiV3Key;
+                    wxKey = Constants.PAY_IF_VERSION.WX_V2.Equals(apiVersion) ? wxpayIsvParams.Key : wxpayIsvParams.ApiV3Key;
                 }
                 else
                 {
@@ -85,7 +85,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 }
 
                 var wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
-                if (CS.PAY_IF_VERSION.WX_V3.Equals(apiVersion)) // V3接口回调
+                if (Constants.PAY_IF_VERSION.WX_V3.Equals(apiVersion)) // V3接口回调
                 {
                     // 验签 && 获取订单回调数据
                     var client = (WechatTenpayClientV3)wxServiceWrapper.Client;
@@ -129,7 +129,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                         }
                     }
                 }
-                else if (CS.PAY_IF_VERSION.WX_V2.Equals(apiVersion)) // V2接口回调
+                else if (Constants.PAY_IF_VERSION.WX_V2.Equals(apiVersion)) // V2接口回调
                 {
                     // 验签 && 获取订单回调数据
                     var client = (WechatTenpayClientV2)wxServiceWrapper.Client;
@@ -167,7 +167,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
 
                 channelResult.ChannelState = ChannelState.WAITING; // Default payment in progress
-                if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
+                if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     // 获取回调参数
                     string refundStatus = string.Empty;
@@ -202,7 +202,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     var okResponse = JsonResp(resJSON);
                     channelResult.ResponseEntity = okResponse;
                 }
-                else if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
+                else if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     // 获取回调参数
                     //var result = (OrderEvent)@params;

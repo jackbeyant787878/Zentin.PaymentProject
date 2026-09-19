@@ -1,10 +1,10 @@
 ﻿using System.Net.Mime;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay.Utils
 {
     public class UmsPayHttpUtil
     {

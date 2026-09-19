@@ -1,8 +1,8 @@
-﻿using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Newtonsoft.Json;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     /// <summary>
     /// 创建订单(统一订单) 响应参数
@@ -56,7 +56,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
         /// <returns></returns>
         public virtual string BuildPayDataType()
         {
-            return CS.PAY_DATA_TYPE.NONE;
+            return Constants.PAY_DATA_TYPE.NONE;
         }
 
         /// <summary>

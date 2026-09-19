@@ -1,26 +1,23 @@
-﻿using System.Diagnostics;
-using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Application.LcswPay;
-using Zentin.Payment.Common.Constants;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay
 {
-    public class LcswPayPaymentService : AbstractPaymentService
+    public class LConstantswPayPaymentService : AbstractPaymentService
     {
-        public LcswPayPaymentService(ILogger<LcswPayPaymentService> logger,
+        public LConstantswPayPaymentService(ILogger<LConstantswPayPaymentService> logger,
             IServiceProvider serviceProvider,
             ISysConfigService sysConfigService,
             ConfigContextQueryService configContextQueryService)
@@ -28,14 +25,14 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         {
         }
 
-        public LcswPayPaymentService()
+        public LConstantswPayPaymentService()
             : base()
         {
         }
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.LCSWPAY;
+            return Constants.IF_CODE.LConstantsWPAY;
         }
 
         public override bool IsSupport(string wayCode)
@@ -121,9 +118,9 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         /// </summary>
         /// <param name="isvParams"></param>
         /// <returns></returns>
-        public static string GetHost4env(LcswPayNormalMchParams isvParams)
+        public static string GetHost4env(LConstantswPayNormalMchParams isvParams)
         {
-            return CS.YES == isvParams.Sandbox ? LcswPayConfig.SANDBOX_SERVER_URL : LcswPayConfig.PROD_SERVER_URL;
+            return Constants.YES == isvParams.Sandbox ? LConstantswPayConfig.SANDBOX_SERVER_URL : LConstantswPayConfig.PROD_SERVER_URL;
         }
 
         /// <summary>
@@ -137,24 +134,24 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         /// <exception cref="BizException"></exception>
         public async Task<JObject> PackageParamAndReqAsync(string apiUri, JObject reqParams, string logPrefix, MchAppConfigContext mchAppConfigContext)
         {
-            LcswPayNormalMchParams lcswParams = (LcswPayNormalMchParams)await _configContextQueryService.QueryNormalMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
+            LConstantswPayNormalMchParams lConstantswParams = (LConstantswPayNormalMchParams)await _configContextQueryService.QueryNormalMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
 
-            reqParams.Add("merchant_no", lcswParams.MerchantNo); // 商户号
-            reqParams.Add("terminal_id", lcswParams.TerminalId); // 商户发起交易的IP地址
+            reqParams.Add("merchant_no", lConstantswParams.MerchantNo); // 商户号
+            reqParams.Add("terminal_id", lConstantswParams.TerminalId); // 商户发起交易的IP地址
 
             // 签名
-            string key = lcswParams.AccessToken;
-            reqParams.Add("key_sign", LcswPaySignUtil.Sign(reqParams, key)); // 签名字符串
+            string key = lConstantswParams.AccessToken;
+            reqParams.Add("key_sign", LConstantswPaySignUtil.Sign(reqParams, key)); // 签名字符串
 
             // 调起上游接口
-            string url = GetHost4env(lcswParams) + apiUri;
+            string url = GetHost4env(lConstantswParams) + apiUri;
             string unionId = Guid.NewGuid().ToString("N");
             var stopwatch = new Stopwatch();
             var reqJsonData = JsonConvert.SerializeObject(reqParams);
             _logger.LogInformation("{logPrefix} unionId={unionId} url={url} reqData={reqData}", logPrefix, unionId, url, reqJsonData);
             //_logger.LogInformation($"{logPrefix} unionId={unionId} url={url} reqData={reqJsonData}");
             stopwatch.Restart();
-            string resText = await LcswPayHttpUtil.DoPostAsync(url, reqJsonData);
+            string resText = await LConstantswPayHttpUtil.DoPostAsync(url, reqJsonData);
             var time = stopwatch.ElapsedMilliseconds;
             _logger.LogInformation("{logPrefix} unionId={unionId} url={url} reqData={reqData} resData={resData} time={time}", logPrefix, unionId, url, reqJsonData, resText, time);
             //_logger.LogInformation($"{logPrefix} unionId={unionId} url={url} reqData={reqJsonData} resData={resText} time={time}");
@@ -166,7 +163,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
 
             // 验签
             var resParams = JObject.Parse(resText);
-            if (!LcswPaySignUtil.Verify(resParams, key))
+            if (!LConstantswPaySignUtil.Verify(resParams, key))
             {
                 _logger.LogWarning("{logPrefix} unionId={unionId} url={url} 验签失败！ reqData={reqData} resData={resData} time={time}", logPrefix, unionId, url, reqJsonData, resText, time);
                 //_logger.LogWarning($"{logPrefix} unionId={unionId} url={url} 验签失败！ reqData={reqJsonData} resData={resText} time={time}");
@@ -183,7 +180,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         /// <param name="notifyUrl"></param>
         public static void UnifiedParamsSet(JObject reqParams, PayOrderDto payOrder, string notifyUrl)
         {
-            string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             reqParams.Add("pay_ver", "201");
             reqParams.Add("pay_type", payType);
             reqParams.Add("service_id", "012");
@@ -201,7 +198,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         /// <param name="notifyUrl"></param>
         public static void MiniPayParamsSet(JObject reqParams, PayOrderDto payOrder, string notifyUrl)
         {
-            string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             reqParams.Add("pay_ver", "202");
             reqParams.Add("pay_type", payType);
             reqParams.Add("service_id", "015");
@@ -218,7 +215,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
         /// <param name="payOrder"></param>
         public static void BarParamsSet(JObject reqParams, PayOrderDto payOrder)
         {
-            string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             reqParams.Add("pay_ver", "202");
             reqParams.Add("pay_type", payType);
             reqParams.Add("service_id", "010");

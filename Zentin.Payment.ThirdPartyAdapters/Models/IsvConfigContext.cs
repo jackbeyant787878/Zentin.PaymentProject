@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using  Microsoft.Extensions.Logging;
 using Zentin.Payment.Application;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     /// <summary>
     /// Isv支付参数信息

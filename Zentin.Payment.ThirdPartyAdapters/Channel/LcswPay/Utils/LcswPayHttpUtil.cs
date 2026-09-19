@@ -1,10 +1,10 @@
 ﻿using System.Net.Mime;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Exceptions;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Utils
 {
-    public class LcswPayHttpUtil
+    public class LConstantswPayHttpUtil
     {
         private static readonly string DEFAULT_CHARSET = "UTF-8";
         private static readonly int DEFAULT_TIMEOUT = 60; // 60 秒超时
@@ -35,7 +35,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay.Utils
                 catch (Exception e)
                 {
                     // 记录详细日志（可选）
-                    LogUtil<LcswPayHttpUtil>.Error($"请求失败: {url}，{reqParams}", e);
+                    LogUtil<LConstantswPayHttpUtil>.Error($"请求失败: {url}，{reqParams}", e);
                     throw ChannelException.SysError($"支付通道请求异常：{e.Message}");
                 }
             }

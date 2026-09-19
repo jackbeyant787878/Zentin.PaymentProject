@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Application.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Zentin.Payment.Application;
 using Zentin.Payment.Application.AliPay;
+using Zentin.Payment.Application.Params;
 using Zentin.Payment.Application.PpPay;
 using Zentin.Payment.Application.WxPay;
-using AGooday.AgPay.Application.Services;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Models;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Models;
 
-namespace AGooday.AgPay.Components.Third.Services
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     public class ConfigContextService
     {
@@ -252,11 +252,11 @@ namespace AGooday.AgPay.Components.Third.Services
             mchAppConfigContext.MchApp = dbMchApp;
 
             // 查询商户的所有支持的参数配置
-            var allConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(CS.INFO_TYPE.MCH_APP, appId);
-            var allOauth2ConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(CS.INFO_TYPE.MCH_APP_OAUTH2, appId);
+            var allConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(Constants.INFO_TYPE.MCH_APP, appId);
+            var allOauth2ConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(Constants.INFO_TYPE.MCH_APP_OAUTH2, appId);
 
             // 普通商户
-            if (mchInfo.Type == CS.MCH_TYPE_NORMAL)
+            if (mchInfo.Type == Constants.MCH_TYPE_NORMAL)
             {
                 foreach (var payInterfaceConfig in allConfigList)
                 {
@@ -275,21 +275,21 @@ namespace AGooday.AgPay.Components.Third.Services
                 }
 
                 //放置alipay client
-                AliPayNormalMchParams alipayParams = mchAppConfigContext.GetNormalMchParamsByIfCode<AliPayNormalMchParams>(CS.IF_CODE.ALIPAY);
+                AliPayNormalMchParams alipayParams = mchAppConfigContext.GetNormalMchParamsByIfCode<AliPayNormalMchParams>(Constants.IF_CODE.ALIPAY);
                 if (alipayParams != null)
                 {
                     mchAppConfigContext.AlipayClientWrapper = AliPayClientWrapper.BuildAlipayClientWrapper(alipayParams);
                 }
 
                 //放置 wxJavaService
-                WxPayNormalMchParams wxpayParams = mchAppConfigContext.GetNormalMchParamsByIfCode<WxPayNormalMchParams>(CS.IF_CODE.WXPAY);
+                WxPayNormalMchParams wxpayParams = mchAppConfigContext.GetNormalMchParamsByIfCode<WxPayNormalMchParams>(Constants.IF_CODE.WXPAY);
                 if (wxpayParams != null)
                 {
                     mchAppConfigContext.WxServiceWrapper = WxServiceWrapper.BuildWxServiceWrapper(wxpayParams);
                 }
 
                 //放置 paypal client
-                PpPayNormalMchParams ppPayMchParams = mchAppConfigContext.GetNormalMchParamsByIfCode<PpPayNormalMchParams>(CS.IF_CODE.PPPAY);
+                PpPayNormalMchParams ppPayMchParams = mchAppConfigContext.GetNormalMchParamsByIfCode<PpPayNormalMchParams>(Constants.IF_CODE.PPPAY);
                 if (ppPayMchParams != null)
                 {
                     mchAppConfigContext.PaypalWrapper = PayPalWrapper.BuildPaypalWrapper(ppPayMchParams);
@@ -404,8 +404,8 @@ namespace AGooday.AgPay.Components.Third.Services
             isvConfigContext.IsvInfo = isvInfo;
 
             // 查询商户的所有支持的参数配置
-            var allConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(CS.INFO_TYPE.ISV, isvNo);
-            var allOauth2ConfigList = await _payInterfaceConfigService.GetPayOauth2ConfigByStartsWithInfoIdAsync(CS.INFO_TYPE.ISV_OAUTH2, isvNo);
+            var allConfigList = await _payInterfaceConfigService.GetByInfoIdAsync(Constants.INFO_TYPE.ISV, isvNo);
+            var allOauth2ConfigList = await _payInterfaceConfigService.GetPayOauth2ConfigByStartsWithInfoIdAsync(Constants.INFO_TYPE.ISV_OAUTH2, isvNo);
 
             foreach (var payInterfaceConfig in allConfigList)
             {
@@ -429,14 +429,14 @@ namespace AGooday.AgPay.Components.Third.Services
             }
 
             //放置alipay client
-            AliPayIsvParams alipayParams = isvConfigContext.GetIsvParamsByIfCode<AliPayIsvParams>(CS.IF_CODE.ALIPAY);
+            AliPayIsvParams alipayParams = isvConfigContext.GetIsvParamsByIfCode<AliPayIsvParams>(Constants.IF_CODE.ALIPAY);
             if (alipayParams != null)
             {
                 isvConfigContext.AlipayClientWrapper = AliPayClientWrapper.BuildAlipayClientWrapper(alipayParams);
             }
 
             //放置 wxJavaService
-            WxPayIsvParams wxpayParams = isvConfigContext.GetIsvParamsByIfCode<WxPayIsvParams>(CS.IF_CODE.WXPAY);
+            WxPayIsvParams wxpayParams = isvConfigContext.GetIsvParamsByIfCode<WxPayIsvParams>(Constants.IF_CODE.WXPAY);
             if (wxpayParams != null)
             {
                 isvConfigContext.WxServiceWrapper = WxServiceWrapper.BuildWxServiceWrapper(wxpayParams);

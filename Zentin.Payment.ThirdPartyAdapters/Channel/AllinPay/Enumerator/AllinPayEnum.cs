@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.AllinPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay.Enumerator
 {
     public class AllinPayEnum
     {
@@ -35,7 +35,7 @@ namespace AGooday.AgPay.Components.Third.Channel.AllinPay.Enumerator
             /// </summary>
             A03,
             /// <summary>
-            /// 银联扫码支付(CSB)
+            /// 银联扫码支付(ConstantsB)
             /// </summary>
             U01,
             /// <summary>
@@ -70,30 +70,30 @@ namespace AGooday.AgPay.Components.Third.Channel.AllinPay.Enumerator
             string payType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_LITE:
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
                     payType = PayType.A02.ToString(); break;
-                case CS.PAY_WAY_CODE.ALI_APP:
+                case Constants.PAY_WAY_CODE.ALI_APP:
                     payType = PayType.A03.ToString(); break;
-                case CS.PAY_WAY_CODE.ALI_PC:
-                case CS.PAY_WAY_CODE.ALI_WAP:
-                case CS.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_PC:
+                case Constants.PAY_WAY_CODE.ALI_WAP:
+                case Constants.PAY_WAY_CODE.ALI_QR:
                     payType = PayType.A01.ToString(); break;
-                case CS.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
                     payType = PayType.W01.ToString(); break;
-                case CS.PAY_WAY_CODE.WX_H5:
-                case CS.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_H5:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
                     payType = PayType.W02.ToString(); break;
-                case CS.PAY_WAY_CODE.WX_APP:
+                case Constants.PAY_WAY_CODE.WX_APP:
                     payType = PayType.W03.ToString(); break;
-                case CS.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_LITE:
                     payType = PayType.W06.ToString(); break;
-                case CS.PAY_WAY_CODE.UP_QR:
+                case Constants.PAY_WAY_CODE.UP_QR:
                     payType = PayType.U01.ToString(); break;
-                case CS.PAY_WAY_CODE.UP_JSAPI:
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.UP_JSAPI:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     payType = PayType.U02.ToString(); break;
-                case CS.PAY_WAY_CODE.DCEP_QR:
+                case Constants.PAY_WAY_CODE.DCEP_QR:
                     payType = PayType.S01.ToString(); break;
                 default:
                     break;

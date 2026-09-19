@@ -1,17 +1,17 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Enumerator;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.SxfPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.SxfPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.SxfPay
 {
     /// <summary>
     /// 随行付退款接口
@@ -20,14 +20,14 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay
     {
         private readonly SxfPayPaymentService _paymentService;
         public SxfPayRefundService(ILogger<SxfPayRefundService> logger,
-            //[FromKeyedServices(CS.IF_CODE.SXFPAY)] IPaymentService paymentService,
+            //[FromKeyedServices(Constants.IF_CODE.SXFPAY)] IPaymentService paymentService,
             IServiceProvider serviceProvider,
             ISysConfigService sysConfigService,
             ConfigContextQueryService configContextQueryService)
             : base(logger, serviceProvider, sysConfigService, configContextQueryService)
         {
             //_paymentService = (SxfPayPaymentService)paymentService;
-            //_paymentService = (SxfPayPaymentService)serviceProvider.GetRequiredKeyedService<IPaymentService>(CS.IF_CODE.SXFPAY);
+            //_paymentService = (SxfPayPaymentService)serviceProvider.GetRequiredKeyedService<IPaymentService>(Constants.IF_CODE.SXFPAY);
             _paymentService = ActivatorUtilities.CreateInstance<SxfPayPaymentService>(serviceProvider);
         }
 
@@ -38,7 +38,7 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.SXFPAY;
+            return Constants.IF_CODE.SXFPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)
@@ -54,7 +54,7 @@ namespace AGooday.AgPay.Components.Third.Channel.SxfPay
                 return payOrder.MchFeeAmount;
             }
             /**
-             * 退款手续费规则说明：https://paas.tianquetech.com/docs/#/help/jsdj 
+             * 退款手续费规则说明：https://paas.tianquetech.com/doConstants/#/help/jsdj 
              * 退款手续费计算公式如下：
              * 全额退款的手续费返还：退款手续费=原交易手续费
              * 部分退款的手续费返还：部分退款金额/原交易金额*原交易手续费 【手续费逐笔计算，四舍五入保留两位小数】。

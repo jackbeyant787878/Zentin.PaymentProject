@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.YsfPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.YsfPay
 {
     /// <summary>
     /// 云闪付 配置信息

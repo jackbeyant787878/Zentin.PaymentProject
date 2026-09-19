@@ -1,18 +1,18 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using Zentin.Payment.Application.HkrtPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.HkrtPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.HkrtPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json.Linq;
-using static AGooday.AgPay.Components.Third.Channel.IChannelNoticeService;
+using Zentin.Payment.ThirdPartyAdapters.Channel.HkrtPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.HkrtPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.HkrtPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.HkrtPay
 {
     /// <summary>
     /// 海科融通回调
@@ -36,7 +36,7 @@ namespace AGooday.AgPay.Components.Third.Channel.HkrtPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.HKRTPAY;
+            return Constants.IF_CODE.HKRTPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

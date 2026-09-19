@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.YsePay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.YsePay
 {
     /// <summary>
     /// 银盛 特约商户参数定义

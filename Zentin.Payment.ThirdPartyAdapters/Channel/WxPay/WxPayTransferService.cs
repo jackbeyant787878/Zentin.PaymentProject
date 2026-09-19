@@ -1,19 +1,20 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Application.WxPay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Transfer;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Microsoft.Extensions.Logging;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2.Models;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Models;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.WxPay;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Transfer;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using WechatTenpayClientV2 = SKIT.FlurlHttpClient.Wechat.TenpayV2.WechatTenpayClient;
 using WechatTenpayClientV3 = SKIT.FlurlHttpClient.Wechat.TenpayV3.WechatTenpayClient;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 转账接口： 微信官方
@@ -35,7 +36,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public bool IsSupport(string entryType)
@@ -57,7 +58,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
              * https://developers.weixin.qq.com/community/develop/doc/0004888f8603b042a45c632355a400?highLine=%25E4%25BB%2598%25E6%25AC%25BE%25E5%2588%25B0%25E9%259B%25B6%25E9%2592%25B1%2520%2520%25E6%259C%258D%25E5%258A%25A1%25E5%2595%2586
              * 微信官方解答： 目前企业付款到零钱，是不支持服务商模式的哈，如果特约商户需要使用该功能，请自行登录商户平台申请使用。
              **/
-            if (transferOrder.MchType == CS.MCH_TYPE_ISVSUB)
+            if (transferOrder.MchType == Constants.MCH_TYPE_ISVSUB)
             {
                 return "微信子商户暂不支持转账业务";
             }
@@ -71,7 +72,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             {
                 WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
 
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))  // V2
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))  // V2
                 {
                     CreatePayMarketingTransfersPromotionTransferRequest request = new CreatePayMarketingTransfersPromotionTransferRequest();
 
@@ -97,7 +98,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     var result = await client.ExecuteCreatePayMarketingTransfersPromotionTransferAsync(request);
                     return ChannelRetMsg.Waiting();
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))  // V3
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))  // V3
                 {
                     var client = (WechatTenpayClientV3)wxServiceWrapper.Client;
                     if (mchAppConfigContext.IsIsvSubMch()) // 特约商户
@@ -168,7 +169,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             {
                 WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
 
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))  // V2
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))  // V2
                 {
                     GetPayMarketingTransfersTransferInfoRequest request = new GetPayMarketingTransfersTransferInfoRequest();
                     request.AppId = wxServiceWrapper.Config.AppId;  // 商户账号appid
@@ -191,7 +192,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                         return ChannelRetMsg.Waiting();
                     }
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))  // V3
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))  // V3
                 {
                     GetTransferBatchDetailByOutDetailNumberRequest request = new GetTransferBatchDetailByOutDetailNumberRequest();
                     request.OutBatchNumber = transferOrder.TransferId;

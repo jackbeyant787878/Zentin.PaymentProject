@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -11,9 +11,9 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Mime;
 using Zentin.Payment.Application.Dto;
-using static AGooday.AgPay.Components.Third.Channel.IChannelRefundNoticeService;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelRefundNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel
+namespace Zentin.Payment.ThirdPartyAdapters.Channel
 {
     public abstract class AbstractChannelRefundNoticeService : IChannelRefundNoticeService
     {

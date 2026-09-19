@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel;
-using AGooday.AgPay.Components.Third.Models;
+using Zentin.Payment.ThirdPartyAdapters.Channel;
+using Zentin.Payment.ThirdPartyAdapters.Models;
 
-namespace AGooday.AgPay.Components.Third.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     /// <summary>
     /// 支付方式动态调用Utils

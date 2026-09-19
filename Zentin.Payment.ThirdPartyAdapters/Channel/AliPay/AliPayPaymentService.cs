@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Microsoft.Extensions.Logging;
 using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay
 {
     /// <summary>
     /// 支付接口： 支付宝官方

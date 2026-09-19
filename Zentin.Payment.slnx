@@ -14,6 +14,7 @@
     <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Notification.SMS/Zentin.Payment.Notification.SMS.csproj" Id="8ee9d8c7-8572-4a2b-9df9-fea7f558999d" />
     <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.SDK/Zentin.Payment.SDK.csproj" Id="43aa014a-a674-41b8-97e1-b9a792220a98" />
     <Project Path="Zentin.Payment.Logging.Serilog/Zentin.Payment.Logging.Serilog.csproj" Id="f90a9541-8e99-4780-bda5-267fc1959cce" />
+    <Project Path="Zentin.Payment.ThirdPartyAdapters/Zentin.Payment.ThirdPartyAdapters.csproj" Id="266c2b66-3710-4582-af7e-3627002be629" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Common.Tests/Zentin.Payment.Common.Tests.csproj" Id="9bb83da1-3f18-4196-ac52-62a26ece888a" />
@@ -21,5 +22,4 @@
     <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Notice.Tests/Zentin.Payment.Notice.Tests.csproj" Id="aa4f29ac-4506-4dde-88ba-6c10a22b5fba" />
     <Project Path="D:/Projects/Zentin.Payment/Zentin.Payment.Sdk.Tests/Zentin.Payment.Sdk.Tests.csproj" Id="7b826d88-5a38-4f4f-8227-92f7f323190b" />
   </Folder>
-  <Project Path="Zentin.Payment.ThirdPartyAdapters/Zentin.Payment.ThirdPartyAdapters.csproj" Id="266c2b66-3710-4582-af7e-3627002be629" />
 </Solution>

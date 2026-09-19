@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Common.Response
+﻿using Zentin.Payment.Common.Models;
+
+namespace Zentin.Payment.Common.Response
 {
     /// <summary>
     /// 接口返回分页对象

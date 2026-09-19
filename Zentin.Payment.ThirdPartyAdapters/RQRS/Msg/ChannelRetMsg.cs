@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Msg
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Msg
 {
     /// <summary>
     /// 上游渠道侧响应信息包装类

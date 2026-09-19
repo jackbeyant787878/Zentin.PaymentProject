@@ -1,42 +1,43 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay
 {
     /// <summary>
     /// 利楚扫呗查单
     /// </summary>
-    public class LcswPayPayOrderQueryService : IPayOrderQueryService
+    public class LConstantswPayPayOrderQueryService : IPayOrderQueryService
     {
-        private readonly ILogger<LcswPayPayOrderQueryService> _logger;
-        private readonly LcswPayPaymentService _paymentService;
+        private readonly ILogger<LConstantswPayPayOrderQueryService> _logger;
+        private readonly LConstantswPayPaymentService _paymentService;
 
-        public LcswPayPayOrderQueryService(ILogger<LcswPayPayOrderQueryService> logger,
+        public LConstantswPayPayOrderQueryService(ILogger<LConstantswPayPayOrderQueryService> logger,
             IServiceProvider serviceProvider)
         {
             _logger = logger;
-            _paymentService = ActivatorUtilities.CreateInstance<LcswPayPaymentService>(serviceProvider);
+            _paymentService = ActivatorUtilities.CreateInstance<LConstantswPayPaymentService>(serviceProvider);
         }
 
-        public LcswPayPayOrderQueryService()
+        public LConstantswPayPayOrderQueryService()
         {
         }
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.LCSWPAY;
+            return Constants.IF_CODE.LConstantsWPAY;
         }
 
         public async Task<ChannelRetMsg> QueryAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
         {
             JObject reqParams = new JObject();
-            string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             string logPrefix = $"【利楚扫呗({payType})查单】";
 
             try
@@ -90,11 +91,11 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                             resJSON.TryGetString("channel_order_no", out string channelOrderNo);// 银行渠道订单号，微信支付时显示在支付成功页面的条码，可用作扫码查询和扫码退款时匹配
                             resJSON.TryGetString("user_id", out string userId);// 付款方用户id，服务商appid下的“微信openid”、“支付宝账户”
                             resJSON.TryGetString("trade_state", out string tradeState);
-                            var _tradeState = LcswPayEnum.ConvertTradeState(tradeState);
+                            var _tradeState = LConstantswPayEnum.ConvertTradeState(tradeState);
                             switch (_tradeState)
                             {
-                                case LcswPayEnum.TradeState.SUCCESS:
-                                case LcswPayEnum.TradeState.REFUND:
+                                case LConstantswPayEnum.TradeState.SUCCESS:
+                                case LConstantswPayEnum.TradeState.REFUND:
                                     channelRetMsg = ChannelRetMsg.ConfirmSuccess(outTradeNo);  //支付成功
                                     channelRetMsg.ChannelMchNo = merchantNo;
                                     channelRetMsg.ChannelOrderId = outTradeNo;
@@ -102,14 +103,14 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay
                                     channelRetMsg.PlatformOrderId = channelTradeNo;
                                     channelRetMsg.PlatformMchOrderId = channelOrderNo;
                                     break;
-                                case LcswPayEnum.TradeState.CLOSED:
-                                case LcswPayEnum.TradeState.REVOKED:
-                                case LcswPayEnum.TradeState.NOPAY:
-                                case LcswPayEnum.TradeState.PAYERROR:
+                                case LConstantswPayEnum.TradeState.CLOSED:
+                                case LConstantswPayEnum.TradeState.REVOKED:
+                                case LConstantswPayEnum.TradeState.NOPAY:
+                                case LConstantswPayEnum.TradeState.PAYERROR:
                                     channelRetMsg = ChannelRetMsg.ConfirmFail(resultCode, returnMsg);
                                     break;
-                                case LcswPayEnum.TradeState.NOTPAY:
-                                case LcswPayEnum.TradeState.USERPAYING:
+                                case LConstantswPayEnum.TradeState.NOTPAY:
+                                case LConstantswPayEnum.TradeState.USERPAYING:
                                     break;
                             }
                         }

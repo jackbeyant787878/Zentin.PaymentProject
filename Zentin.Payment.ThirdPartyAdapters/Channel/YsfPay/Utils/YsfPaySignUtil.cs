@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsfPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsfPay.Utils
 {
     public class YsfPaySignUtil
     {

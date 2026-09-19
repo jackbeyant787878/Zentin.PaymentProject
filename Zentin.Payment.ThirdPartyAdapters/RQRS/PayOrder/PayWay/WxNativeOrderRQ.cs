@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： WX_NATIVE
@@ -12,7 +12,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public WxNativeOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.WX_NATIVE;
+            this.WayCode = Constants.PAY_WAY_CODE.WX_NATIVE;
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace AGooday.AgPay.Components.Third.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     public class PayInfoBuilder
     {
         /// <summary>
         /// 为App构建PayInfo
-        /// https://pay.weixin.qq.com/docs/merchant/apis/in-app-payment/app-transfer-payment.html
+        /// https://pay.weixin.qq.com/doConstants/merchant/apis/in-app-payment/app-transfer-payment.html
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="partnerId"></param>
@@ -33,7 +33,7 @@ namespace AGooday.AgPay.Components.Third.Utils
 
         /// <summary>
         /// 为Jsapi构建PayInfo
-        /// https://pay.weixin.qq.com/docs/merchant/apis/jsapi-payment/jsapi-transfer-payment.html
+        /// https://pay.weixin.qq.com/doConstants/merchant/apis/jsapi-payment/jsapi-transfer-payment.html
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="timeStamp"></param>
@@ -66,7 +66,7 @@ namespace AGooday.AgPay.Components.Third.Utils
 
         /// <summary>
         /// 为小程序构建PayInfo
-        /// https://pay.weixin.qq.com/docs/merchant/apis/mini-program-payment/mini-transfer-payment.html
+        /// https://pay.weixin.qq.com/doConstants/merchant/apis/mini-program-payment/mini-transfer-payment.html
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="timeStamp"></param>

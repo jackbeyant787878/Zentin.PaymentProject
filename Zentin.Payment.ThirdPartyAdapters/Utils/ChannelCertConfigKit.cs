@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.Utils
+﻿namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     /// <summary>
     /// 支付平台 获取系统文件工具类
@@ -40,7 +40,7 @@
             // 以下为 文件不存在的处理方式
 
             // 是否本地存储
-            bool isLocalSave = OssUseType.Equals(OssUseTypeCS.LOCAL_FILE);
+            bool isLocalSave = OssUseType.Equals(OssUseTypeConstants.LOCAL_FILE);
 
             // 本地存储 & 文件不存在
             if (isLocalSave)

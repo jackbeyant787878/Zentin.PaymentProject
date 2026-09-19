@@ -1,5 +1,4 @@
-﻿using AGooday.AgPay.Components.Third.Utils;
-using SKIT.FlurlHttpClient;
+﻿using SKIT.FlurlHttpClient;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Models;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Settings;
@@ -7,8 +6,9 @@ using System.Text;
 using Zentin.Payment.Application.WxPay;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     using WechatTenpayClientOptionsV2 = SKIT.FlurlHttpClient.Wechat.TenpayV2.WechatTenpayClientOptions;
     using WechatTenpayClientOptionsV3 = SKIT.FlurlHttpClient.Wechat.TenpayV3.WechatTenpayClientOptions;

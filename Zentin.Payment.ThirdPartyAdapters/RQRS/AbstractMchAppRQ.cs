@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AGooday.AgPay.Components.Third.RQRS
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS
 {
     /// <summary>
     /// 通用RQ, 包含mchNo和appId 必填项

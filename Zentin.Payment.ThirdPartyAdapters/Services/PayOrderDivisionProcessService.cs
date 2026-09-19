@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Components.Third.Channel;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Enumerator;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Services
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     /// <summary>
     /// 业务：支付订单分账处理逻辑

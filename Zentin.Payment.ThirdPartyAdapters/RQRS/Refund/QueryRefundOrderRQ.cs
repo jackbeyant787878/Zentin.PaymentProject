@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.RQRS.Refund
+﻿namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Refund
 {
     /// <summary>
     /// 查询退款单请求参数对象

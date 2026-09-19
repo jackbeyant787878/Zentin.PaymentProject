@@ -1,22 +1,22 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.PayWay
 {
     /// <summary>
     /// 利楚扫呗 微信 Native
     /// </summary>
-    public class WxNative : LcswPayPaymentService
+    public class WxNative : LConstantswPayPaymentService
     {
         public WxNative(ILogger<WxNative> logger,
             IServiceProvider serviceProvider,
@@ -36,7 +36,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay.PayWay
             res.ChannelRetMsg = channelRetMsg;
 
             // 请求参数赋值
-            //string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            //string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             reqParams.Add("pay_ver", "201");
             reqParams.Add("pay_type", "000");
             reqParams.Add("service_id", "016");
@@ -60,7 +60,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LcswPay.PayWay
                         resJSON.TryGetString("out_trade_no", out string outTradeNo).ToString();//平台唯一订单号
                         string qrUrl = resJSON.GetValue("qr_url").ToString();
                         //二维码地址
-                        if (CS.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
+                        if (Constants.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
                         {
                             res.CodeImgUrl = _sysConfigService.GetDBApplicationConfig().GenScanImgUrl(qrUrl);
                         }

@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Application.Params.JlPay
+﻿namespace Zentin.Payment.Application.Params.JlPay
 {
     /// <summary>
     /// 嘉联 特约商户参数定义

@@ -1,7 +1,4 @@
-﻿using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.RQRS.Transfer;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Mime;
@@ -9,8 +6,11 @@ using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Enumerator;
 using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Transfer;
 
-namespace AGooday.AgPay.Components.Third.Services
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     /// <summary>
     /// 商户通知 service

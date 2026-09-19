@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Application.Params.LesPay
+﻿namespace Zentin.Payment.Application.Params.LesPay
 {
     /// <summary>
     /// 乐刷 通用配置信息

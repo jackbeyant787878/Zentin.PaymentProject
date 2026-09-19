@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： ALI_JSAPI
@@ -20,7 +20,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public AliJsapiOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.ALI_JSAPI;
+            this.WayCode = Constants.PAY_WAY_CODE.ALI_JSAPI;
         }
 
         public override string GetChannelUserId()

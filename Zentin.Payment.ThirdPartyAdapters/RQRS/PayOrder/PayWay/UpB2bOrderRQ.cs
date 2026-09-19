@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： UPACP_B2B
@@ -12,7 +12,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public UpB2bOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.UP_B2B; //默认 wayCode, 避免validate出现问题
+            this.WayCode = Constants.PAY_WAY_CODE.UP_B2B; //默认 wayCode, 避免validate出现问题
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Zentin.Payment.Application.AliPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Exceptions;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Aop.Api;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     /// <summary>
     /// 支付宝Client 包装类
@@ -15,7 +15,7 @@ namespace AGooday.AgPay.Components.Third.Models
         /// <summary>
         /// 默认为 不使用证书方式
         /// </summary>
-        public byte? UseCert { get; private set; } = CS.NO;
+        public byte? UseCert { get; private set; } = Constants.NO;
 
         /// <summary>
         /// 缓存支付宝client 对象
@@ -34,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Models
             {
                 T alipayResp = null;
                 //证书加密方式
-                if (UseCert == CS.YES)
+                if (UseCert == Constants.YES)
                 {
                     alipayResp = AlipayClient.CertificateExecute(request);
                 }
@@ -83,11 +83,11 @@ namespace AGooday.AgPay.Components.Third.Models
             string alipayPublicCert, string alipayRootCert)
         {
             //避免空值
-            sandbox ??= CS.NO;
+            sandbox ??= Constants.NO;
 
             IAopClient alipayClient;
             //证书的方式
-            if (useCert == CS.YES)
+            if (useCert == Constants.YES)
             {
                 //设置证书相关参数
                 CertParams certParams = new CertParams
@@ -96,11 +96,11 @@ namespace AGooday.AgPay.Components.Third.Models
                     AppCertPath = ChannelCertConfigKit.GetCertFilePath(appCert),
                     RootCertPath = ChannelCertConfigKit.GetCertFilePath(alipayRootCert)
                 };
-                alipayClient = new DefaultAopClient(sandbox == CS.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL,
+                alipayClient = new DefaultAopClient(sandbox == Constants.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL,
                     appId, privateKey, AliPayConfig.FORMAT, "1.0", signType, AliPayConfig.CHARSET, false, certParams);
 
                 //AlipayConfig alipayConfig = new AlipayConfig();
-                //alipayConfig.ServerUrl = sandbox == CS.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL;
+                //alipayConfig.ServerUrl = sandbox == Constants.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL;
                 //alipayConfig.AppId = appId;
                 //alipayConfig.PrivateKey = privateKey;
                 //alipayConfig.Format = AliPayConfig.FORMAT;
@@ -113,8 +113,8 @@ namespace AGooday.AgPay.Components.Third.Models
             }
             else
             {
-                // RSA2 加密算法默认生成格式为 PKCS8（Java 适用），如需 PKCS1 格式（非 Java 适用），可使用格式转换。C# 需使用 PKCS1 格式。
-                alipayClient = new DefaultAopClient(sandbox == CS.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL,
+                // RSA2 加密算法默认生成格式为 PKConstants8（Java 适用），如需 PKConstants1 格式（非 Java 适用），可使用格式转换。C# 需使用 PKConstants1 格式。
+                alipayClient = new DefaultAopClient(sandbox == Constants.YES ? AliPayConfig.SANDBOX_SERVER_URL : AliPayConfig.PROD_SERVER_URL,
                     appId, privateKey, AliPayConfig.FORMAT, "1.0", signType, alipayPublicKey, AliPayConfig.CHARSET,
                         false);
             }

@@ -6,8 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
+	
+	
   <ItemGroup>
-    <None Remove="Zentin.Payment.ThirdPartyAdapters.csproj.Backup.tmp" />
+	  <Using Include="Zentin.Payment.Application.Dto" />
+	  <Using Include="Microsoft.Extensions.Logging" />
+	  <Using Include="Microsoft.AspNetCore.Http" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zentin.Payment.Application.Contracts\Zentin.Payment.Application.Contracts.csproj" />
     <ProjectReference Include="..\Zentin.Payment.Application\Zentin.Payment.Application.csproj" />
   </ItemGroup>
 

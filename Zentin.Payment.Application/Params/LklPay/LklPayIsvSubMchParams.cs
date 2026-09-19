@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.LklPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.LklPay
 {
     /// <summary>
     /// 拉卡拉 特约商户参数定义

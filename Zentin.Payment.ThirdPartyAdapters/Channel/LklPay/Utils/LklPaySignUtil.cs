@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.LklPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LklPay.Utils
 {
     public class LklPaySignUtil
     {
@@ -50,7 +50,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Utils
         {
             var certFilePath = ChannelCertConfigKit.GetCertFilePath(publicKeyCert);
             var publicKey = LoadPublicKey(certFilePath);
-            bool bol = publicKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            bool bol = publicKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.PkConstants1);
             return bol;
         }
 
@@ -89,7 +89,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Utils
         /// <returns></returns>
         private static byte[] SignData(RSA privateKey, byte[] data)
         {
-            return privateKey.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            return privateKey.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.PkConstants1);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Utils
         /// <returns></returns>
         private static bool VerifyData(RSA publicKey, byte[] data, byte[] signature)
         {
-            return publicKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            return publicKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.PkConstants1);
         }
 
         private static string GenSigned(string appId, string serialNo, string strBody, string timeStamp, string nonceStr)

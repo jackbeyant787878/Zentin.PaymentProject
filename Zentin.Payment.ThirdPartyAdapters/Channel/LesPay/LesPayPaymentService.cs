@@ -1,22 +1,21 @@
-﻿using System.Diagnostics;
-using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using Zentin.Payment.Application.LesPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Application.Params.LesPay;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LesPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.LesPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LesPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LesPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.LesPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LesPay
 {
     public class LesPayPaymentService : AbstractPaymentService
     {
@@ -35,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LesPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.LESPAY;
+            return Constants.IF_CODE.LESPAY;
         }
 
         public override bool IsSupport(string wayCode)
@@ -124,7 +123,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LesPay
         /// <returns></returns>
         public static string GetHost4env(LesPayIsvParams isvParams)
         {
-            return CS.YES == isvParams.Sandbox ? LesPayConfig.SANDBOX_SERVER_URL : LesPayConfig.PROD_SERVER_URL;
+            return Constants.YES == isvParams.Sandbox ? LesPayConfig.SANDBOX_SERVER_URL : LesPayConfig.PROD_SERVER_URL;
         }
 
         /// <summary>

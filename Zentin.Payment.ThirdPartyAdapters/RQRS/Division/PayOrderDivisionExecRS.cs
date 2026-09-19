@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.RQRS.Division
+﻿namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Division
 {
     /// <summary>
     /// 发起订单分账 响应参数

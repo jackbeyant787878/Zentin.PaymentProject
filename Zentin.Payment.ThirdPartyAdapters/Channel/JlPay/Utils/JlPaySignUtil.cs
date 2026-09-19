@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.JlPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.JlPay.Utils
 {
     public class JlPaySignUtil
     {

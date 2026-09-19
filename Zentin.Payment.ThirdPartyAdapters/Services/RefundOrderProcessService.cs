@@ -1,12 +1,10 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Enumerator;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Channel;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Services
+namespace Zentin.Payment.ThirdPartyAdapters.Services
 {
     /// <summary>
     /// 退款处理通用逻辑
@@ -91,7 +89,7 @@ namespace AGooday.AgPay.Components.Third.Services
                 var afterBalance = 0L;
                 var changeAmount = 0L;
                 var totalProfitAmount = 0L;
-                var agentPayOrderProfits = payOrderProfits.Where(w => w.InfoType.Equals(CS.PAY_ORDER_PROFIT_INFO_TYPE.AGENT)).OrderBy(o => o.Id);
+                var agentPayOrderProfits = payOrderProfits.Where(w => w.InfoType.Equals(Constants.PAY_ORDER_PROFIT_INFO_TYPE.AGENT)).OrderBy(o => o.Id);
                 foreach (var payOrderProfit in agentPayOrderProfits)
                 {
                     beforeBalance = payOrderProfit.ProfitAmount;
@@ -106,7 +104,7 @@ namespace AGooday.AgPay.Components.Third.Services
                 }
 
                 var platformInaccountPayOrderProfit = payOrderProfits
-                    .Where(w => w.InfoType.Equals(CS.PAY_ORDER_PROFIT_INFO_TYPE.PLATFORM) && w.InfoId.Equals(CS.PAY_ORDER_PROFIT_INFO_ID.PLATFORM_INACCOUNT))
+                    .Where(w => w.InfoType.Equals(Constants.PAY_ORDER_PROFIT_INFO_TYPE.PLATFORM) && w.InfoId.Equals(Constants.PAY_ORDER_PROFIT_INFO_ID.PLATFORM_INACCOUNT))
                     .OrderBy(o => o.Id).FirstOrDefault();
                 var isvFeeAmount = paymentService?.CalculateFeeAmount(amount, platformInaccountPayOrderProfit.FeeRate) ?? 0;
                 var platformInaccountProfitAmount = payOrder.MchFeeAmount - isvFeeAmount;
@@ -120,7 +118,7 @@ namespace AGooday.AgPay.Components.Third.Services
                 GenAccountBill(accountBills, platformInaccountPayOrderProfit, refundOrder, beforeBalance, afterBalance, changeAmount);
 
                 var platformProfitPayOrderProfit = payOrderProfits
-                    .Where(w => w.InfoType.Equals(CS.PAY_ORDER_PROFIT_INFO_TYPE.PLATFORM) && w.InfoId.Equals(CS.PAY_ORDER_PROFIT_INFO_ID.PLATFORM_PROFIT))
+                    .Where(w => w.InfoType.Equals(Constants.PAY_ORDER_PROFIT_INFO_TYPE.PLATFORM) && w.InfoId.Equals(Constants.PAY_ORDER_PROFIT_INFO_ID.PLATFORM_PROFIT))
                     .OrderBy(o => o.Id).FirstOrDefault();
                 var platformProfitAmount = platformInaccountProfitAmount - totalProfitAmount;
                 beforeBalance = platformProfitPayOrderProfit.ProfitAmount;

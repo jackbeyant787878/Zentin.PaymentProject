@@ -1,4 +1,4 @@
-﻿namespace AGooday.AgPay.Components.Third.RQRS.Transfer
+﻿namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Transfer
 {
     /// <summary>
     /// 查询转账单请求参数对象

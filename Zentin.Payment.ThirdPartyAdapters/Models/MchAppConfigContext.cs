@@ -1,9 +1,9 @@
-﻿using AGooday.AgPay.Application.Params;
-using Zentin.Payment.Application;
+﻿using Zentin.Payment.Application;
 using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.Params;
 using Zentin.Payment.Common.Enumerator;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     /// <summary>
     /// 商户应用支付参数信息

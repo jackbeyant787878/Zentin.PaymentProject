@@ -1,42 +1,44 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LcswPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay
 {
     /// <summary>
     /// 利楚扫呗关单
     /// </summary>
-    public class LcswPayPayOrderCloseService : IPayOrderCloseService
+    public class LConstantswPayPayOrderCloseService : IPayOrderCloseService
     {
-        private readonly ILogger<LcswPayPayOrderCloseService> _logger;
-        private readonly LcswPayPaymentService _paymentService;
+        private readonly ILogger<LConstantswPayPayOrderCloseService> _logger;
+        private readonly LConstantswPayPaymentService _paymentService;
 
-        public LcswPayPayOrderCloseService(ILogger<LcswPayPayOrderCloseService> logger,
+        public LConstantswPayPayOrderCloseService(ILogger<LConstantswPayPayOrderCloseService> logger,
             IServiceProvider serviceProvider)
         {
             _logger = logger;
-            _paymentService = ActivatorUtilities.CreateInstance<LcswPayPaymentService>(serviceProvider);
+            _paymentService = ActivatorUtilities.CreateInstance<LConstantswPayPaymentService>(serviceProvider);
         }
 
-        public LcswPayPayOrderCloseService()
+        public LConstantswPayPayOrderCloseService()
         {
         }
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.LCSWPAY;
+            return Constants.IF_CODE.LConstantsWPAY;
         }
 
         public async Task<ChannelRetMsg> CloseAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
         {
             JObject reqParams = new JObject();
-            string payType = LcswPayEnum.GetPayType(payOrder.WayCode);
+            string payType = LConstantswPayEnum.GetPayType(payOrder.WayCode);
             string logPrefix = $"【利楚扫呗({payType})关闭订单】";
 
             try

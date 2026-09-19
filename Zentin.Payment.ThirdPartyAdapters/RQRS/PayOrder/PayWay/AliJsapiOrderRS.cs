@@ -1,7 +1,7 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： ALI_JSAPI
@@ -12,7 +12,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
 
         public override string BuildPayDataType()
         {
-            return CS.PAY_DATA_TYPE.ALI_APP;
+            return Constants.PAY_DATA_TYPE.ALI_APP;
         }
 
         public override string BuildPayData()

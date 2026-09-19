@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay.Utils
 {
     public class UmsPaySignUtil
     {
@@ -19,9 +19,9 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay.Utils
             byte[] keyByte = encoding.GetBytes(appkey);
             byte[] messageBytes = encoding.GetBytes(appid + timestamp + nonce + sb.ToString());
             string authorization;
-            using (var hmacsha256 = new HMACSHA256(keyByte))
+            using (var hmaConstantsha256 = new HMAConstantsHA256(keyByte))
             {
-                byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
+                byte[] hashmessage = hmaConstantsha256.ComputeHash(messageBytes);
                 string signature = Convert.ToBase64String(hashmessage);
                 authorization = $@"OPEN-BODY-SIG AppId=""{appid}"", Timestamp=""{timestamp}"", Nonce=""{nonce}"", Signature=""{signature}""";
             }

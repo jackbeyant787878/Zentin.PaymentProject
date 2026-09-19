@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.PpPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.PpPay
 {
     public class PpPayPaymentService : AbstractPaymentService
     {
@@ -26,7 +26,7 @@ namespace AGooday.AgPay.Components.Third.Channel.PpPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.PPPAY;
+            return Constants.IF_CODE.PPPAY;
         }
 
         public override bool IsSupport(string wayCode)

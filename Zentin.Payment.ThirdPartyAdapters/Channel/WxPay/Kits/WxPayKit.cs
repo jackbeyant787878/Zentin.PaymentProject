@@ -1,15 +1,15 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Zentin.Payment.Application.WxPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Models;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay.Kits
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.Kits
 {
     /// <summary>
     /// 【微信支付】支付通道工具包
@@ -32,7 +32,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay.Kits
             ConfigContextQueryService configContextQueryService = ServiceResolver.GetService<ConfigContextQueryService>();
 
             WxPayIsvSubMchParams isvsubMchParams =
-                (WxPayIsvSubMchParams)await configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, CS.IF_CODE.WXPAY);
+                (WxPayIsvSubMchParams)await configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, Constants.IF_CODE.WXPAY);
 
             //req.SubMchId = isvsubMchParams.SubMchId;
             //req.SubAppId = isvsubMchParams.SubMchAppId;

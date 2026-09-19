@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Exceptions;
 
-namespace AGooday.AgPay.Components.Third.Channel.LesPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LesPay.Utils
 {
     public class LesPayHttpUtil
     {

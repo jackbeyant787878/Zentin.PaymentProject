@@ -1,22 +1,19 @@
-﻿using System.Diagnostics;
-using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Zentin.Payment.Application.LklPay;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.LklPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.LklPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LklPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.LklPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.LklPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LklPay
 {
     public class LklPayPaymentService : AbstractPaymentService
     {
@@ -35,7 +32,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.LKLPAY;
+            return Constants.IF_CODE.LKLPAY;
         }
 
         public override bool IsSupport(string wayCode)
@@ -107,7 +104,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay
         /// <returns></returns>
         public static string GetHost4env(LklPayIsvParams isvParams)
         {
-            return CS.YES == isvParams.Sandbox ? LklPayConfig.SANDBOX_SERVER_URL : LklPayConfig.PROD_SERVER_URL;
+            return Constants.YES == isvParams.Sandbox ? LklPayConfig.SANDBOX_SERVER_URL : LklPayConfig.PROD_SERVER_URL;
         }
 
         /// <summary>
@@ -142,7 +139,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay
              *  示例值：6666000123120000
              **/
             reqParams.Add("req_time", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            reqParams.Add("version", "3.0"); //汇付分配的产品号，示例值：MCS
+            reqParams.Add("version", "3.0"); //汇付分配的产品号，示例值：MConstants
             reqParams.Add("req_data", reqData); //业务请求参数，具体值参考API文档
 
             // 调起上游接口

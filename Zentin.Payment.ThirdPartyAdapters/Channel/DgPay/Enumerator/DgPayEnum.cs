@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.DgPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.DgPay.Enumerator
 {
     public class DgPayEnum
     {
@@ -81,53 +81,53 @@ namespace AGooday.AgPay.Components.Third.Channel.DgPay.Enumerator
             string payType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_BAR:
+                case Constants.PAY_WAY_CODE.ALI_BAR:
                     payType = TransType.A_MICROPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
-                case CS.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
                     payType = TransType.A_JSAPI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.ALI_APP:
-                case CS.PAY_WAY_CODE.ALI_PC:
-                case CS.PAY_WAY_CODE.ALI_WAP:
-                case CS.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_APP:
+                case Constants.PAY_WAY_CODE.ALI_PC:
+                case Constants.PAY_WAY_CODE.ALI_WAP:
+                case Constants.PAY_WAY_CODE.ALI_QR:
                     payType = TransType.A_NATIVE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_BAR:
+                case Constants.PAY_WAY_CODE.WX_BAR:
                     payType = TransType.T_MICROPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_APP:
+                case Constants.PAY_WAY_CODE.WX_APP:
                     payType = TransType.T_APP.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
                     payType = TransType.T_JSAPI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_LITE:
                     payType = TransType.T_MINIAPP.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_H5:
+                case Constants.PAY_WAY_CODE.WX_H5:
                     payType = TransType.T_H5.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
                     payType = TransType.T_NATIVE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.UP_BAR:
+                case Constants.PAY_WAY_CODE.UP_BAR:
                     payType = TransType.U_MICROPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.UP_QR:
+                case Constants.PAY_WAY_CODE.UP_QR:
                     payType = TransType.U_NATIVE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.YSF_BAR:
+                case Constants.PAY_WAY_CODE.YSF_BAR:
                     payType = TransType.U_MICROPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     payType = TransType.U_JSAPI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.DCEP_BAR:
+                case Constants.PAY_WAY_CODE.DCEP_BAR:
                     payType = TransType.D_MICROPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.DCEP_QR:
+                case Constants.PAY_WAY_CODE.DCEP_QR:
                     payType = TransType.D_NATIVE.ToString();
                     break;
                 default:

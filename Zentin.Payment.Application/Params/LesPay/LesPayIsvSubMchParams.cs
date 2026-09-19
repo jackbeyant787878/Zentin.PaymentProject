@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.LesPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.LesPay
 {
     public class LesPayIsvSubMchParams : IsvSubMchParams
     {

@@ -1,16 +1,16 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.AllinPay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.AllinPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AllinPay
 {
     /// <summary>
     /// 通联退款接口
@@ -20,14 +20,14 @@ namespace AGooday.AgPay.Components.Third.Channel.AllinPay
         private readonly AllinPayPaymentService _paymentService;
 
         public AllinPayRefundService(ILogger<AllinPayRefundService> logger,
-            //[FromKeyedServices(CS.IF_CODE.ALLINPAY)] IPaymentService paymentService,
+            //[FromKeyedServices(Constants.IF_CODE.ALLINPAY)] IPaymentService paymentService,
             IServiceProvider serviceProvider,
             ISysConfigService sysConfigService,
             ConfigContextQueryService configContextQueryService)
             : base(logger, serviceProvider, sysConfigService, configContextQueryService)
         {
             //_paymentService = (AllinPayPaymentService)paymentService;
-            //_paymentService = (AllinPayPaymentService)serviceProvider.GetRequiredKeyedService<IPaymentService>(CS.IF_CODE.ALLINPAY);
+            //_paymentService = (AllinPayPaymentService)serviceProvider.GetRequiredKeyedService<IPaymentService>(Constants.IF_CODE.ALLINPAY);
             _paymentService = ActivatorUtilities.CreateInstance<AllinPayPaymentService>(serviceProvider);
         }
 
@@ -38,7 +38,7 @@ namespace AGooday.AgPay.Components.Third.Channel.AllinPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.ALLINPAY;
+            return Constants.IF_CODE.ALLINPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)

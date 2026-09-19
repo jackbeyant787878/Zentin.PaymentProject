@@ -1,11 +1,11 @@
-﻿using AGooday.AgPay.Components.Third.Channel.AliPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Aop.Api.Domain;
 using Aop.Api.Request;
 using Aop.Api.Response;
@@ -14,7 +14,7 @@ using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.PayWay
 {
     /// <summary>
     /// 支付宝 条码支付

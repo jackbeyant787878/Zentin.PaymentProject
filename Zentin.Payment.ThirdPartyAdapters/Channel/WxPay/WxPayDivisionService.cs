@@ -1,16 +1,17 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Params.WxPay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Exceptions;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Microsoft.Extensions.Logging;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3.Models;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.WxPay;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using WechatTenpayClientV3 = SKIT.FlurlHttpClient.Wechat.TenpayV3.WechatTenpayClient;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 分账接口： 微信官方
@@ -32,7 +33,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public bool IsSupport()
@@ -46,13 +47,13 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             {
                 WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
 
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     ChannelRetMsg channelRetMsg = ChannelRetMsg.ConfirmFail();
                     channelRetMsg.ChannelErrMsg = "V2暂不支持";
                     return channelRetMsg;
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     var client = (WechatTenpayClientV3)wxServiceWrapper.Client;
                     await WxServiceWrapper.InitializeCertificateManagerAsync(client);
@@ -113,13 +114,13 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             try
             {
                 WxServiceWrapper wxServiceWrapper = await _configContextQueryService.GetWxServiceWrapperAsync(mchAppConfigContext);
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     ChannelRetMsg channelRetMsg = ChannelRetMsg.ConfirmFail();
                     channelRetMsg.ChannelErrMsg = "V2暂不支持";
                     return channelRetMsg;
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     var client = (WechatTenpayClientV3)wxServiceWrapper.Client;
                     await WxServiceWrapper.InitializeCertificateManagerAsync(client);
@@ -134,7 +135,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     if (mchAppConfigContext.IsIsvSubMch())
                     {
                         WxPayIsvSubMchParams isvsubMchParams =
-                                (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, CS.IF_CODE.WXPAY);
+                                (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, Constants.IF_CODE.WXPAY);
 
                         request.SubMerchantId = isvsubMchParams.SubMchId;
                         request.SubAppId = isvsubMchParams.SubMchAppId;
@@ -214,7 +215,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
             if (mchAppConfigContext.IsIsvSubMch())
             {
                 WxPayIsvSubMchParams isvsubMchParams =
-                        (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, CS.IF_CODE.WXPAY);
+                        (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, Constants.IF_CODE.WXPAY);
 
                 request.SubMerchantId = isvsubMchParams.SubMchId;
             }
@@ -255,11 +256,11 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     accnoAndRecordIdSet.Add(record.AccNo, record.RecordId.Value);
                 }
 
-                if (CS.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion)) // V2
+                if (Constants.PAY_IF_VERSION.WX_V2.Equals(wxServiceWrapper.Config.ApiVersion)) // V2
                 {
                     throw new BizException("V2暂不支持");
                 }
-                else if (CS.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
+                else if (Constants.PAY_IF_VERSION.WX_V3.Equals(wxServiceWrapper.Config.ApiVersion))
                 {
                     GetProfitSharingOrderByOutOrderNumberRequest request = new GetProfitSharingOrderByOutOrderNumberRequest();
                     request.OutOrderNumber = recordList.First().BatchOrderId;
@@ -268,7 +269,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                     // 特约商户
                     if (mchAppConfigContext.IsIsvSubMch())
                     {
-                        WxPayIsvSubMchParams isvsubMchParams = (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, CS.IF_CODE.WXPAY);
+                        WxPayIsvSubMchParams isvsubMchParams = (WxPayIsvSubMchParams)await _configContextQueryService.QueryIsvSubMchParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, Constants.IF_CODE.WXPAY);
                         request.SubMerchantId = isvsubMchParams.SubMchId;
                     }
                     var client = (WechatTenpayClientV3)wxServiceWrapper.Client;

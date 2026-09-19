@@ -1,20 +1,19 @@
-﻿using System.Net;
-using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Application.JlPay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Exceptions;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.JlPay.Enumerator;
-using AGooday.AgPay.Components.Third.Channel.JlPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using static AGooday.AgPay.Components.Third.Channel.IChannelNoticeService;
+using System.Net;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.JlPay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Channel.JlPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
+using static Zentin.Payment.ThirdPartyAdapters.Channel.IChannelNoticeService;
 
-namespace AGooday.AgPay.Components.Third.Channel.JlPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.JlPay
 {
     /// <summary>
     /// 嘉联回调
@@ -35,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.JlPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.JLPAY;
+            return Constants.IF_CODE.JLPAY;
         }
 
         public override async Task<Dictionary<string, object>> ParseParamsAsync(HttpRequest request, string urlOrderId, NoticeTypeEnum noticeTypeEnum)

@@ -1,4 +1,6 @@
-﻿namespace Zentin.Payment.Application.HkrtPay
+﻿using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.HkrtPay
 {
     public class HkrtPayIsvSubMchParams : IsvSubMchParams
     {

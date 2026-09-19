@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
 
-namespace AGooday.AgPay.Components.Third.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Utils
 {
     public class RequestIpUtil
     {
@@ -12,10 +12,10 @@ namespace AGooday.AgPay.Components.Third.Utils
 
         public string GetRequestIP()
         {
-            string ip = SplitCsv(GetHeaderValueAs<string>("X-Forwarded-For")).FirstOrDefault();
+            string ip = SplitConstantsv(GetHeaderValueAs<string>("X-Forwarded-For")).FirstOrDefault();
 
             if (string.IsNullOrWhiteSpace(ip))
-                ip = SplitCsv(GetHeaderValueAs<string>("X-Real-IP")).FirstOrDefault();
+                ip = SplitConstantsv(GetHeaderValueAs<string>("X-Real-IP")).FirstOrDefault();
 
             if (string.IsNullOrWhiteSpace(ip) && _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress != null)
                 ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -44,12 +44,12 @@ namespace AGooday.AgPay.Components.Third.Utils
             return default;
         }
 
-        public static List<string> SplitCsv(string csvList)
+        public static List<string> SplitConstantsv(string ConstantsvList)
         {
-            if (string.IsNullOrWhiteSpace(csvList))
+            if (string.IsNullOrWhiteSpace(ConstantsvList))
                 return new List<string>();
 
-            return csvList
+            return ConstantsvList
                 .TrimEnd(',')
                 .Split(',')
                 .AsEnumerable<string>()

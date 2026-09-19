@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.LklPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LklPay.Enumerator
 {
     public class LklPayEnum
     {
@@ -15,27 +15,27 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Enumerator
             string accountType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_BAR:
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
-                case CS.PAY_WAY_CODE.ALI_APP:
-                case CS.PAY_WAY_CODE.ALI_PC:
-                case CS.PAY_WAY_CODE.ALI_WAP:
-                case CS.PAY_WAY_CODE.ALI_QR:
-                case CS.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.ALI_BAR:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_APP:
+                case Constants.PAY_WAY_CODE.ALI_PC:
+                case Constants.PAY_WAY_CODE.ALI_WAP:
+                case Constants.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
                     accountType = AccountType.ALIPAY.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_BAR:
-                case CS.PAY_WAY_CODE.WX_APP:
-                case CS.PAY_WAY_CODE.WX_JSAPI:
-                case CS.PAY_WAY_CODE.WX_LITE:
-                case CS.PAY_WAY_CODE.WX_H5:
-                case CS.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.WX_BAR:
+                case Constants.PAY_WAY_CODE.WX_APP:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_H5:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
                     accountType = AccountType.WECHAT.ToString();
                     break;
-                case CS.PAY_WAY_CODE.UP_BAR:
-                case CS.PAY_WAY_CODE.UP_QR:
-                case CS.PAY_WAY_CODE.YSF_BAR:
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.UP_BAR:
+                case Constants.PAY_WAY_CODE.UP_QR:
+                case Constants.PAY_WAY_CODE.YSF_BAR:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     accountType = AccountType.UQRCODEPAY.ToString();
                     break;
                 default:
@@ -49,22 +49,22 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Enumerator
             string transType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_QR:
                     transType = TransType.NATIVE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
                     transType = TransType.JSAPI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
                     transType = TransType.JSAPI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_LITE:
                     transType = TransType.WXLITE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.UP_QR:
+                case Constants.PAY_WAY_CODE.UP_QR:
                     transType = TransType.NATIVE.ToString();
                     break;
-                case CS.PAY_WAY_CODE.YSF_JSAPI:
+                case Constants.PAY_WAY_CODE.YSF_JSAPI:
                     transType = TransType.JSAPI.ToString();
                     break;
                 default:
@@ -148,7 +148,7 @@ namespace AGooday.AgPay.Components.Third.Channel.LklPay.Enumerator
             /// <summary>
             /// 网联小钱包
             /// </summary>
-            public const string NUCSPAY = "NUCSPAY";
+            public const string NUConstantsPAY = "NUConstantsPAY";
         }
 
         /// <summary>

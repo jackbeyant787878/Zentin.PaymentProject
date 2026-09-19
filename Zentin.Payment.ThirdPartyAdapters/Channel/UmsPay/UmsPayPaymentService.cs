@@ -1,21 +1,20 @@
-﻿using System.Diagnostics;
-using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Application.UmsPay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Exceptions;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.UmsPay.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.UmsPay;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay
 {
     /// <summary>
     /// 银联商务下单
@@ -37,7 +36,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.UMSPAY;
+            return Constants.IF_CODE.UMSPAY;
         }
 
         public override bool IsSupport(string wayCode)
@@ -62,7 +61,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
         /// <returns></returns>
         public static string GetHost4env(UmsPayIsvParams isvParams)
         {
-            return CS.YES == isvParams.Sandbox ? UmsPayConfig.SANDBOX_SERVER_URL : UmsPayConfig.PROD_SERVER_URL;
+            return Constants.YES == isvParams.Sandbox ? UmsPayConfig.SANDBOX_SERVER_URL : UmsPayConfig.PROD_SERVER_URL;
         }
 
         /// <summary>

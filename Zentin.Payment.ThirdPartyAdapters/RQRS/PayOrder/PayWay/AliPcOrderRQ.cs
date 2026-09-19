@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： ALI_PC
@@ -12,7 +12,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public AliPcOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.ALI_PC;
+            this.WayCode = Constants.PAY_WAY_CODE.ALI_PC;
         }
     }
 }

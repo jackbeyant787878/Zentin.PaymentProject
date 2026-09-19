@@ -1,17 +1,17 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Channel.WxPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.PayWay
 {
     /// <summary>
     /// 微信 native支付
@@ -45,12 +45,12 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay.PayWay
             if (response.IsSuccessful())
             {
                 string payUrl = response.MobileWebUrl;
-                if (CS.PAY_DATA_TYPE.FORM.Equals(bizRQ.PayDataType))
+                if (Constants.PAY_DATA_TYPE.FORM.Equals(bizRQ.PayDataType))
                 {
                     //表单方式
                     res.FormContent = payUrl;
                 }
-                else if (CS.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
+                else if (Constants.PAY_DATA_TYPE.CODE_IMG_URL.Equals(bizRQ.PayDataType))
                 {
                     //二维码图片地址
                     res.CodeImgUrl = _sysConfigService.GetDBApplicationConfig().GenScanImgUrl(payUrl);

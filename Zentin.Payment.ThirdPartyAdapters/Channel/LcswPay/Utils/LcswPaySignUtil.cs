@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.LcswPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LConstantswPay.Utils
 {
-    public class LcswPaySignUtil
+    public class LConstantswPaySignUtil
     {
         public static string Sign(JObject reqParams, string key)
         {

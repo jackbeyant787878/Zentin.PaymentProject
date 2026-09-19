@@ -1,14 +1,15 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay
 {
     /// <summary>
     /// 银联商务退款
@@ -33,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.UMSPAY;
+            return Constants.IF_CODE.UMSPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)
@@ -50,17 +51,17 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
                 var channelRetMsg = ChannelRetMsg.Waiting(); //退款中
                 switch (refundOrder.WayCode)
                 {
-                    case CS.PAY_WAY_CODE.ALI_BAR:
-                    case CS.PAY_WAY_CODE.WX_BAR:
-                    case CS.PAY_WAY_CODE.YSF_BAR:
+                    case Constants.PAY_WAY_CODE.ALI_BAR:
+                    case Constants.PAY_WAY_CODE.WX_BAR:
+                    case Constants.PAY_WAY_CODE.YSF_BAR:
                         await BarQueryAsync(logPrefix, channelRetMsg, refundOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_QR:
+                    case Constants.PAY_WAY_CODE.ALI_QR:
                         await QrQueryAsync(logPrefix, channelRetMsg, refundOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_JSAPI:
-                    case CS.PAY_WAY_CODE.WX_JSAPI:
-                    case CS.PAY_WAY_CODE.YSF_JSAPI:
+                    case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                    case Constants.PAY_WAY_CODE.WX_JSAPI:
+                    case Constants.PAY_WAY_CODE.YSF_JSAPI:
                         await UnifiedQueryAsync(logPrefix, channelRetMsg, refundOrder, mchAppConfigContext);
                         break;
                     default:
@@ -243,17 +244,17 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
                 var channelRetMsg = ChannelRetMsg.Waiting(); //退款中
                 switch (payOrder.WayCode)
                 {
-                    case CS.PAY_WAY_CODE.ALI_BAR:
-                    case CS.PAY_WAY_CODE.WX_BAR:
-                    case CS.PAY_WAY_CODE.YSF_BAR:
+                    case Constants.PAY_WAY_CODE.ALI_BAR:
+                    case Constants.PAY_WAY_CODE.WX_BAR:
+                    case Constants.PAY_WAY_CODE.YSF_BAR:
                         await BarRefundAsync(logPrefix, channelRetMsg, bizRQ, refundOrder, payOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_QR:
+                    case Constants.PAY_WAY_CODE.ALI_QR:
                         await QrRefundAsync(logPrefix, channelRetMsg, bizRQ, refundOrder, payOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_JSAPI:
-                    case CS.PAY_WAY_CODE.WX_JSAPI:
-                    case CS.PAY_WAY_CODE.YSF_JSAPI:
+                    case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                    case Constants.PAY_WAY_CODE.WX_JSAPI:
+                    case Constants.PAY_WAY_CODE.YSF_JSAPI:
                         await UnifiedRefundAsync(logPrefix, channelRetMsg, bizRQ, refundOrder, payOrder, mchAppConfigContext);
                         break;
                     default:

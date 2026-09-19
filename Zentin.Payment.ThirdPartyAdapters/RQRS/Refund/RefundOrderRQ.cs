@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Refund
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Refund
 {
     /// <summary>
     /// 创建退款订单请求参数对象

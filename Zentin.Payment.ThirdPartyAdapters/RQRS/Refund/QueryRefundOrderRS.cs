@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Zentin.Payment.Application.Dto;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Refund
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Refund
 {
     /// <summary>
     /// 查询退款单 响应参数

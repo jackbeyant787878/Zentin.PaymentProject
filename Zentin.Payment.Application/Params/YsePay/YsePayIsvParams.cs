@@ -1,4 +1,4 @@
-﻿using AGooday.AgPay.Common.Extensions;
+﻿using Zentin.Payment.Common.Extensions;
 using Newtonsoft.Json;
 
 namespace Zentin.Payment.Application.YsePay

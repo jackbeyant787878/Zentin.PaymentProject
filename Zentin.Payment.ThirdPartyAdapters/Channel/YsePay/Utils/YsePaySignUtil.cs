@@ -3,7 +3,7 @@ using Zentin.Payment.Common.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsePay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsePay.Utils
 {
     public class YsePaySignUtil
     {

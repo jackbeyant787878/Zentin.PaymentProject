@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zentin.Payment.Common.Constant
+﻿namespace Zentin.Payment.Common.Constant
 {
     public class Constants
     {
@@ -795,5 +791,5 @@ namespace Zentin.Payment.Common.Constant
     }
 
 
-    
+
 }

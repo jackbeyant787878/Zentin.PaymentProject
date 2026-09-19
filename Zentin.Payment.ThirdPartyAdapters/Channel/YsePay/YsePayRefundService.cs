@@ -1,17 +1,18 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Application.YsePay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Channel.YsePay.Enumerator;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.YsePay;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.YsePay.Enumerator;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsePay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsePay
 {
     /// <summary>
     /// 银盛退款接口
@@ -36,7 +37,7 @@ namespace AGooday.AgPay.Components.Third.Channel.YsePay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.YSEPAY;
+            return Constants.IF_CODE.YSEPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)
@@ -74,8 +75,8 @@ namespace AGooday.AgPay.Components.Third.Channel.YsePay
                 if ("10000".Equals(code))
                 {
                     data.TryGetString("trade_no", out string tradeNo);//银盛支付交易流水号
-                    data.TryGetString("funds_dynamics", out string fundsDynamics);//银盛支付交易流水号
-                    var refundChannelfundsDynamicDto = fundsDynamics.ToObject<JObject>();
+                    data.TryGetString("funds_dynamiConstants", out string fundsDynamiConstants);//银盛支付交易流水号
+                    var refundChannelfundsDynamicDto = fundsDynamiConstants.ToObject<JObject>();
                     refundChannelfundsDynamicDto.TryGetString("channelRecvSn", out string channelRecvSn);//渠道返回流水号	
                     refundChannelfundsDynamicDto.TryGetString("channelSendSn", out string channelSendSn);//发往渠道流水号
                     string _refundState = data.GetValue("refund_state").ToString();

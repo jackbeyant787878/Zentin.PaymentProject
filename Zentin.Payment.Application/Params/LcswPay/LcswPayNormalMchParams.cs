@@ -1,7 +1,7 @@
-﻿using AGooday.AgPay.Common.Extensions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Zentin.Payment.Common.Extensions;
 
-namespace AGooday.AgPay.Application.Params.LcswPay
+namespace Zentin.Payment.Application.Params.LcswPay
 {
     public class LcswPayNormalMchParams : NormalMchParams
     {

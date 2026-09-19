@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Transfer
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Transfer
 {
     /// <summary>
     /// 申请转账 请求参数

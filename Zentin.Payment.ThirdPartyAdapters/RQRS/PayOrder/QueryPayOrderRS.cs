@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Zentin.Payment.Application.Dto;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     /// <summary>
     /// 查询订单 响应参数

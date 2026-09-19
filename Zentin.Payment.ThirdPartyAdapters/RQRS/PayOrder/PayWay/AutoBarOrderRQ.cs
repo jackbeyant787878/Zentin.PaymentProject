@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay
 {
     /// <summary>
     /// 支付方式： AUTO_BAR
@@ -17,7 +17,7 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay
         /// </summary>
         public AutoBarOrderRQ()
         {
-            this.WayCode = CS.PAY_WAY_CODE.AUTO_BAR;
+            this.WayCode = Constants.PAY_WAY_CODE.AUTO_BAR;
         }
     }
 }

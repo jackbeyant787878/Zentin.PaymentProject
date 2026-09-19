@@ -1,4 +1,8 @@
-﻿namespace Zentin.Payment.Application.DgPay
+﻿
+
+using Zentin.Payment.Application.Params;
+
+namespace Zentin.Payment.Application.DgPay
 {
     /// <summary>
     /// 斗拱 特约商户参数定义

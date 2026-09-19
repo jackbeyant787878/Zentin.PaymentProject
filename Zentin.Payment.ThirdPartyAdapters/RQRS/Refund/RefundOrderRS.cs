@@ -1,7 +1,6 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AutoMapper;
+﻿using AutoMapper;
 
-namespace AGooday.AgPay.Components.Third.RQRS.Refund
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.Refund
 {
     /// <summary>
     /// 退款订单 响应参数

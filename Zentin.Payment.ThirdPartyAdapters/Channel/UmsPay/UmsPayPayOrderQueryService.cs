@@ -1,11 +1,11 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay
 {
     /// <summary>
     /// 银联商务查单
@@ -28,7 +28,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.UMSPAY;
+            return Constants.IF_CODE.UMSPAY;
         }
 
         public async Task<ChannelRetMsg> QueryAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
@@ -40,17 +40,17 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
                 var channelRetMsg = ChannelRetMsg.Waiting(); //支付中
                 switch (payOrder.WayCode)
                 {
-                    case CS.PAY_WAY_CODE.ALI_BAR:
-                    case CS.PAY_WAY_CODE.WX_BAR:
-                    case CS.PAY_WAY_CODE.YSF_BAR:
+                    case Constants.PAY_WAY_CODE.ALI_BAR:
+                    case Constants.PAY_WAY_CODE.WX_BAR:
+                    case Constants.PAY_WAY_CODE.YSF_BAR:
                         await BarQueryAsync(logPrefix, channelRetMsg, payOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_QR:
+                    case Constants.PAY_WAY_CODE.ALI_QR:
                         await QrQueryAsync(logPrefix, channelRetMsg, payOrder, mchAppConfigContext);
                         break;
-                    case CS.PAY_WAY_CODE.ALI_JSAPI:
-                    case CS.PAY_WAY_CODE.WX_JSAPI:
-                    case CS.PAY_WAY_CODE.YSF_JSAPI:
+                    case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                    case Constants.PAY_WAY_CODE.WX_JSAPI:
+                    case Constants.PAY_WAY_CODE.YSF_JSAPI:
                         await UnifiedQueryAsync(logPrefix, channelRetMsg, payOrder, mchAppConfigContext);
                         break;
                     default:

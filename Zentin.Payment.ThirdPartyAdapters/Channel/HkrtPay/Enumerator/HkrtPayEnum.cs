@@ -1,6 +1,6 @@
-﻿using Zentin.Payment.Common.Constants;
+﻿using Zentin.Payment.Common.Constant;
 
-namespace AGooday.AgPay.Components.Third.Channel.HkrtPay.Enumerator
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.HkrtPay.Enumerator
 {
     public class HkrtPayEnum
     {
@@ -112,17 +112,17 @@ namespace AGooday.AgPay.Components.Third.Channel.HkrtPay.Enumerator
             string payType = null;
             switch (wayCode)
             {
-                case CS.PAY_WAY_CODE.ALI_JSAPI:
-                case CS.PAY_WAY_CODE.ALI_QR:
-                case CS.PAY_WAY_CODE.ALI_LITE:
+                case Constants.PAY_WAY_CODE.ALI_JSAPI:
+                case Constants.PAY_WAY_CODE.ALI_QR:
+                case Constants.PAY_WAY_CODE.ALI_LITE:
                     payType = TradeType.ALI.ToString();
                     break;
-                case CS.PAY_WAY_CODE.WX_JSAPI:
-                case CS.PAY_WAY_CODE.WX_LITE:
-                case CS.PAY_WAY_CODE.WX_NATIVE:
+                case Constants.PAY_WAY_CODE.WX_JSAPI:
+                case Constants.PAY_WAY_CODE.WX_LITE:
+                case Constants.PAY_WAY_CODE.WX_NATIVE:
                     payType = TradeType.WX.ToString();
                     break;
-                case CS.PAY_WAY_CODE.UP_QR:
+                case Constants.PAY_WAY_CODE.UP_QR:
                     payType = TradeType.UNIONQR.ToString();
                     break;
                 default:

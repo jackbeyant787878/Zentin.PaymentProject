@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Zentin.Payment.Common.Constants;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
 using Newtonsoft.Json;
 
-namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
+namespace Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder
 {
     /// <summary>
     /// 创建订单请求参数对象
@@ -115,119 +115,119 @@ namespace AGooday.AgPay.Components.Third.RQRS.PayOrder
         {
             ValidateData(this);
 
-            if (CS.PAY_WAY_CODE.ALI_BAR.Equals(WayCode))
+            if (Constants.PAY_WAY_CODE.ALI_BAR.Equals(WayCode))
             {
                 AliBarOrderRQ bizRQ = JsonConvert.DeserializeObject<AliBarOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_JSAPI.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_JSAPI.Equals(WayCode))
             {
                 AliJsapiOrderRQ bizRQ = JsonConvert.DeserializeObject<AliJsapiOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_LITE.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_LITE.Equals(WayCode))
             {
                 AliLiteOrderRQ bizRQ = JsonConvert.DeserializeObject<AliLiteOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.QR_CASHIER.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.QR_CASHIER.Equals(WayCode))
             {
                 QrCashierOrderRQ bizRQ = JsonConvert.DeserializeObject<QrCashierOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.WX_JSAPI.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.WX_JSAPI.Equals(WayCode))
             {
                 WxJsapiOrderRQ bizRQ = JsonConvert.DeserializeObject<WxJsapiOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.WX_LITE.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.WX_LITE.Equals(WayCode))
             {
                 WxLiteOrderRQ bizRQ = JsonConvert.DeserializeObject<WxLiteOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.WX_BAR.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.WX_BAR.Equals(WayCode))
             {
                 WxBarOrderRQ bizRQ = JsonConvert.DeserializeObject<WxBarOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.WX_NATIVE.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.WX_NATIVE.Equals(WayCode))
             {
                 WxNativeOrderRQ bizRQ = JsonConvert.DeserializeObject<WxNativeOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.WX_H5.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.WX_H5.Equals(WayCode))
             {
                 WxH5OrderRQ bizRQ = JsonConvert.DeserializeObject<WxH5OrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.YSF_BAR.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.YSF_BAR.Equals(WayCode))
             {
                 YsfBarOrderRQ bizRQ = JsonConvert.DeserializeObject<YsfBarOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.YSF_JSAPI.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.YSF_JSAPI.Equals(WayCode))
             {
                 YsfJsapiOrderRQ bizRQ = JsonConvert.DeserializeObject<YsfJsapiOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.AUTO_BAR.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.AUTO_BAR.Equals(WayCode))
             {
                 AutoBarOrderRQ bizRQ = JsonConvert.DeserializeObject<AutoBarOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_APP.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_APP.Equals(WayCode))
             {
                 AliAppOrderRQ bizRQ = JsonConvert.DeserializeObject<AliAppOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_WAP.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_WAP.Equals(WayCode))
             {
                 AliWapOrderRQ bizRQ = JsonConvert.DeserializeObject<AliWapOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_PC.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_PC.Equals(WayCode))
             {
                 AliPcOrderRQ bizRQ = JsonConvert.DeserializeObject<AliPcOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.ALI_QR.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.ALI_QR.Equals(WayCode))
             {
                 AliQrOrderRQ bizRQ = JsonConvert.DeserializeObject<AliQrOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);
                 ValidateData(bizRQ);
                 return bizRQ;
             }
-            else if (CS.PAY_WAY_CODE.PP_PC.Equals(WayCode))
+            else if (Constants.PAY_WAY_CODE.PP_PC.Equals(WayCode))
             {
                 PpPcOrderRQ bizRQ = JsonConvert.DeserializeObject<PpPcOrderRQ>(!string.IsNullOrWhiteSpace(this.ChannelExtra) ? this.ChannelExtra : "{}");
                 CopyUtil.CopyProperties(this, bizRQ);

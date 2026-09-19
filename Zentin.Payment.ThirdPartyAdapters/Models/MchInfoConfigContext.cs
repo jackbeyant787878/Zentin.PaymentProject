@@ -1,6 +1,6 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
+﻿using  Microsoft.Extensions.Logging;
 
-namespace AGooday.AgPay.Components.Third.Models
+namespace Zentin.Payment.ThirdPartyAdapters.Models
 {
     /// <summary>
     /// 商户配置信息

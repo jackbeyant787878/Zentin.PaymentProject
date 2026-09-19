@@ -1,14 +1,14 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Channel.AliPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.Services;
-using Aop.Api.Domain;
+﻿using Aop.Api.Domain;
 using Aop.Api.Request;
 using Aop.Api.Response;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Channel.AliPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.AliPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.AliPay
 {
     /// <summary>
     /// 支付宝 查单接口实现类
@@ -28,7 +28,7 @@ namespace AGooday.AgPay.Components.Third.Channel.AliPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.ALIPAY;
+            return Constants.IF_CODE.ALIPAY;
         }
 
         public async Task<ChannelRetMsg> QueryAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)

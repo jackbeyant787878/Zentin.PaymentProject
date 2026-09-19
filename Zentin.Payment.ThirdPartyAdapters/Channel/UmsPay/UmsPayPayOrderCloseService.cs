@@ -1,9 +1,9 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Common.Constants;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Channel.UmsPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.UmsPay
 {
     /// <summary>
     /// 银联商务关单
@@ -16,7 +16,7 @@ namespace AGooday.AgPay.Components.Third.Channel.UmsPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.UMSPAY;
+            return Constants.IF_CODE.UMSPAY;
         }
         public Task<ChannelRetMsg> CloseAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
         {

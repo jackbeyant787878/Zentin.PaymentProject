@@ -1,18 +1,18 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
 using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Channel.WxPay.Kits;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder;
-using AGooday.AgPay.Components.Third.RQRS.PayOrder.PayWay;
-using AGooday.AgPay.Components.Third.Services;
-using AGooday.AgPay.Components.Third.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.Kits;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.PayOrder.PayWay;
+using Zentin.Payment.ThirdPartyAdapters.Services;
+using Zentin.Payment.ThirdPartyAdapters.Utils;
 using Newtonsoft.Json;
 using SKIT.FlurlHttpClient.Wechat.TenpayV2;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay.PayWay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay.PayWay
 {
     /// <summary>
     /// 微信 jsapi支付

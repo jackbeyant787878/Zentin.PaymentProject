@@ -1,16 +1,16 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using AGooday.AgPay.Application.Interfaces;
-using Zentin.Payment.Common.Constants;
+﻿using  Microsoft.Extensions.Logging;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
-using AGooday.AgPay.Components.Third.RQRS.Refund;
-using AGooday.AgPay.Components.Third.Services;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Refund;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PaypalServerSdk.Standard.Models;
 
-namespace AGooday.AgPay.Components.Third.Channel.PpPay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.PpPay
 {
     public class PpPayRefundService : AbstractRefundService
     {
@@ -29,7 +29,7 @@ namespace AGooday.AgPay.Components.Third.Channel.PpPay
 
         public override string GetIfCode()
         {
-            return CS.IF_CODE.PPPAY;
+            return Constants.IF_CODE.PPPAY;
         }
 
         public override string PreCheck(RefundOrderRQ bizRQ, RefundOrderDto refundOrder, PayOrderDto payOrder)

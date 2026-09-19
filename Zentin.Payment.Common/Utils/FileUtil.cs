@@ -1,5 +1,4 @@
-﻿
-using Zentin.Payment.Common.Constant;
+﻿using Zentin.Payment.Common.Constant;
 using Zentin.Payment.Common.Exceptions;
 namespace Zentin.Payment.Common.Utils
 {

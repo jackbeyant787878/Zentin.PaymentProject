@@ -1,13 +1,13 @@
-﻿using AGooday.AgPay.Application.Params.WxPay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Exceptions;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.Services;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using SKIT.FlurlHttpClient.Wechat.Api;
 using SKIT.FlurlHttpClient.Wechat.Api.Models;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Exceptions;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.Services;
 
-namespace AGooday.AgPay.Components.Third.Channel.WxPay
+
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.WxPay
 {
     /// <summary>
     /// 微信支付 获取微信openID实现类
@@ -34,7 +34,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.WXPAY;
+            return Constants.IF_CODE.WXPAY;
         }
 
         public async Task<string> BuildUserRedirectUrlAsync(string callbackUrlEncode, string wayCode, MchAppConfigContext mchAppConfigContext)
@@ -90,12 +90,12 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 appId = isvOauth2Params.AppId;
                 appSecret = isvOauth2Params.AppSecret;
                 oauth2Url = isvOauth2Params.Oauth2Url;
-                if (wayCode.Equals(CS.PAY_WAY_CODE.WX_LITE))
+                if (wayCode.Equals(Constants.PAY_WAY_CODE.WX_LITE))
                 {
                     appId = isvOauth2Params.LiteAppId;
                     appSecret = isvOauth2Params.LiteAppSecret;
                     var isvSubMchOauth2Params = (WxPayIsvSubMchOauth2Params)await _configContextQueryService.QueryIsvSubMchOauth2ParamsAsync(mchAppConfigContext.MchNo, mchAppConfigContext.AppId, GetIfCode());
-                    if (isvSubMchOauth2Params.IsUseSubmchAccount.Equals(CS.YES))
+                    if (isvSubMchOauth2Params.IsUseSubmchAccount.Equals(Constants.YES))
                     {
                         appId = isvSubMchOauth2Params.LiteAppId;
                         appSecret = isvSubMchOauth2Params.LiteAppSecret;
@@ -113,7 +113,7 @@ namespace AGooday.AgPay.Components.Third.Channel.WxPay
                 appId = normalMchOauth2Params.AppId;
                 appSecret = normalMchOauth2Params.AppSecret;
                 oauth2Url = normalMchOauth2Params.Oauth2Url;
-                if (wayCode.Equals(CS.PAY_WAY_CODE.WX_LITE))
+                if (wayCode.Equals(Constants.PAY_WAY_CODE.WX_LITE))
                 {
                     appId = normalMchOauth2Params.LiteAppId;
                     appSecret = normalMchOauth2Params.LiteAppSecret;

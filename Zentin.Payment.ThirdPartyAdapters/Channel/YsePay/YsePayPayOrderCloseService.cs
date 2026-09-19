@@ -1,13 +1,15 @@
-﻿using AGooday.AgPay.Application.DataTransfer;
-using Zentin.Payment.Application.YsePay;
-using Zentin.Payment.Common.Constants;
-using Zentin.Payment.Common.Utils;
-using AGooday.AgPay.Components.Third.Models;
-using AGooday.AgPay.Components.Third.RQRS.Msg;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Zentin.Payment.Application.Dto;
+using Zentin.Payment.Application.YsePay;
+using Zentin.Payment.Common.Constant;
+using Zentin.Payment.Common.Utils;
+using Zentin.Payment.ThirdPartyAdapters.Models;
+using Zentin.Payment.ThirdPartyAdapters.RQRS.Msg;
 
-namespace AGooday.AgPay.Components.Third.Channel.YsePay
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.YsePay
 {
     /// <summary>
     ///银盛关单
@@ -30,7 +32,7 @@ namespace AGooday.AgPay.Components.Third.Channel.YsePay
 
         public string GetIfCode()
         {
-            return CS.IF_CODE.YSEPAY;
+            return Constants.IF_CODE.YSEPAY;
         }
         public async Task<ChannelRetMsg> CloseAsync(PayOrderDto payOrder, MchAppConfigContext mchAppConfigContext)
         {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AGooday.AgPay.Components.Third.Channel.LesPay.Utils
+namespace Zentin.Payment.ThirdPartyAdapters.Channel.LesPay.Utils
 {
     public class LesPaySignUtil
     {
