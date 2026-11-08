@@ -5,7 +5,7 @@ using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Events;
 using static Zentin.Payment.Domain.Enums.Enums;
 
-namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Pay
+namespace Zentin.Payment.Domain.Entities.Pay
 {
     /// <summary>
     /// Merchant transfer order aggregate root

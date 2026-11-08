@@ -39,7 +39,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
             builder.Property(e => e.MchOrderFeeAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.Currency).HasMaxLength(3).HasDefaultValue("CNY").IsRequired();
             builder.Property(e => e.State).HasConversion<int>().HasDefaultValue(PayOrderStatus.Created);
-            builder.Property(e => e.NotifyState).HasColumnType("int").HasDefaultValue(0);
+            builder.Property(e => e.NotifyState).HasDefaultValue(false);
             builder.Property(e => e.ClientIp).HasMaxLength(32);
             builder.Property(e => e.Subject).HasMaxLength(64).IsRequired();
             builder.Property(e => e.Body).HasMaxLength(256).IsRequired();

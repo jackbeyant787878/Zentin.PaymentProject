@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Zentin.Payment.Domain.Abstractions;
 
-namespace Zentin.Payment.Application.Contracts.Notifications
+namespace Zentin.Payment.Domain.Abstractions
 {
     /// <summary>
     /// domain notification event

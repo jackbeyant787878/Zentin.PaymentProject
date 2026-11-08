@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Zentin.Payment.Domain.IRepositories;
 using Zentin.Payment.Infrastructure.Data;
-using Zentin.Payment.Infrastructure.EntityTypeConfiguration.Pay;
+using Zentin.Payment.Domain.Entities.Pay;
 
 namespace Zentin.Payment.Infrastructure.Repositories
 {

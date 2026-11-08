@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Zentin.Payment.Domain.Entities.Pay;
 using static Zentin.Payment.Domain.Enums.Enums;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Pay

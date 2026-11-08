@@ -1,5 +1,5 @@
 ﻿using Zentin.Payment.Domain.Abstractions;
-using Zentin.Payment.Infrastructure.EntityTypeConfiguration.Pay;
+using Zentin.Payment.Domain.Entities.Pay;
 
 namespace Zentin.Payment.Domain.IRepositories
 {

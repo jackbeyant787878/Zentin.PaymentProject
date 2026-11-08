@@ -6,7 +6,6 @@ using Zentin.Payment.Domain.Entities.Notify;
 using Zentin.Payment.Domain.Entities.Order;
 using Zentin.Payment.Domain.Entities.Pay;
 using Zentin.Payment.Domain.Entities.QrCode;
-using Zentin.Payment.Infrastructure.EntityTypeConfiguration.Pay;
 using Zentin.Payment.Infrastructure.Interceptors;
 
 namespace Zentin.Payment.Infrastructure.Data

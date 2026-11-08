@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Entities.Order;
+using static Zentin.Payment.Domain.Enums.Enums;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
 {
@@ -39,7 +37,7 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
             builder.Property(e => e.RefundAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.RefundFeeAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.Currency).HasMaxLength(3).HasDefaultValue("CNY").IsRequired();
-            builder.Property(e => e.State).HasConversion<int>().HasDefaultValue(0);
+            builder.Property(e => e.State).HasConversion<int>().HasDefaultValue(RefundOrderStatus.Created);
             builder.Property(e => e.ClientIp).HasMaxLength(32);
             builder.Property(e => e.RefundReason).HasMaxLength(256).IsRequired();
             builder.Property(e => e.ChannelOrderNo).HasMaxLength(32);
@@ -51,8 +49,9 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
             builder.Property(e => e.SuccessTime).HasColumnType("datetime2(6)");
             builder.Property(e => e.ExpiredTime).HasColumnType("datetime2(6)");
 
-          
             builder.HasIndex(e => new { e.MchNo, e.MchRefundNo }).HasDatabaseName("UniMchNoMchRefundNo").IsUnique();
+            builder.HasIndex(e => e.PayOrderId).HasDatabaseName("IdxPayOrderId");
+            builder.HasIndex(e => e.State).HasDatabaseName("IdxState");
         }
     }
 }
