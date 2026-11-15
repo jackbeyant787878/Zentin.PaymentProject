@@ -82,6 +82,18 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
                 .HasForeignKey(e => e.PayOrderId)
                 .HasConstraintName("FKRefundOrderPayOrderId")
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(e => e.ProfitRecords)
+                .WithOne(e => e.PayOrder)
+                .HasForeignKey(e => e.PayOrderId)
+                .HasConstraintName("FKPayOrderProfitPayOrderId")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(e => e.DivisionRecords)
+                .WithOne(e => e.PayOrder)
+                .HasForeignKey(e => e.PayOrderId)
+                .HasConstraintName("FKPayOrderDivisionRecordPayOrderId")
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

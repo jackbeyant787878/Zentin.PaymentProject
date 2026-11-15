@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Zentin.Payment.Domain.Abstractions;
+using Zentin.Payment.Domain.Entities.Member;
 using Zentin.Payment.Domain.Enums;
 using Zentin.Payment.Domain.Events;
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Zentin.Payment.Domain.Entities.Member;
+using Zentin.Payment.Domain.Entities.Merchant;
 using Zentin.Payment.Domain.Enums;
 
 namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Member
@@ -28,6 +29,12 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration.Member
 
        
             builder.HasIndex(e => e.MchNo).HasDatabaseName("IdxMchNo");
+
+            builder.HasOne<MchInfo>()
+                .WithMany(e => e.RechargeRules)
+                .HasForeignKey(e => e.MchNo)
+                .HasConstraintName("FKMbrRechargeRuleMchNo")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
