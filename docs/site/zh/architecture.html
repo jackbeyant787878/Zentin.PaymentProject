@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>.NET 10 分布式支付系统架构图</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@11.13.0/font/simple-icons.min.css" />
+<link rel="stylesheet" href="../assets/architecture.css" />
+</head>
+<body>
+<nav style="width:1460px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:10px 4px;border-bottom:1px solid #221d18;">
+  <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#f5d170;font-weight:600;letter-spacing:.22em;font-size:14px;">
+    <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#e2b240;"></span>ZENTIN
+  </a>
+  <div style="display:flex;align-items:center;gap:22px;font-size:12.5px;">
+    <a href="index.html" style="color:#888e99;text-decoration:none;">产品总览</a>
+    <a href="architecture.html" style="color:#e6edf3;text-decoration:none;">系统架构</a>
+    <a href="https://github.com/jackbeyant787878/Zentin.Payment" style="color:#888e99;text-decoration:none;">GitHub</a>
+    <a href="../architecture.html" style="color:#d4a857;text-decoration:none;border:1px solid #332c22;border-radius:16px;padding:2px 12px;font-size:11px;">English</a>
+  </div>
+</nav>
+<div class="wrap">
+<div class="diagram">
+
+<div class="hd">
+<h1>⚡ .NET 10 分布式支付系统架构图</h1>
+<p>Zenith Pay · DDD + CQRS · 云原生 K3s</p>
+<div class="badges">
+<span class="bdg">.NET10</span>
+<span class="bdg">DDD/CQRS</span>
+<span class="bdg">RabbitMQ</span>
+<span class="bdg">Consul</span>
+<span class="bdg">Redis</span>
+<span class="bdg">SQL Server</span>
+<span class="bdg">ELK 日志栈</span>
+<span class="bdg">监控套件</span>
+<span class="bdg">YARP 网关集群</span>
+</div>
+</div>
+
+<!-- L1 前端层 -->
+<div class="layer ly-fe">
+<div class="lbl">
+<span class="lbl-zh">前端层</span>
+<span class="lbl-en">Client Side</span>
+</div>
+<div class="lc" style="align-items:center;">
+<div class="grp" style="border-color:#42b85c;min-width:320px;">
+<div class="grp-t">🖥 桌面管理端</div>
+<div class="row">
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">运营平台</span><span class="sb">平台管理后台</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">代理商平台</span><span class="sb">渠道管理后台</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">商户后台</span><span class="sb">商户控制台</span>
+</div>
+</div>
+</div>
+<div class="sep"></div>
+<div class="grp" style="border-color:#42b85c;min-width:210px;">
+<div class="grp-t">📱 移动端</div>
+<div class="row">
+<div class="nd">
+<div class="ico fa fa-mobile text-green-400"></div>
+<span class="nm">商户 App</span><span class="sb">iOS / Android</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-mobile text-green-400"></div>
+<span class="nm">H5 收银台</span><span class="sb">支付页面</span>
+</div>
+</div>
+</div>
+<div class="sep"></div>
+<div class="grp" style="border-color:#3ac6d1;min-width:260px;">
+<div class="grp-t">🔗 第三方对接</div>
+<div class="row">
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-circle text-cyan-400"></div>
+<span class="nm" style="font-size:11px">微信 / 支付宝</span>
+</div>
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-credit-card text-cyan-400"></div>
+<span class="nm" style="font-size:11px">银行渠道</span>
+</div>
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-link text-cyan-400"></div>
+<span class="nm" style="font-size:11px">Webhook 回调</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">外部流量 <span class="proto-tag">HTTPS/TLS1.3</span> <span class="proto-tag">REST/JSON</span> <span class="proto-tag">OAuth2.0/OIDC</span> 统一网关入口</div>
+
+<!-- L2 网关层 -->
+<div class="layer ly-gw">
+<div class="lbl">
+<span class="lbl-zh">网关层</span>
+<span class="lbl-en">API Gateway</span>
+</div>
+<div class="lc" style="align-items:center;gap:14px;">
+<div class="grp" style="border-color:#42b85c;min-width:220px;">
+<div class="grp-t">Nginx 负载均衡集群</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-nginx color-nginx"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">Nginx 集群</span>
+<span class="sb">SSL 卸载、反向代理</span>
+</div>
+</div>
+</div>
+<span class="pa">→</span>
+<div class="grp" style="border-color:#a87ff2;flex:1;min-width:560px;">
+<div class="grp-t">🚀 YARP API 网关集群（.NET 10）</div>
+<div class="row">
+<div class="nd" style="min-width:100px;">
+<div class="ico si si-dotnet color-dotnet"></div>
+<span class="nm">智能路由</span><span class="sb">路由转发</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-key text-yellow-400"></div>
+<span class="nm">JWT 鉴权</span><span class="sb">认证中间件</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-search text-blue-400"></div>
+<span class="nm">服务发现</span><span class="sb">Consul 集成</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-balance-scale text-orange-400"></div>
+<span class="nm">限流与熔断</span><span class="sb">服务韧性</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-line-chart text-cyan-400"></div>
+<span class="nm">分布式追踪</span><span class="sb">日志跟踪</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">内部服务调用 <span class="proto-tag">RESTful HTTP/1.1 & HTTP2</span> <span class="proto-tag">Consul 服务发现</span> <span class="proto-tag">K8s ClusterIP</span></div>
+
+<!-- L3 应用层 -->
+<div class="layer ly-svc">
+<div class="lbl">
+<span class="lbl-zh">应用层</span>
+<span class="lbl-en">Business Microservices</span>
+</div>
+<div class="lc">
+<div class="nd">
+<div class="ico si si-openid color-openid"></div>
+<span class="nm">身份认证服务</span><span class="sb">IdentityService</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-clock-o text-yellow-400"></div>
+<span class="nm">任务调度服务</span><span class="sb">SchedulerService</span>
+</div>
+<div class="nd">
+<div class="ico si si-adminer color-adminer"></div>
+<span class="nm">运营平台服务</span><span class="sb">ManagerService</span>
+</div>
+<div class="nd">
+<div class="ico si si-microsoftteams color-msteams"></div>
+<span class="nm">代理商管理服务</span><span class="sb">AgentService</span>
+</div>
+<div class="nd">
+<div class="ico si si-shopify text-green-400"></div>
+<span class="nm">商户服务</span><span class="sb">MerchantService</span>
+</div>
+<div class="nd">
+<div class="ico si si-stripe color-stripe"></div>
+<span class="nm">支付网关服务</span><span class="sb">PaymentService</span>
+</div>
+<div class="grp" style="min-width:170px;border-color:#4c3470;">
+<div class="grp-t">📦 核心 NuGet 包</div>
+<div class="col">
+<span class="npkg">MediatR</span>
+<span class="npkg">FluentValidation</span>
+<span class="npkg">Mapster</span>
+<span class="npkg">Polly</span>
+<span class="npkg">OpenIddict</span>
+<span class="npkg">Quartz.NET</span>
+<span class="npkg">Serilog</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">消息 / 注册 / 配置 <span class="proto-tag">AMQP 0-9-1</span> <span class="proto-tag">Consul HTTP API</span></div>
+
+<!-- L4 基础设施层 -->
+<div class="layer ly-inf">
+<div class="lbl">
+<span class="lbl-zh">基础设施层</span>
+<span class="lbl-en">Middleware</span>
+</div>
+<div class="lc">
+<div class="nd">
+<div class="ico si si-rabbitmq color-rabbitmq"></div>
+<span class="nm">RabbitMQ</span><span class="sb">消息队列</span>
+</div>
+<div class="nd">
+<div class="ico si si-consul color-consul"></div>
+<span class="nm">Consul</span><span class="sb">服务注册与配置中心</span>
+</div>
+<div class="grp" style="flex:1;border-color:#e2b240;">
+<div class="grp-t">⚙ 基础设施公共组件</div>
+<div class="row">
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-prometheus color-prometheus"></div>
+<span class="nm">监控服务</span><span class="sb">Prometheus</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-grafana color-grafana"></div>
+<span class="nm">可视化看板</span><span class="sb">Grafana</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-envelope text-amber-400"></div>
+<span class="nm">邮件服务</span><span class="sb">邮件通知</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-docker color-docker"></div>
+<span class="nm">容器运行时</span><span class="sb">Docker / K3s</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-sitemap text-amber-400"></div>
+<span class="nm">服务治理</span><span class="sb">注册发现与熔断</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-file-text text-amber-400"></div>
+<span class="nm">日志服务</span><span class="sb">日志采集</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">数据读写 <span class="proto-tag">Redis 协议</span> <span class="proto-tag">TDS / SQL over TCP</span></div>
+
+<!-- L5 存储层 -->
+<div class="layer ly-sto">
+<div class="lbl">
+<span class="lbl-zh">存储层</span>
+<span class="lbl-en">Persistence & Cache</span>
+</div>
+<div class="lc">
+<div class="grp" style="min-width:240px;border-color:#3ac6d1;">
+<div class="grp-t">⚡ 分布式缓存</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-redis color-redis"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">Redis</span>
+<span class="sb">分布式缓存组件</span>
+</div>
+</div>
+</div>
+<div class="grp" style="min-width:240px;border-color:#d39a24;">
+<div class="grp-t">🗄 关系型持久化</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-microsoftsqlserver color-sqlserver"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">SQL Server</span>
+<span class="sb">事务型关系数据库</span>
+</div>
+</div>
+</div>
+<div class="grp" style="flex:1;min-width:340px;border-color:#f5d131;">
+<div class="grp-t">📋 ELK 日志管道</div>
+<div class="row">
+<div class="nd" style="min-width:105px;">
+<div class="ico si si-elasticsearch color-elastic"></div>
+<span class="nm">Elasticsearch</span><span class="sb">全文检索</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-cogs text-yellow-500"></div>
+<span class="nm">Logstash</span><span class="sb">日志管道解析</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-area-chart text-yellow-500"></div>
+<span class="nm">Kibana</span><span class="sb">日志可视化</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-file-text-o text-yellow-500"></div>
+<span class="nm">Filebeat</span><span class="sb">日志采集转发</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">云基础设施资源 <span class="proto-tag">TCP/IP 私有网络</span></div>
+
+<!-- L6 支撑层 -->
+<div class="layer ly-sup">
+<div class="lbl">
+<span class="lbl-zh">支撑层</span>
+<span class="lbl-en">Cloud & Security</span>
+</div>
+<div class="lc">
+<div class="grp" style="min-width:220px;border-color:#d39a24;">
+<div class="grp-t">🖥 计算服务器</div>
+<div class="row">
+<div class="nd" style="min-width:90px;">
+<div class="ico fa fa-server text-amber-400"></div>
+<span class="nm">腾讯云 CVM</span><span class="sb">云服务器</span>
+</div>
+<div class="nd" style="min-width:90px;">
+<div class="ico si si-kubernetes color-k8s"></div>
+<span class="nm">K3s 集群</span><span class="sb">容器编排</span>
+</div>
+</div>
+</div>
+<div class="grp" style="min-width:220px;border-color:#d39a24;">
+<div class="grp-t">🗄 数据库</div>
+<div class="nd" style="width:100%;padding:10px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<div class="ico si si-microsoftsqlserver color-sqlserver"></div>
+<span class="nm">SQL Server</span>
+</div>
+</div>
+</div>
+<div class="grp" style="min-width:200px;border-color:#d39a24;">
+<div class="grp-t">⚡ 缓存存储</div>
+<div class="nd" style="width:100%;padding:10px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<div class="ico si si-redis color-redis"></div>
+<span class="nm">Redis</span>
+</div>
+</div>
+</div>
+<div class="grp" style="flex:1;min-width:240px;border-color:#d39a24;">
+<div class="grp-t">🌐 网络与安全</div>
+<div class="row">
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-shield text-amber-400"></div>
+<span class="nm">腾讯云 WAF</span><span class="sb">Web 应用防火墙</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-sitemap text-amber-400"></div>
+<span class="nm">VPC 私有网络</span><span class="sb">内网隔离</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">CI/CD 自动化流水线 <span class="proto-tag">Git Push 触发构建</span></div>
+
+<!-- L7 CI/CD -->
+<div class="layer ly-ci">
+<div class="lbl">
+<span class="lbl-zh">CI/CD 流水线</span>
+<span class="lbl-en">DevOps Delivery</span>
+</div>
+<div class="lc">
+<div class="pipe">
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#a87ff2;">
+<i class="fa fa-code text-purple-400"></i>
+</div>
+<span class="ps-nm">本地开发 DEV</span>
+<span class="ps-sb">Visual Studio</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#c2c8d0;">
+<i class="si si-github color-github"></i>
+</div>
+<span class="ps-nm">GitHub 代码仓库</span>
+<span class="ps-sb">PR 评审与源码托管</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#59a7ff;">
+<i class="si si-githubactions color-githubactions"></i>
+</div>
+<span class="ps-nm">GitHub Actions</span>
+<span class="ps-sb">CI 构建与单元测试</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#4d9fff;">
+<i class="si si-docker color-docker"></i>
+</div>
+<span class="ps-nm">腾讯云 TCR 镜像仓库</span>
+<span class="ps-sb">容器镜像存储</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#42b85c;">
+<i class="si si-kubernetes color-k8s"></i>
+</div>
+<span class="ps-nm">腾讯云 K3s 集群</span>
+<span class="ps-sb">生产工作负载运行时</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 底部：分层说明 + 端到端流程 -->
+<div class="wrap doc-wrap">
+  <div class="doc-card">
+    <div class="doc-title"><i class="fa fa-book text-yellow-400"></i>分层组件与服务说明</div>
+
+    <div class="doc-section">
+      <h4>1. 前端层（外部流量入口）</h4>
+      <p>面向商户、运营人员与渠道代理商的客户端应用。只允许 HTTPS 外部请求，不能直接访问内网资源。</p>
+      <ul>
+        <li>桌面后台：日常对账、费率配置、渠道管理</li>
+        <li>移动端与 H5 收银台：终端用户创建支付订单、查询订单状态</li>
+        <li>第三方支付网关：微信 / 支付宝 / 银行的异步 Webhook 回调</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>2. 网关层（唯一公网边界）</h4>
+      <p>所有外部流量在此汇聚，完成安全校验、请求路由与流量治理。后端微服务全部与公网隔离。</p>
+      <ul>
+        <li>Nginx：四层负载均衡、SSL 证书卸载、静态资源转发</li>
+        <li>YARP .NET 10 网关：JWT 鉴权、动态服务发现、熔断限流、全链路日志追踪。通过内网标准 RESTful HTTP 与内部微服务通信。</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>3. 应用层（核心业务微服务）</h4>
+      <p>按领域驱动设计划分业务域，用 CQRS 做读写分离，承载商户、交易与分账核心逻辑。</p>
+      <ul>
+        <li>IdentityService：基于 OpenIddict 的集中式认证与细粒度权限控制</li>
+        <li>SchedulerService：基于 Quartz.NET 的分布式任务调度，负责自动对账、退款执行、超时关单</li>
+        <li>四个领域微服务：运营平台、渠道代理商、商户控制台、支付网关</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>4. 基础设施层（分布式中间件底座）</h4>
+      <p>共享中间件与公共组件，把业务逻辑与分布式能力实现解耦。</p>
+      <ul>
+        <li>Consul：服务注册、健康检查与分布式 KV 配置中心</li>
+        <li>RabbitMQ：异步事件队列，用于削峰、系统解耦与事务消息</li>
+        <li>公共能力：监控、邮件通知、容器运行时、服务治理与集中式日志</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>5. 存储层（持久化、缓存与日志数仓）</h4>
+      <ul>
+        <li>SQL Server：核心订单、商户档案与分账结算记录的 ACID 事务存储</li>
+        <li>Redis：分布式锁、热点数据缓存、会话与限流计数器</li>
+        <li>ELK 日志栈：全量 API 请求日志与异常日志存储，故障排查时快速检索</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>6. 支撑层（云运行时底座）</h4>
+      <p>容器集群运行所需的底层计算、网络与安全资源，以及内网隔离保护。</p>
+    </div>
+
+    <div class="doc-section">
+      <h4>7. CI/CD DevOps 流水线（自动化构建与部署）</h4>
+      <p>从源码提交到生产集群部署的全自动流程，支持一键回滚做版本恢复。</p>
+    </div>
+  </div>
+
+  <div class="doc-card">
+    <div class="doc-title"><i class="fa fa-random text-yellow-400"></i>端到端支付请求流程</div>
+    <div class="doc-section">
+      <p>以商户标准支付下单为例，完整的客户端到存储请求链路：</p>
+      <div class="flow-step-item">
+        <strong>步骤 1　客户端发起外部 HTTPS 请求</strong>
+        <p>商户 H5 / 桌面后台通过公网 HTTPS 发送下单请求，流量进入公网 Nginx 集群入口。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 2　Nginx 负载均衡转发</strong>
+        <p>Nginx 完成 SSL 解密，按权重规则把入站流量分发到健康的 YARP 网关实例。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 3　YARP 网关统一前置处理</strong>
+        <p>1. 校验 JWT 会话令牌与接口访问权限；2. 验证请求签名防篡改；3. 从 Consul 拉取最新健康服务列表；4. 对下游服务执行限流与熔断保护；5. 生成全局 TraceId 用于全链路日志追踪。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 4　内网 RESTful HTTP 调用支付微服务</strong>
+        <p>网关通过 K8s 内网 ClusterIP 向 PaymentService 发起 RESTful HTTP 请求，所有业务服务与公网隔离。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 5　业务服务读写处理</strong>
+        <p>1. 从 Redis 缓存读取商户费率配置；2. 构造订单领域实体；3. 在本地数据库事务中持久化新订单；4. 向 RabbitMQ 发布「待支付」领域事件。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 6　异步中间件消费与日志落库</strong>
+        <p>RabbitMQ 消费者异步发送支付通知邮件、预处理日对账数据；Filebeat 采集全部请求日志并投递到 ELK 存储集群。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 7　同步响应返回客户端</strong>
+        <p>支付收银台链接与唯一订单号沿完整请求链路回传前端，同步请求生命周期结束。</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>步骤 8　异步渠道回调收尾（支付完成后）</strong>
+        <p>终端用户完成支付后，微信 / 银行服务端向网关发送异步 Webhook 回调。网关重新校验回调签名，更新订单支付状态，生成分账结算数据并推送用户支付通知。</p>
+      </div>
+    </div>
+    <div class="doc-section" style="margin-top:20px;">
+      <h4>容错与韧性机制</h4>
+      <ul>
+        <li>不健康实例剔除：Consul 健康检查摘除下线实例，YARP 自动把流量路由到健康节点。</li>
+        <li>流量突增保护：YARP 限流 + RabbitMQ 峰值缓冲，避免数据库过载。</li>
+        <li>消息不丢：RabbitMQ 持久化队列 + 死信队列，配合定时重试补偿任务。</li>
+        <li>分布式排障：通过 TraceId 在 ELK 日志存储中交叉检索，实现全链路可追溯。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

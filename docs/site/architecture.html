@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>.NET 10 Distributed Payment System Architecture Diagram</title>
+<!-- jsDelivr stable CDN for GitHub Pages -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@11.13.0/font/simple-icons.min.css" />
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+body{
+  background:#0a0a0e;
+  font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;
+  color:#c2c8d0;
+  padding:16px;
+}
+.wrap{
+  width:1460px;
+  margin:0 auto;
+}
+.diagram{
+  background:#0a0a0e;
+  overflow:hidden;
+  border:1px solid #221d18;
+  border-radius:12px;
+}
+/* Header Title Bar */
+.hd{
+  padding:20px 30px 16px;
+  text-align:center;
+  border-bottom:1px solid #221d18;
+}
+.hd h1{
+  font-size:22px;
+  font-weight:600;
+  color:#e6edf3;
+}
+.hd p{
+  margin-top:6px;
+  font-size:11px;
+  color:#888e99;
+}
+.badges{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+.bdg{
+  padding:2px 10px;
+  border-radius:16px;
+  font-size:10px;
+  border:1px solid #332c22;
+  color:#d4a857;
+}
+/* Left Vertical Layer Sidebar Original Layout */
+.layer{
+  display:flex;
+  border-bottom:1px solid #221d18;
+  min-height:120px;
+}
+.layer:last-child{
+  border-bottom:none;
+}
+.lbl{
+  width:60px;
+  min-width:60px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:6px 2px;
+  border-right:2px solid;
+}
+.lbl-zh{
+  writing-mode:vertical-rl;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+.lbl-en{
+  writing-mode:vertical-rl;
+  font-size:9px;
+  opacity:.4;
+  margin-top:8px;
+  white-space:nowrap;
+}
+.lc{
+  flex:1;
+  padding:14px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:14px;
+}
+/* 7 Layer Sidebar Theme Colors */
+.ly-fe .lbl{background:#081408;border-color:#42b85c;}
+.ly-fe .lbl-zh,.ly-fe .lbl-en{color:#42b85c;}
+.ly-fe .lc{background:#091109;}
+
+.ly-gw .lbl{background:#120a1f;border-color:#a87ff2;}
+.ly-gw .lbl-zh,.ly-gw .lbl-en{color:#a87ff2;}
+.ly-gw .lc{background:#100b1c;}
+
+.ly-svc .lbl{background:#081628;border-color:#59a7ff;}
+.ly-svc .lbl-zh,.ly-svc .lbl-en{color:#59a7ff;}
+.ly-svc .lc{background:#091424;}
+
+.ly-inf .lbl{background:#1a1206;border-color:#e2b240;}
+.ly-inf .lbl-zh,.ly-inf .lbl-en{color:#e2b240;}
+.ly-inf .lc{background:#171005;}
+
+.ly-sto .lbl{background:#06181b;border-color:#3ac6d1;}
+.ly-sto .lbl-zh,.ly-sto .lbl-en{color:#3ac6d1;}
+.ly-sto .lc{background:#071518;}
+
+.ly-sup .lbl{background:#191407;border-color:#d39a24;}
+.ly-sup .lbl-zh,.ly-sup .lbl-en{color:#d39a24;}
+.ly-sup .lc{background:#161206;}
+
+.ly-ci .lbl{background:#190f06;border-color:#f1893a;}
+.ly-ci .lbl-zh,.ly-ci .lbl-en{color:#f1893a;}
+.ly-ci .lc{background:#160d05;}
+
+/* Protocol Separator Bar Between Layers */
+.proto{
+  width:100%;
+  padding:6px 0;
+  text-align:center;
+  font-size:11px;
+  color:#888e99;
+  background:#06080b;
+  border-bottom:1px solid #221d18;
+}
+.proto-tag{
+  padding:2px 8px;
+  border:1px solid #332c22;
+  border-radius:6px;
+  margin:0 6px;
+  color:#63aaff;
+}
+/* Dashed Border Group Panel Match Screenshot */
+.grp{
+  border:1px dashed #604e30;
+  border-radius:8px;
+  padding:12px;
+  position:relative;
+}
+.grp-t{
+  position:absolute;
+  top:-8px;
+  left:10px;
+  font-size:10px;
+  font-weight:600;
+  padding:0 6px;
+  background:#0a0a0e;
+  color:#e2b240;
+}
+/* Unified Component Card Icon Layout */
+.nd{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:12px 8px;
+  border-radius:8px;
+  border:1px solid #332c22;
+  background:#14100b;
+  gap:6px;
+  min-width:120px;
+}
+.nd .ico{
+  font-size:32px;
+  height:36px;
+  line-height:36px;
+  text-align:center;
+}
+.nd .nm{
+  font-size:12px;
+  font-weight:500;
+  color:#e6d4b0;
+}
+.nd .sb{
+  font-size:9px;
+  color:#998c77;
+}
+/* CI/CD Pipeline Row */
+.pipe{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  justify-content:center;
+  padding:8px 0;
+}
+.ps{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  min-width:110px;
+}
+.ps-ico{
+  font-size:40px;
+  width:56px;
+  height:56px;
+  line-height:56px;
+  text-align:center;
+  border-radius:10px;
+  border:2px solid;
+  background:#14100b;
+}
+.ps-nm{
+  font-size:10px;
+  color:#c2c8d0;
+}
+.ps-sb{
+  font-size:9px;
+  color:#888e99;
+}
+.pa{
+  font-size:20px;
+  color:#e2b240;
+}
+.row{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.col{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.sep{
+  width:1px;
+  background:#332c22;
+  margin:0 6px;
+}
+.npkg{
+  padding:3px 8px;
+  border-radius:4px;
+  border:1px solid #4c3470;
+  background:rgba(168,127,242,.08);
+  font-size:10px;
+  color:#a87ff2;
+}
+/* Official Standard Brand Color Classes for SimpleIcons */
+.color-dotnet { color: #512bd4; }
+.color-nginx { color: #009639; }
+.color-rabbitmq { color: #ff6600; }
+.color-consul { color: #ec4d37; }
+.color-prometheus { color: #e6522c; }
+.color-grafana { color: #f46800; }
+.color-docker { color: #2496ed; }
+.color-redis { color: #dc382d; }
+.color-sqlserver { color: #cc2927; }
+.color-elastic { color: #f0c529; }
+.color-github { color: #ffffff; }
+.color-githubactions { color: #2088ff; }
+.color-k8s { color: #326ce5; }
+.color-openid { color: #f78c40; }
+.color-stripe { color: #635bff; }
+.color-adminer { color: #00868b; }
+.color-msteams { color: #6264a7; }
+
+/* New Style for Architecture Doc & Flow Panel */
+.doc-wrap{
+  margin-top:24px;
+  display:flex;
+  gap:20px;
+}
+.doc-card{
+  flex:1;
+  border:1px solid #221d18;
+  border-radius:12px;
+  padding:20px;
+  background:#080b14;
+}
+.doc-title{
+  font-size:16px;
+  font-weight:600;
+  color:#f5d170;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.doc-section{
+  margin-bottom:16px;
+}
+.doc-section h4{
+  font-size:13px;
+  color:#63aaff;
+  margin-bottom:8px;
+}
+.doc-section p{
+  font-size:12px;
+  line-height:1.7;
+  color:#b0b8c4;
+}
+.doc-section ul{
+  padding-left:18px;
+  margin-top:6px;
+}
+.doc-section li{
+  font-size:12px;
+  line-height:1.7;
+  color:#b0b8c4;
+  margin-bottom:4px;
+}
+.flow-step-item{
+  border-left:2px solid #f59e0b;
+  padding-left:12px;
+  margin-bottom:10px;
+}
+.flow-step-item strong{
+  color:#f5d170;
+}
+</style>
+</head>
+<body>
+<nav style="width:1460px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:10px 4px;border-bottom:1px solid #221d18;">
+  <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#f5d170;font-weight:600;letter-spacing:.22em;font-size:14px;">
+    <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#e2b240;"></span>ZENTIN
+  </a>
+  <div style="display:flex;align-items:center;gap:22px;font-size:12.5px;">
+    <a href="index.html" style="color:#888e99;text-decoration:none;">Overview</a>
+    <a href="architecture.html" style="color:#e6edf3;text-decoration:none;">Architecture</a>
+    <a href="https://github.com/jackbeyant787878/Zentin.Payment" style="color:#888e99;text-decoration:none;">GitHub</a>
+    <a href="zh/architecture.html" style="color:#d4a857;text-decoration:none;border:1px solid #332c22;border-radius:16px;padding:2px 12px;font-size:11px;">中文</a>
+  </div>
+</nav>
+<div class="wrap">
+<div class="diagram">
+<!-- Header Area -->
+<div class="hd">
+<h1>⚡ .NET 10 Distributed Payment System Architecture Diagram</h1>
+<p>Zenith Pay · DDD + CQRS · Cloud Native K3s</p>
+<div class="badges">
+<span class="bdg">.NET10</span>
+<span class="bdg">DDD/CQRS</span>
+<span class="bdg">RabbitMQ</span>
+<span class="bdg">Consul</span>
+<span class="bdg">Redis</span>
+<span class="bdg">SQL Server</span>
+<span class="bdg">ELK Stack</span>
+<span class="bdg">Monitoring Suite</span>
+<span class="bdg">YARP Gateway Cluster</span>
+</div>
+</div>
+
+<!-- L1 Frontend Layer (Complete, No Missing) -->
+<div class="layer ly-fe">
+<div class="lbl">
+<span class="lbl-zh">Frontend Layer</span>
+<span class="lbl-en">Client Side</span>
+</div>
+<div class="lc" style="align-items:center;">
+<div class="grp" style="border-color:#42b85c;min-width:320px;">
+<div class="grp-t">🖥 Desktop Web Portal</div>
+<div class="row">
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">Operation Portal</span><span class="sb">Manager Backoffice</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">Agent Portal</span><span class="sb">Channel Admin Panel</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-desktop text-green-400"></div>
+<span class="nm">Merchant Backoffice</span><span class="sb">Merchant Console</span>
+</div>
+</div>
+</div>
+<div class="sep"></div>
+<div class="grp" style="border-color:#42b85c;min-width:210px;">
+<div class="grp-t">📱 Mobile Client</div>
+<div class="row">
+<div class="nd">
+<div class="ico fa fa-mobile text-green-400"></div>
+<span class="nm">Merchant App</span><span class="sb">iOS / Android</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-mobile text-green-400"></div>
+<span class="nm">H5 Cashier</span><span class="sb">Payment Page</span>
+</div>
+</div>
+</div>
+<div class="sep"></div>
+<div class="grp" style="border-color:#3ac6d1;min-width:260px;">
+<div class="grp-t">🔗 Third-Party Integration</div>
+<div class="row">
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-circle text-cyan-400"></div>
+<span class="nm" style="font-size:11px">WeChat / Alipay</span>
+</div>
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-credit-card text-cyan-400"></div>
+<span class="nm" style="font-size:11px">Bank Channels</span>
+</div>
+<div class="nd" style="width:120px;padding:10px 6px;">
+<div class="ico fa fa-link text-cyan-400"></div>
+<span class="nm" style="font-size:11px">Webhook Callback</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">External Traffic <span class="proto-tag">HTTPS/TLS1.3</span> <span class="proto-tag">REST/JSON</span> <span class="proto-tag">OAuth2.0/OIDC</span> Unified Gateway Entrypoint</div>
+
+<!-- L2 Gateway Layer with Official Colored SI Icons -->
+<div class="layer ly-gw">
+<div class="lbl">
+<span class="lbl-zh">Gateway Layer</span>
+<span class="lbl-en">API Gateway</span>
+</div>
+<div class="lc" style="align-items:center;gap:14px;">
+<div class="grp" style="border-color:#42b85c;min-width:220px;">
+<div class="grp-t">Nginx Load Balancer Cluster</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-nginx color-nginx"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">Nginx Cluster</span>
+<span class="sb">SSL Termination, Reverse Proxy</span>
+</div>
+</div>
+</div>
+<span class="pa">→</span>
+<div class="grp" style="border-color:#a87ff2;flex:1;min-width:560px;">
+<div class="grp-t">🚀 YARP API Gateway Cluster (.NET 10)</div>
+<div class="row">
+<div class="nd" style="min-width:100px;">
+<div class="ico si si-dotnet color-dotnet"></div>
+<span class="nm">Intelligent Routing</span><span class="sb">Route Proxy</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-key text-yellow-400"></div>
+<span class="nm">JWT Auth</span><span class="sb">Authentication Middleware</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-search text-blue-400"></div>
+<span class="nm">Service Discovery</span><span class="sb">Consul Integration</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-balance-scale text-orange-400"></div>
+<span class="nm">Rate Limiting & Circuit Breaker</span><span class="sb">Service Resilience</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-line-chart text-cyan-400"></div>
+<span class="nm">Distributed Tracing</span><span class="sb">Log Tracking</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">Internal Service Calls <span class="proto-tag">RESTful HTTP/1.1 & HTTP2</span> <span class="proto-tag">Consul Service Discovery</span> <span class="proto-tag">K8s ClusterIP</span></div>
+
+<!-- L3 Application Service Layer All SI Icons with Official Brand Colors -->
+<div class="layer ly-svc">
+<div class="lbl">
+<span class="lbl-zh">Application Layer</span>
+<span class="lbl-en">Business Microservices</span>
+</div>
+<div class="lc">
+<div class="nd">
+<div class="ico si si-openid color-openid"></div>
+<span class="nm">Identity Auth Service</span><span class="sb">IdentityService</span>
+</div>
+<div class="nd">
+<div class="ico fa fa-clock-o text-yellow-400"></div>
+<span class="nm">Task Scheduler Service</span><span class="sb">SchedulerService</span>
+</div>
+<div class="nd">
+<div class="ico si si-adminer color-adminer"></div>
+<span class="nm">Operation Platform Service</span><span class="sb">OperationService</span>
+</div>
+<div class="nd">
+<div class="ico si si-microsoftteams color-msteams"></div>
+<span class="nm">Agent Management Service</span><span class="sb">AgentService</span>
+</div>
+<div class="nd">
+<div class="ico si si-shopify text-green-400"></div>
+<span class="nm">Merchant Service</span><span class="sb">MerchantService</span>
+</div>
+<div class="nd">
+<div class="ico si si-stripe color-stripe"></div>
+<span class="nm">Payment Gateway Service</span><span class="sb">PaymentGateway</span>
+</div>
+<div class="grp" style="min-width:170px;border-color:#4c3470;">
+<div class="grp-t">📦 Core NuGet Packages</div>
+<div class="col">
+<span class="npkg">MediatR</span>
+<span class="npkg">FluentValidation</span>
+<span class="npkg">Mapster</span>
+<span class="npkg">Polly</span>
+<span class="npkg">OpenIddict</span>
+<span class="npkg">Quartz.NET</span>
+<span class="npkg">Serilog</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">Messaging / Registration / Config <span class="proto-tag">AMQP 0-9-1</span> <span class="proto-tag">Consul HTTP API</span></div>
+
+<!-- L4 Infrastructure Layer SI-RabbitMQ & Consul Official Brand Colors -->
+<div class="layer ly-inf">
+<div class="lbl">
+<span class="lbl-zh">Infrastructure Layer</span>
+<span class="lbl-en">Middleware & Common Components</span>
+</div>
+<div class="lc">
+<div class="nd">
+<div class="ico si si-rabbitmq color-rabbitmq"></div>
+<span class="nm">RabbitMQ</span><span class="sb">Message Queue</span>
+</div>
+<div class="nd">
+<div class="ico si si-consul color-consul"></div>
+<span class="nm">Consul</span><span class="sb">Service Registry & Config</span>
+</div>
+<div class="grp" style="flex:1;border-color:#e2b240;">
+<div class="grp-t">⚙ Infrastructure Base Components</div>
+<div class="row">
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-prometheus color-prometheus"></div>
+<span class="nm">Monitoring Service</span><span class="sb">Prometheus</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-grafana color-grafana"></div>
+<span class="nm">Visualization Dashboard</span><span class="sb">Grafana</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-envelope text-amber-400"></div>
+<span class="nm">Email Service</span><span class="sb">Email Notification</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico si si-docker color-docker"></div>
+<span class="nm">Container Runtime</span><span class="sb">Docker / K3s</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-sitemap text-amber-400"></div>
+<span class="nm">Service Governance</span><span class="sb">Service Governance</span>
+</div>
+<div class="nd" style="min-width:120px;">
+<div class="ico fa fa-file-text text-amber-400"></div>
+<span class="nm">Logging Service</span><span class="sb">Log Collector</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">Data Read & Write <span class="proto-tag">Redis Protocol</span> <span class="proto-tag">TDS / SQL over TCP</span></div>
+
+<!-- L5 Storage Layer SI-Redis, SQL Server, Elasticsearch Official Brand Colors -->
+<div class="layer ly-sto">
+<div class="lbl">
+<span class="lbl-zh">Storage Layer</span>
+<span class="lbl-en">Persistence & Cache</span>
+</div>
+<div class="lc">
+<!-- Redis Distributed Cache -->
+<div class="grp" style="min-width:240px;border-color:#3ac6d1;">
+<div class="grp-t">⚡ Distributed Cache</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-redis color-redis"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">Redis</span>
+<span class="sb">Distributed Cache Component</span>
+</div>
+</div>
+</div>
+<!-- SQL Server Persistent Storage -->
+<div class="grp" style="min-width:240px;border-color:#d39a24;">
+<div class="grp-t">🗄 Relational Persistence</div>
+<div class="nd" style="width:100%;flex-direction:row;gap:10px;">
+<div class="ico si si-microsoftsqlserver color-sqlserver"></div>
+<div class="col">
+<span class="nm" style="font-size:13px;">SQL Server</span>
+<span class="sb">Transactional Relational Database</span>
+</div>
+</div>
+</div>
+<!-- ELK Stack Suite -->
+<div class="grp" style="flex:1;min-width:340px;border-color:#f5d131;">
+<div class="grp-t">📋 ELK Log Pipeline</div>
+<div class="row">
+<div class="nd" style="min-width:105px;">
+<div class="ico si si-elasticsearch color-elastic"></div>
+<span class="nm">Elasticsearch</span><span class="sb">Full-Text Search</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-cogs text-yellow-500"></div>
+<span class="nm">Logstash</span><span class="sb">Log Pipeline Parser</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-area-chart text-yellow-500"></div>
+<span class="nm">Kibana</span><span class="sb">Log Visualization</span>
+</div>
+<div class="nd" style="min-width:105px;">
+<div class="ico fa fa-file-text-o text-yellow-500"></div>
+<span class="nm">Filebeat</span><span class="sb">Log Shipper Collector</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">Cloud Infrastructure Resources <span class="proto-tag">TCP/IP Private Network</span></div>
+
+<!-- L6 Supporting Infrastructure Layer Single DB/Cache Panel with SI Color Icons -->
+<div class="layer ly-sup">
+<div class="lbl">
+<span class="lbl-zh">Support Layer</span>
+<span class="lbl-en">Cloud & Security Base</span>
+</div>
+<div class="lc">
+<!-- Server Group -->
+<div class="grp" style="min-width:220px;border-color:#d39a24;">
+<div class="grp-t">🖥 Compute Servers</div>
+<div class="row">
+<div class="nd" style="min-width:90px;">
+<div class="ico fa fa-server text-amber-400"></div>
+<span class="nm">Tencent Cloud CVM</span><span class="sb">Cloud Virtual Machine</span>
+</div>
+<div class="nd" style="min-width:90px;">
+<div class="ico si si-kubernetes color-k8s"></div>
+<span class="nm">K3s Cluster</span><span class="sb">Container Orchestration</span>
+</div>
+</div>
+</div>
+<!-- Database Panel -->
+<div class="grp" style="min-width:220px;border-color:#d39a24;">
+<div class="grp-t">🗄 Database</div>
+<div class="nd" style="width:100%;padding:10px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<div class="ico si si-microsoftsqlserver color-sqlserver"></div>
+<span class="nm">SQL Server</span>
+</div>
+</div>
+</div>
+<!-- Cache Panel -->
+<div class="grp" style="min-width:200px;border-color:#d39a24;">
+<div class="grp-t">⚡ Cache Storage</div>
+<div class="nd" style="width:100%;padding:10px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<div class="ico si si-redis color-redis"></div>
+<span class="nm">Redis</span>
+</div>
+</div>
+</div>
+<!-- Network & Security -->
+<div class="grp" style="flex:1;min-width:240px;border-color:#d39a24;">
+<div class="grp-t">🌐 Network & Security</div>
+<div class="row">
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-shield text-amber-400"></div>
+<span class="nm">Tencent Cloud WAF</span><span class="sb">Web Application Firewall</span>
+</div>
+<div class="nd" style="min-width:100px;">
+<div class="ico fa fa-sitemap text-amber-400"></div>
+<span class="nm">VPC Private Network</span><span class="sb">Isolated Internal Network</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="proto">CI/CD Automation Pipeline <span class="proto-tag">Git Push Triggered Build</span></div>
+
+<!-- L7 CI/CD Pipeline Full SI Official Color Icons -->
+<div class="layer ly-ci">
+<div class="lbl">
+<span class="lbl-zh">CI/CD Pipeline</span>
+<span class="lbl-en">DevOps Delivery</span>
+</div>
+<div class="lc">
+<div class="pipe">
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#a87ff2;">
+<i class="fa fa-code text-purple-400"></i>
+</div>
+<span class="ps-nm">Local Development DEV</span>
+<span class="ps-sb">Visual Studio</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#c2c8d0;">
+<i class="si si-github color-github"></i>
+</div>
+<span class="ps-nm">GitHub Code Repository</span>
+<span class="ps-sb">PR Review & Source Hosting</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#59a7ff;">
+<i class="si si-githubactions color-githubactions"></i>
+</div>
+<span class="ps-nm">GitHub Actions</span>
+<span class="ps-sb">CI Build & Unit Test</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#4d9fff;">
+<i class="si si-docker color-docker"></i>
+</div>
+<span class="ps-nm">Tencent Cloud TCR Registry</span>
+<span class="ps-sb">Container Image Storage</span>
+</div>
+<span class="pa">→</span>
+<div class="flow-step">
+<div class="ps-ico" style="border-color:#42b85c;">
+<i class="si si-kubernetes color-k8s"></i>
+</div>
+<span class="ps-nm">Tencent Cloud K3s Cluster</span>
+<span class="ps-sb">Production Workload Runtime</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Architecture Doc & Request Flow Panel (Fully English) -->
+<div class="wrap doc-wrap">
+  <!-- Left: Layer-by-Layer Component & Service Introduction -->
+  <div class="doc-card">
+    <div class="doc-title"><i class="fa fa-book text-yellow-400"></i>Layer Component & Service Overview</div>
+
+    <div class="doc-section">
+      <h4>1. Frontend Layer (External Traffic Entrypoint)</h4>
+      <p>Client applications for merchants, operation staff and channel agents. Only HTTPS external requests allowed, no direct access to internal private network resources.</p>
+      <ul>
+        <li>Desktop Backoffice: Daily reconciliation, rate configuration, channel management</li>
+        <li>Mobile & H5 Cashier: End-user payment order creation, order status inquiry</li>
+        <li>Third-party Payment Gateways: WeChat/Alipay/Bank asynchronous Webhook callbacks</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>2. Gateway Layer (Single Public Network Boundary)</h4>
+      <p>All external traffic converges here for security validation, request routing and traffic control. All backend microservices are isolated from public internet.</p>
+      <ul>
+        <li>Nginx: L4 load balancing, SSL certificate offloading, static asset forwarding</li>
+        <li>YARP .NET10 Gateway: JWT authentication, dynamic service discovery, circuit breaker & rate limiting, full distributed log tracing. Communicates with internal microservices via standard RESTful HTTP over private network.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>3. Application Layer (Core Business Microservices)</h4>
+      <p>Domain-Driven Design separated business domains, CQRS pattern for read/write separation handling merchant, transaction and revenue-sharing core logic.</p>
+      <ul>
+        <li>IdentityService: OpenIddict distributed centralized authentication & fine-grained permission control</li>
+        <li>SchedulerService: Quartz.NET distributed task runner for auto reconciliation, refund execution, expired order closing</li>
+        <li>Four domain microservices: Operation Platform, Channel Agent, Merchant Console, Payment Gateway</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>4. Infrastructure Layer (Distributed Middleware Foundation)</h4>
+      <p>Shared middleware & common components to decouple business logic from distributed capability implementation.</p>
+      <ul>
+        <li>Consul: Service registration, health check & distributed KV configuration center</li>
+        <li>RabbitMQ: Asynchronous event queue for traffic peak shaving, system decoupling & transactional messaging</li>
+        <li>Shared utilities: Monitoring, email notification, container runtime, service governance & centralized logging</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>5. Storage Layer (Persistence, Cache & Log Data Warehouse)</h4>
+      <ul>
+        <li>SQL Server: ACID transactional storage for core orders, merchant profiles & split settlement records</li>
+        <li>Redis: Distributed lock, hot data cache, user session & rate limit counters</li>
+        <li>ELK Stack: Full API request log & exception log storage, fast search for incident troubleshooting</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h4>6. Supporting Infrastructure Layer (Cloud Runtime Base)</h4>
+      <p>Underlying compute, network & security resources for container cluster runtime and private network isolation protection.</p>
+    </div>
+
+    <div class="doc-section">
+      <h4>7. CI/CD DevOps Pipeline (Automated Build & Deployment)</h4>
+      <p>Fully automated workflow from source code commit to production cluster deployment, supports one-click rollback for version recovery.</p>
+    </div>
+  </div>
+
+  <!-- Right: End-to-End Full Request Execution Flow (Payment Order Scenario) -->
+  <div class="doc-card">
+    <div class="doc-title"><i class="fa fa-random text-yellow-400"></i>End-to-End Payment Request Workflow</div>
+    <div class="doc-section">
+      <p>Complete client-to-storage request flow for a standard merchant payment order creation:</p>
+      <div class="flow-step-item">
+        <strong>Step 1 Client Initiates External HTTPS Request</strong>
+        <p>Merchant H5/Desktop Backoffice sends order creation request over public HTTPS, traffic hits public Nginx cluster ingress.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 2 Nginx Load Balancing Forwarding</strong>
+        <p>Nginx completes SSL decryption and distributes inbound traffic to healthy YARP gateway instances by weight rules.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 3 Unified Preprocessing on YARP Gateway</strong>
+        <p>1. Validate JWT session token & API access permissions; 2. Verify request signature to prevent tampering; 3. Pull up-to-date healthy service list from Consul; 4. Enforce rate limit & circuit breaker protection for downstream services; 5. Generate global TraceId for full request tracing logging.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 4 Internal RESTful HTTP Call to Payment Microservice</strong>
+        <p>Gateway sends RESTful HTTP requests to PaymentGateway service via K8s private ClusterIP network, all business services isolated from public internet.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 5 Business Service Read/Write Processing Logic</strong>
+        <p>1. Fetch merchant rate configuration from Redis cache; 2. Construct order domain entity; 3. Persist new order record into SQL Server with local database transaction; 4. Publish "Pending Payment" domain event to RabbitMQ message queue.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 6 Asynchronous Middleware Consumption & Log Persistence</strong>
+        <p>RabbitMQ consumer workers send payment notification emails and pre-process daily reconciliation data asynchronously; Filebeat collects all request logs and ships to ELK storage cluster.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 7 Synchronous Response Returns Back to Client</strong>
+        <p>Payment checkout link & unique order ID propagates back through the full request chain to frontend client, completing synchronous request lifecycle.</p>
+      </div>
+      <div class="flow-step-item">
+        <strong>Step 8 Asynchronous Channel Callback Finalization (Post Payment)</strong>
+        <p>After end-user completes payment, WeChat/Bank server sends asynchronous Webhook callback to gateway. Gateway re-authenticates callback signature, updates order payment status, generates split settlement data and pushes user payment notifications.</p>
+      </div>
+    </div>
+    <div class="doc-section" style="margin-top:20px;">
+      <h4>Fault Tolerance & Resilience Mechanisms</h4>
+      <ul>
+        <li>Unhealthy Service Eviction: Consul health check removes offline instances, YARP automatically routes traffic to healthy service nodes.</li>
+        <li>Traffic Surge Protection: YARP rate limiting + RabbitMQ peak traffic buffering to avoid database overload.</li>
+        <li>Message Loss Prevention: RabbitMQ persistent queue + dead letter queue with scheduled retry compensation tasks.</li>
+        <li>Distributed Troubleshooting: Full request traceability via TraceId cross-search in ELK log storage.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

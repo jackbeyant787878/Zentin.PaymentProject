@@ -1,0 +1,317 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+body{
+  background:#0a0a0e;
+  font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;
+  color:#c2c8d0;
+  padding:16px;
+}
+.wrap{
+  width:1460px;
+  margin:0 auto;
+}
+.diagram{
+  background:#0a0a0e;
+  overflow:hidden;
+  border:1px solid #221d18;
+  border-radius:12px;
+}
+/* Header Title Bar */
+.hd{
+  padding:20px 30px 16px;
+  text-align:center;
+  border-bottom:1px solid #221d18;
+}
+.hd h1{
+  font-size:22px;
+  font-weight:600;
+  color:#e6edf3;
+}
+.hd p{
+  margin-top:6px;
+  font-size:11px;
+  color:#888e99;
+}
+.badges{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+.bdg{
+  padding:2px 10px;
+  border-radius:16px;
+  font-size:10px;
+  border:1px solid #332c22;
+  color:#d4a857;
+}
+/* Left Vertical Layer Sidebar Original Layout */
+.layer{
+  display:flex;
+  border-bottom:1px solid #221d18;
+  min-height:120px;
+}
+.layer:last-child{
+  border-bottom:none;
+}
+.lbl{
+  width:60px;
+  min-width:60px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:6px 2px;
+  border-right:2px solid;
+}
+.lbl-zh{
+  writing-mode:vertical-rl;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+.lbl-en{
+  writing-mode:vertical-rl;
+  font-size:9px;
+  opacity:.4;
+  margin-top:8px;
+  white-space:nowrap;
+}
+.lc{
+  flex:1;
+  padding:14px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:14px;
+}
+/* 7 Layer Sidebar Theme Colors */
+.ly-fe .lbl{background:#081408;border-color:#42b85c;}
+.ly-fe .lbl-zh,.ly-fe .lbl-en{color:#42b85c;}
+.ly-fe .lc{background:#091109;}
+
+.ly-gw .lbl{background:#120a1f;border-color:#a87ff2;}
+.ly-gw .lbl-zh,.ly-gw .lbl-en{color:#a87ff2;}
+.ly-gw .lc{background:#100b1c;}
+
+.ly-svc .lbl{background:#081628;border-color:#59a7ff;}
+.ly-svc .lbl-zh,.ly-svc .lbl-en{color:#59a7ff;}
+.ly-svc .lc{background:#091424;}
+
+.ly-inf .lbl{background:#1a1206;border-color:#e2b240;}
+.ly-inf .lbl-zh,.ly-inf .lbl-en{color:#e2b240;}
+.ly-inf .lc{background:#171005;}
+
+.ly-sto .lbl{background:#06181b;border-color:#3ac6d1;}
+.ly-sto .lbl-zh,.ly-sto .lbl-en{color:#3ac6d1;}
+.ly-sto .lc{background:#071518;}
+
+.ly-sup .lbl{background:#191407;border-color:#d39a24;}
+.ly-sup .lbl-zh,.ly-sup .lbl-en{color:#d39a24;}
+.ly-sup .lc{background:#161206;}
+
+.ly-ci .lbl{background:#190f06;border-color:#f1893a;}
+.ly-ci .lbl-zh,.ly-ci .lbl-en{color:#f1893a;}
+.ly-ci .lc{background:#160d05;}
+
+/* Protocol Separator Bar Between Layers */
+.proto{
+  width:100%;
+  padding:6px 0;
+  text-align:center;
+  font-size:11px;
+  color:#888e99;
+  background:#06080b;
+  border-bottom:1px solid #221d18;
+}
+.proto-tag{
+  padding:2px 8px;
+  border:1px solid #332c22;
+  border-radius:6px;
+  margin:0 6px;
+  color:#63aaff;
+}
+/* Dashed Border Group Panel Match Screenshot */
+.grp{
+  border:1px dashed #604e30;
+  border-radius:8px;
+  padding:12px;
+  position:relative;
+}
+.grp-t{
+  position:absolute;
+  top:-8px;
+  left:10px;
+  font-size:10px;
+  font-weight:600;
+  padding:0 6px;
+  background:#0a0a0e;
+  color:#e2b240;
+}
+/* Unified Component Card Icon Layout */
+.nd{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:12px 8px;
+  border-radius:8px;
+  border:1px solid #332c22;
+  background:#14100b;
+  gap:6px;
+  min-width:120px;
+}
+.nd .ico{
+  font-size:32px;
+  height:36px;
+  line-height:36px;
+  text-align:center;
+}
+.nd .nm{
+  font-size:12px;
+  font-weight:500;
+  color:#e6d4b0;
+}
+.nd .sb{
+  font-size:9px;
+  color:#998c77;
+}
+/* CI/CD Pipeline Row */
+.pipe{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  justify-content:center;
+  padding:8px 0;
+}
+.ps{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  min-width:110px;
+}
+.ps-ico{
+  font-size:40px;
+  width:56px;
+  height:56px;
+  line-height:56px;
+  text-align:center;
+  border-radius:10px;
+  border:2px solid;
+  background:#14100b;
+}
+.ps-nm{
+  font-size:10px;
+  color:#c2c8d0;
+}
+.ps-sb{
+  font-size:9px;
+  color:#888e99;
+}
+.pa{
+  font-size:20px;
+  color:#e2b240;
+}
+.row{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.col{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.sep{
+  width:1px;
+  background:#332c22;
+  margin:0 6px;
+}
+.npkg{
+  padding:3px 8px;
+  border-radius:4px;
+  border:1px solid #4c3470;
+  background:rgba(168,127,242,.08);
+  font-size:10px;
+  color:#a87ff2;
+}
+/* Official Standard Brand Color Classes for SimpleIcons */
+.color-dotnet { color: #512bd4; }
+.color-nginx { color: #009639; }
+.color-rabbitmq { color: #ff6600; }
+.color-consul { color: #ec4d37; }
+.color-prometheus { color: #e6522c; }
+.color-grafana { color: #f46800; }
+.color-docker { color: #2496ed; }
+.color-redis { color: #dc382d; }
+.color-sqlserver { color: #cc2927; }
+.color-elastic { color: #f0c529; }
+.color-github { color: #ffffff; }
+.color-githubactions { color: #2088ff; }
+.color-k8s { color: #326ce5; }
+.color-openid { color: #f78c40; }
+.color-stripe { color: #635bff; }
+.color-adminer { color: #00868b; }
+.color-msteams { color: #6264a7; }
+
+/* New Style for Architecture Doc & Flow Panel */
+.doc-wrap{
+  margin-top:24px;
+  display:flex;
+  gap:20px;
+}
+.doc-card{
+  flex:1;
+  border:1px solid #221d18;
+  border-radius:12px;
+  padding:20px;
+  background:#080b14;
+}
+.doc-title{
+  font-size:16px;
+  font-weight:600;
+  color:#f5d170;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.doc-section{
+  margin-bottom:16px;
+}
+.doc-section h4{
+  font-size:13px;
+  color:#63aaff;
+  margin-bottom:8px;
+}
+.doc-section p{
+  font-size:12px;
+  line-height:1.7;
+  color:#b0b8c4;
+}
+.doc-section ul{
+  padding-left:18px;
+  margin-top:6px;
+}
+.doc-section li{
+  font-size:12px;
+  line-height:1.7;
+  color:#b0b8c4;
+  margin-bottom:4px;
+}
+.flow-step-item{
+  border-left:2px solid #f59e0b;
+  padding-left:12px;
+  margin-bottom:10px;
+}
+.flow-step-item strong{
+  color:#f5d170;
+}
