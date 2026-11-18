@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zentin.Payment.Application\Zentin.Payment.Application.csproj" />
+    <ProjectReference Include="..\Zentin.Payment.Infrastructure\Zentin.Payment.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
   </ItemGroup>
 

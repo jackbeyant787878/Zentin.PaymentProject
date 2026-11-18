@@ -12,7 +12,6 @@ using Zentin.Payment.Domain.Entities.Order;
 using Zentin.Payment.Domain.Entities.Pay;
 using Zentin.Payment.Domain.Entities.QrCode;
 using Zentin.Payment.Domain.Entities.Sys;
-using Zentin.Payment.Infrastructure.Interceptors;
 
 namespace Zentin.Payment.Infrastructure.Data
 {
@@ -92,13 +91,6 @@ namespace Zentin.Payment.Infrastructure.Data
 
         public PaymentDbContext(DbContextOptions<PaymentDbContext> options)
             : base(options) { }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.AddInterceptors(new AuditFieldInterceptor());
-            optionsBuilder.EnableDetailedErrors();
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
