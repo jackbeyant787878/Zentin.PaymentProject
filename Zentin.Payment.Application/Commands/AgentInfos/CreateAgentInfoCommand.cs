@@ -1,5 +1,5 @@
 ﻿
-namespace AGooday.AgPay.Domain.Commands.AgentInfos
+namespace Zentin.Payment.Application.Commands.AgentInfos
 {
     public class CreateAgentInfoCommand : AgentInfoCommand
     {

@@ -32,7 +32,6 @@
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="10.0.10" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.14.14" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.7.3" />
     <PackageReference Include="Zenith.Extensions.Consul" Version="1.0.0" />
   </ItemGroup>
 
@@ -41,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zentin.Payment.Application.Contracts\Zentin.Payment.Application.Contracts.csproj" />
     <ProjectReference Include="..\Zentin.Payment.Domain\Zentin.Payment.Domain.csproj" />
     <ProjectReference Include="..\..\Zenith.Extensions.Core\Zenith.Extensions.Redis\Zenith.Extensions.Redis.csproj" />
     <ProjectReference Include="..\..\Zenith.Extensions.Core\Zenith.Extensions.Rabbitmq\Zenith.Extensions.Rabbitmq.csproj" />

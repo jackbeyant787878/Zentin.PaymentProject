@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Enums;
 using static Zentin.Payment.Domain.Enums.Enums;

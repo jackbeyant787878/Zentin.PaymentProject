@@ -20,10 +20,6 @@ namespace Zentin.Payment.Domain.Abstractions
 
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
 
-        IQueryable<TEntity> GetQueryable();
-
-        IQueryable<TEntity> GetQueryableNoTracking();
-
         void Add(TEntity entity);
 
         Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);

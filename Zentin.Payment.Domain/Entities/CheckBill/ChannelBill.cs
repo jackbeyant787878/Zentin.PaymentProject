@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Zentin.Payment.Common;
 using Zentin.Payment.Domain.Abstractions;
 
 namespace Zentin.Payment.Domain.Entities.CheckBill

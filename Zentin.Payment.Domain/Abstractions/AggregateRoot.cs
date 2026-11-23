@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Zentin.Payment.Domain.Abstractions
+﻿namespace Zentin.Payment.Domain.Abstractions
 {
     public abstract class AggregateRoot : BaseEntity, IAggregateRoot
     {
@@ -13,8 +11,8 @@ namespace Zentin.Payment.Domain.Abstractions
 
     }
 
-
-    public interface IDomainEvent : INotification
+    // 领域事件是纯领域概念，不依赖 MediatR；由基础设施层经 DomainEventNotification 包装后发布
+    public interface IDomainEvent
     {
         DateTime OccurredOnUtc { get; }
 

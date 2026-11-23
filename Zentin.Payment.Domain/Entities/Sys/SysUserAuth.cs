@@ -1,4 +1,4 @@
-using Zentin.Payment.Common;
+using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Enums;
 
 namespace Zentin.Payment.Domain.Entities.Sys

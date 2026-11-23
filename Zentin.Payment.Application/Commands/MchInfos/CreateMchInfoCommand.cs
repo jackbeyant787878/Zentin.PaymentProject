@@ -1,6 +1,6 @@
 ﻿
 
-namespace AGooday.AgPay.Domain.Commands.MchInfos
+namespace Zentin.Payment.Application.Commands.MchInfos
 {
     public class CreateMchInfoCommand : MchInfoCommand
     {

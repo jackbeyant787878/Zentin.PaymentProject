@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
+using Zentin.Payment.Application.Contracts.Notifications;
 using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Infrastructure.Data;
 
@@ -23,11 +24,9 @@ namespace Zentin.Payment.Infrastructure.UnitOfWork
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            // 1. first publish domain events (can be placed after commit based on requirements)
-            await PublishDomainEventsAsync(cancellationToken);
-
-            // 2. save changes to the database
+            // 先落库，再发布领域事件，确保订阅者看到已提交状态
             var result = await _dbContext.SaveChangesAsync(cancellationToken);
+            await PublishDomainEventsAsync(cancellationToken);
             return result;
         }
 
@@ -69,20 +68,20 @@ namespace Zentin.Payment.Infrastructure.UnitOfWork
 
             foreach (var @event in domainEvents)
             {
-                await _publisher.Publish(@event, cancellationToken);
+                await _publisher.Publish(new DomainEventNotification(@event), cancellationToken);
             }
         }
 
         public void Dispose()
         {
             _transaction?.Dispose();
-            _dbContext.Dispose();
+            // DbContext 由 DI 容器（对象池）管理生命周期，此处不得手动释放
         }
 
         public async ValueTask DisposeAsync()
         {
             if (_transaction != null) await _transaction.DisposeAsync();
-            await _dbContext.DisposeAsync();
+            // DbContext 由 DI 容器（对象池）管理生命周期，此处不得手动释放
         }
 
         public async Task<bool> CommitAsync()

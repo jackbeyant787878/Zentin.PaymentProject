@@ -1,5 +1,4 @@
-﻿namespace Zentin.Payment.Common;
-
+namespace Zentin.Payment.Domain.Abstractions;
 
 /// <summary>
 /// Thread-safe Snowflake ID Generator
@@ -7,7 +6,7 @@
 public static class SnowflakeIdGenerator
 {
     private static readonly object LockObj = new();
-    private const long Epoch = 1704067200000L; 
+    private const long Epoch = 1704067200000L;
 
     private const int WorkerIdBits = 5;
     private const int DatacenterIdBits = 5;

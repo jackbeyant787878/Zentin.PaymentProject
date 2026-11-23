@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zentin.Payment.Common\Zentin.Payment.Common.csproj" />
+    <ProjectReference Include="..\Zentin.Payment.Domain\Zentin.Payment.Domain.csproj" />
   </ItemGroup>
 
 </Project>

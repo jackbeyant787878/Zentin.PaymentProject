@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Zentin.Payment.Application.Contracts.Commands;
 
-namespace AGooday.AgPay.Domain.Commands.MchInfos
+namespace Zentin.Payment.Application.Commands.MchInfos
 {
     public abstract class MchInfoCommand : CommandBase
     {
