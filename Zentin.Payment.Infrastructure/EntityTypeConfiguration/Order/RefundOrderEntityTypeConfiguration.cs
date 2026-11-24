@@ -52,6 +52,12 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
             builder.HasIndex(e => new { e.MchNo, e.MchRefundNo }).HasDatabaseName("UniMchNoMchRefundNo").IsUnique();
             builder.HasIndex(e => e.PayOrderId).HasDatabaseName("IdxPayOrderId");
             builder.HasIndex(e => e.State).HasDatabaseName("IdxState");
+
+            // 单订单串行退款（ADR-0007 决策 3）：同一 PayOrder 同时只允许一个在途退款（Created/Processing）
+            builder.HasIndex(e => e.PayOrderId)
+                .HasDatabaseName("UQ_RefundOrder_InFlight")
+                .IsUnique()
+                .HasFilter("[State] IN (0, 1)");
         }
     }
 }

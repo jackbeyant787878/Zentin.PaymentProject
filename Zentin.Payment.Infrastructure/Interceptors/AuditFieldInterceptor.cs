@@ -37,11 +37,11 @@ namespace Zentin.Payment.Infrastructure.Interceptors
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedOnUtc = now;
-                        entry.Entity.UpdatedOnUtc = now;
+                        entry.Property(e => e.CreatedOnUtc).CurrentValue = now;
+                        entry.Property(e => e.UpdatedOnUtc).CurrentValue = now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.UpdatedOnUtc = now;
+                        entry.Property(e => e.UpdatedOnUtc).CurrentValue = now;
                         break;
                 }
             }

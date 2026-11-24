@@ -26,6 +26,7 @@ namespace Zentin.Payment.Infrastructure.Extensions
             services.AddZentinRepositories();
             services.AddZentinRedis(configuration);
             services.AddZentinRabbitMQ(configuration);
+            services.AddZentinCap(configuration);
 
             // 未配置 ConsulConfig:RegistryAddress 时该扩展自动 no-op，本地开发可不接注册中心
             services.AddConsulRegistry(configuration);
@@ -37,6 +38,9 @@ namespace Zentin.Payment.Infrastructure.Extensions
 
             // 出站 HTTP 统一韧性（重试/熔断/超时/限流），供后续渠道适配器等客户端继承
             services.AddZentinResilience(configuration);
+
+            services.AddHttpClient(Http.MchNotifySender.ClientName, client => client.Timeout = TimeSpan.FromSeconds(15));
+            services.AddScoped<Application.Contracts.Ports.IMchNotifySender, Http.MchNotifySender>();
 
             return services;
         }

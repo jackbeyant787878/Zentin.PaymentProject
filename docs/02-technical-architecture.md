@@ -183,6 +183,8 @@ PayOrder:
 
 RefundOrder:
   Created ──► Processing ──► Success | Failed
+     │             │
+     └─────────────┴────► Closed（过期关闭）
 
 TransferOrder:
   Created ──► Processing ──► Success | Failed

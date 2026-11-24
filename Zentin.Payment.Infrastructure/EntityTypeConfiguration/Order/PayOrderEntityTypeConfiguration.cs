@@ -38,7 +38,8 @@ namespace Zentin.Payment.Infrastructure.EntityTypeConfiguration
             builder.Property(e => e.MchFeeAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.MchOrderFeeAmount).HasColumnType("bigint").IsRequired();
             builder.Property(e => e.Currency).HasMaxLength(3).HasDefaultValue("CNY").IsRequired();
-            builder.Property(e => e.State).HasConversion<int>().HasDefaultValue(PayOrderStatus.Created);
+            // 并发令牌：UPDATE 带 WHERE State=@原值，弥补供体读-检-写无并发保护的缺陷（PayOrderService.cs:166-170）
+            builder.Property(e => e.State).HasConversion<int>().HasDefaultValue(PayOrderStatus.Created).IsConcurrencyToken();
             builder.Property(e => e.NotifyState).HasDefaultValue(false);
             builder.Property(e => e.ClientIp).HasMaxLength(32);
             builder.Property(e => e.Subject).HasMaxLength(64).IsRequired();

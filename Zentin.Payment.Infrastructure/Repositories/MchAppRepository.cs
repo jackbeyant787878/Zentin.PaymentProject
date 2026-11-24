@@ -19,6 +19,11 @@ namespace Zentin.Payment.Infrastructure.Repositories
             return await DbSet.FirstOrDefaultAsync(a => a.MchNo == mchNo && a.DefaultFlag == 1, cancellationToken);
         }
 
+        public async Task<MchApp?> GetByMchNoAndAppIdAsync(string mchNo, string appId, CancellationToken cancellationToken = default)
+        {
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(a => a.MchNo == mchNo && a.AppId == appId, cancellationToken);
+        }
+
         public async Task<bool> ExistsByAppIdAsync(string appId, CancellationToken cancellationToken = default)
         {
             return await DbSet.AsNoTracking().AnyAsync(a => a.AppId == appId, cancellationToken);

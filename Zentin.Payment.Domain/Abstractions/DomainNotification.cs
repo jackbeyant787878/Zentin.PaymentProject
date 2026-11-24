@@ -28,13 +28,14 @@ namespace Zentin.Payment.Domain.Abstractions
         /// </summary>
         public NotificationLevel Level { get; }
 
-        public DateTime OccurredOnUtc => DateTime.UtcNow;
+        public DateTime OccurredOnUtc { get; }
 
         public DomainNotification(string key, string message, NotificationLevel level = NotificationLevel.Error)
         {
             Key = key;
             Message = message;
             Level = level;
+            OccurredOnUtc = DateTime.UtcNow;
         }
     }
 

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Zentin.Payment.Domain.Abstractions;
 
 namespace Zentin.Payment.Domain.Events
 {
- 
-    public sealed record RefundSuccessDomainEvent(string refundOrderId,string payOrderId, long refundAmount, DateTime OccurredOnUtc) : IDomainEvent;
+    /// <summary>
+    /// Raised when a refund order transitions to success; consumed by merchant notify and (later) profit settlement.
+    /// </summary>
+    public sealed record RefundSuccessDomainEvent(string RefundOrderId, string PayOrderId, long RefundAmount, DateTime OccurredOnUtc) : IDomainEvent;
 }

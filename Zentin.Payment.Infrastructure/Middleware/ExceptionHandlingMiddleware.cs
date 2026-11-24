@@ -24,6 +24,8 @@ namespace Zentin.Payment.Infrastructure.Middleware
 
                 var (statusCode, title, detail) = ex switch
                 {
+                    FluentValidation.ValidationException vex =>
+                        (StatusCodes.Status400BadRequest, "Validation Failed", string.Join("; ", vex.Errors.Select(e => e.ErrorMessage))),
                     ArgumentException or InvalidOperationException =>
                         (StatusCodes.Status400BadRequest, "Bad Request", ex.Message),
                     KeyNotFoundException =>

@@ -105,6 +105,10 @@ namespace Zentin.Payment.Domain.Entities.Order
                 throw new ArgumentException("Merchant ID cannot be null or empty", nameof(mchNo));
             if (amount <= 0)
                 throw new ArgumentException("Payment amount must be greater than 0", nameof(amount));
+            if (mchFeeRate < 0 || mchFeeRate > 1)
+                throw new ArgumentException("Fee rate must be between 0 and 1", nameof(mchFeeRate));
+            if (mchFeeAmount < 0)
+                throw new ArgumentException("Fee amount cannot be negative", nameof(mchFeeAmount));
             if (string.IsNullOrWhiteSpace(notifyUrl))
                 throw new ArgumentException("Notify URL cannot be null or empty", nameof(notifyUrl));
 
@@ -156,13 +160,17 @@ namespace Zentin.Payment.Domain.Entities.Order
             ChannelExtra = channelExtra;
         }
 
-        public void MarkSuccess(string channelOrderNo, long paidAmount, string? channelExtra = null)
+        public void MarkSuccess(string channelOrderNo, string? channelUser = null, string? platformOrderNo = null, string? channelExtra = null)
         {
-            if (State is PayOrderStatus.Success or PayOrderStatus.Closed or PayOrderStatus.Refunded)
-                throw new InvalidOperationException("current order status cannot be marked as payment successful");
+            // 渠道重复回调幂等：供体在控制器层忽略非 ING 订单的通知（ChannelNoticeController.cs:248-259）
+            if (State == PayOrderStatus.Success) return;
+            if (State != PayOrderStatus.Paying)
+                throw new InvalidOperationException("only paying orders can be marked as payment successful");
 
             State = PayOrderStatus.Success;
             ChannelOrderNo = channelOrderNo;
+            ChannelUser = channelUser;
+            PlatformOrderNo = platformOrderNo;
             SuccessTime = DateTime.UtcNow;
             ChannelExtra = channelExtra;
 
@@ -171,8 +179,9 @@ namespace Zentin.Payment.Domain.Entities.Order
 
         public void MarkFail(string errCode, string errMsg)
         {
-            if (State is PayOrderStatus.Success or PayOrderStatus.Closed or PayOrderStatus.Refunded)
-                throw new InvalidOperationException("current order status cannot be marked as payment failed");
+            if (State == PayOrderStatus.Failed) return;
+            if (State != PayOrderStatus.Paying)
+                throw new InvalidOperationException("only paying orders can be marked as payment failed");
 
             State = PayOrderStatus.Failed;
             ErrCode = errCode;
@@ -181,26 +190,28 @@ namespace Zentin.Payment.Domain.Entities.Order
 
         public void Close(string? reason = null)
         {
-            if (State == PayOrderStatus.Closed)
-                throw new InvalidOperationException("Order is already closed");
-            if (State == PayOrderStatus.Success)
-                throw new InvalidOperationException("Paid order cannot be closed");
+            if (State == PayOrderStatus.Closed) return;
+            if (State is not (PayOrderStatus.Created or PayOrderStatus.Paying))
+                throw new InvalidOperationException("only created or paying orders can be closed");
 
             State = PayOrderStatus.Closed;
             ErrMsg = reason;
         }
 
-        public void RecordRefund(long refundAmount)
+        public void RecordRefund(long refundAmount, long refundFeeAmount = 0)
         {
             if (State != PayOrderStatus.Success)
                 throw new InvalidOperationException("only paid orders can initiate refunds");
             if (refundAmount <= 0)
                 throw new ArgumentException("refund amount must be greater than 0", nameof(refundAmount));
+            if (refundFeeAmount < 0)
+                throw new ArgumentException("refund fee amount cannot be negative", nameof(refundFeeAmount));
             if (RefundAmount + refundAmount > Amount)
                 throw new InvalidOperationException("refund amount exceeds the available refundable amount");
 
             RefundAmount += refundAmount;
             RefundTimes += 1;
+            MchFeeAmount -= refundFeeAmount;
 
             RefundState = RefundAmount == Amount
                 ? RefundStatus.Full

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Enums;
+using Zentin.Payment.Domain.Events;
 
 namespace Zentin.Payment.Domain.Entities.Notify
 {
     /// <summary>
     /// Merchant asynchronous notify record
     /// </summary>
-    public sealed class MchNotifyRecord : BaseEntity
+    public sealed class MchNotifyRecord : AggregateRoot
     {
         /// <summary>
         /// Notify record ID (snowflake)
@@ -127,7 +128,7 @@ namespace Zentin.Payment.Domain.Entities.Notify
             if (notifyCountLimit <= 0)
                 throw new ArgumentOutOfRangeException(nameof(notifyCountLimit), "Retry limit must be greater than 0");
 
-            return new MchNotifyRecord
+            var record = new MchNotifyRecord
             {
                 OrderId = orderId,
                 OrderType = orderType,
@@ -144,21 +145,30 @@ namespace Zentin.Payment.Domain.Entities.Notify
                 NotifyCount = 0,
                 State = NotifyState.Notifying
             };
+            record.AddDomainEvent(new MchNotifyCreatedDomainEvent(record.NotifyId, DateTime.UtcNow));
+            return record;
         }
 
         /// <summary>
-        /// Record one notify attempt and increment counter
+        /// Record one notify attempt with the merchant response; schedules a delayed retry while attempts remain.
         /// </summary>
-        public void RecordAttempt()
+        public void RecordAttempt(string resResult)
         {
             if (State != NotifyState.Notifying)
                 throw new InvalidOperationException("Only notifying records can retry");
 
             NotifyCount++;
+            ResResult = resResult;
             LastNotifyTime = DateTime.UtcNow;
 
             if (NotifyCount >= NotifyCountLimit)
+            {
                 State = NotifyState.Failed;
+                return;
+            }
+
+            // 供体重试节奏: 第 n 次失败后延迟 n*30 秒 (PayOrderMchNotifyMQReceiver.cs:119)
+            AddDomainEvent(new MchNotifyAttemptedDomainEvent(NotifyId, NotifyCount * 30, DateTime.UtcNow));
         }
 
         /// <summary>
@@ -167,7 +177,7 @@ namespace Zentin.Payment.Domain.Entities.Notify
         public void MarkSuccess(string resResult)
         {
             if (State == NotifyState.Success)
-                throw new InvalidOperationException("Notify already succeeded");
+                return; // CAP 至少一次投递，重复消费幂等
 
             State = NotifyState.Success;
             ResResult = resResult;

@@ -38,7 +38,7 @@ namespace Zentin.Payment.Domain.Entities.Merchant
         /// <param name="createdUid"></param>
         /// <param name="createdBy"></param>
         /// <returns></returns>
-        internal static MchApp Create(
+        public static MchApp Create(
             string appId,
             string appName,
             string appSecret,

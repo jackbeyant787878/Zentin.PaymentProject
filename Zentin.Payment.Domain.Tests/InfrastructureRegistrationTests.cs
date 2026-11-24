@@ -82,6 +82,21 @@ namespace Zentin.Payment.Infrastructure.Tests
         }
 
         [TestMethod]
+        public void Cap_publisher_is_registered_with_outbox_storage()
+        {
+            var services = new ServiceCollection();
+            services.AddLogging();
+            services.AddZentinInfrastructure(BuildConfiguration(withConsul: false));
+
+            var provider = services.BuildServiceProvider();
+            var publisher = provider.GetRequiredService<DotNetCore.CAP.ICapPublisher>();
+            var options = provider.GetRequiredService<IOptions<DotNetCore.CAP.CapOptions>>().Value;
+
+            Assert.IsNotNull(publisher);
+            Assert.AreEqual("zentin.payment", options.DefaultGroupName);
+        }
+
+        [TestMethod]
         public void Resilience_pipeline_applies_to_http_clients()
         {
             var services = new ServiceCollection();

@@ -12,10 +12,10 @@
 
 | # | 切片 | 主要聚合 | 实体 | EF 配置 | DbSet | 仓储 | Handler | API | 阶段 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | PayOrder 支付订单 | `PayOrder` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
+| 1 | PayOrder 支付订单 | `PayOrder` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | P1 ✓ 主链已落地 |
 | 2 | RefundOrder 退款 | `RefundOrder` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
 | 3 | TransferOrder 转账 | `TransferOrder` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
-| 4 | MchNotifyRecord 商户通知 | `MchNotifyRecord` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
+| 4 | MchNotifyRecord 商户通知 | `MchNotifyRecord` | ✓ | ✓ | ✓ | ✓ | ✓ 消费端 | — 事件驱动 | P1 ✓ 通知链已落地 |
 | 5 | PayWay 支付方式 | `PayWay` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
 | 6 | MchPayPassage 商户通道 | `MchPayPassage` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
 | 7 | PayInterfaceConfig 渠道参数 | `PayInterfaceConfig` | ✓ | ✓ | ✓ | ✓ | — | — | P1 |
@@ -37,7 +37,7 @@
 
 **关键事实**：
 
-- **Handler 与 API 全为 0**。DTO 有 100+ 个，但没有一个用例端到端打通。
+- **切片 1（PayOrder 支付主链）已端到端落地**：创建→支付中→成功/失败确认→关单+查询，CAP outbox 原子发布，32 项测试全绿。行为差异与未移植项见 `legacy-parity/0001-payorder-main-chain.md`。其余切片 Handler 与 API 仍为 0。
 - `PayOrder`/`RefundOrder` 的"实体 ✓"是在**修正重复之后**才成立，详见 `04-data-model.md` 第 5 节。
 - `MchStore` 没有任何 EF 配置，属 P2 补齐项。
 - `PayOrderDivisionRecord`、`PayOrderProfit`、`AccountBill` 有配置无 DbSet，由 `ApplyConfigurationsFromAssembly` 隐式进入模型。

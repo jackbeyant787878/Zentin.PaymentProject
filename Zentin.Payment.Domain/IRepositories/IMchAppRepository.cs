@@ -9,6 +9,8 @@ namespace Zentin.Payment.Domain.IRepositories
 
         Task<MchApp?> GetDefaultAppAsync(string mchNo, CancellationToken cancellationToken = default);
 
+        Task<MchApp?> GetByMchNoAndAppIdAsync(string mchNo, string appId, CancellationToken cancellationToken = default);
+
         Task<bool> ExistsByAppIdAsync(string appId, CancellationToken cancellationToken = default);
     }
 }

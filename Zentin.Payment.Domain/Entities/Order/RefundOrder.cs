@@ -1,5 +1,6 @@
 ﻿using Zentin.Payment.Domain.Abstractions;
 using Zentin.Payment.Domain.Enums;
+using Zentin.Payment.Domain.Events;
 using static Zentin.Payment.Domain.Enums.Enums;
 
 namespace Zentin.Payment.Domain.Entities.Order
@@ -7,7 +8,7 @@ namespace Zentin.Payment.Domain.Entities.Order
     /// <summary>
     /// Refund order aggregate root
     /// </summary>
-    public sealed class RefundOrder : BaseEntity
+    public sealed class RefundOrder : AggregateRoot
     {
         public string RefundOrderId { get; private set; } = string.Empty;
         public string PayOrderId { get; private set; } = string.Empty;
@@ -120,24 +121,31 @@ namespace Zentin.Payment.Domain.Entities.Order
         }
 
         /// <summary>
-        /// Mark refund confirmed successful
+        /// Mark refund confirmed successful (idempotent under channel callback redelivery)
         /// </summary>
         public void MarkSuccess()
         {
-            if (State is RefundOrderStatus.Success or RefundOrderStatus.Closed)
-                throw new InvalidOperationException("Invalid state transition to success");
+            if (State == RefundOrderStatus.Success)
+                return; // 渠道回调重复投递幂等
+
+            if (State != RefundOrderStatus.Processing)
+                throw new InvalidOperationException("Only processing refund can be marked success");
 
             State = RefundOrderStatus.Success;
             SuccessTime = DateTime.UtcNow;
+            AddDomainEvent(new RefundSuccessDomainEvent(RefundOrderId, PayOrderId, RefundAmount, DateTime.UtcNow));
         }
 
         /// <summary>
-        /// Mark refund failed with error info
+        /// Mark refund failed with error info (idempotent under channel callback redelivery)
         /// </summary>
         public void MarkFailed(string errCode, string errMsg)
         {
-            if (State is RefundOrderStatus.Success or RefundOrderStatus.Closed)
-                throw new InvalidOperationException("Cannot mark successful refund as failed");
+            if (State == RefundOrderStatus.Failed)
+                return;
+
+            if (State != RefundOrderStatus.Processing)
+                throw new InvalidOperationException("Only processing refund can be marked failed");
 
             State = RefundOrderStatus.Failed;
             ErrCode = errCode;
@@ -150,7 +158,10 @@ namespace Zentin.Payment.Domain.Entities.Order
         public void Close()
         {
             if (State == RefundOrderStatus.Closed)
-                throw new InvalidOperationException("Refund already closed");
+                return;
+
+            if (State is RefundOrderStatus.Success or RefundOrderStatus.Failed)
+                throw new InvalidOperationException("Only created or processing refund can be closed");
 
             State = RefundOrderStatus.Closed;
         }

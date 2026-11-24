@@ -1990,6 +1990,7 @@ namespace Zentin.Payment.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("State")
+                        .IsConcurrencyToken()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
@@ -2198,7 +2199,9 @@ namespace Zentin.Payment.Infrastructure.Migrations
                     b.HasKey("RefundOrderId");
 
                     b.HasIndex("PayOrderId")
-                        .HasDatabaseName("IdxPayOrderId");
+                        .IsUnique()
+                        .HasDatabaseName("UQ_RefundOrder_InFlight")
+                        .HasFilter("[State] IN (0, 1)");
 
                     b.HasIndex("State")
                         .HasDatabaseName("IdxState");
